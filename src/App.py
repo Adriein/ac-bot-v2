@@ -1,4 +1,4 @@
-from LoggerPackage import Logger
+from src.LoggerPackage import Logger
 
 
 class TibiaAcBot:
