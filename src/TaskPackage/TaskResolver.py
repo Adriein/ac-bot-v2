@@ -7,10 +7,12 @@ class TaskResolver:
         cls.__queue = queue.Queue()
 
     def resolve(self) -> None:
+        game_context = None
+
         while not self.__queue.empty():
             task = self.dequeue()
 
-            task.execute()
+            game_context = task.execute(game_context)
 
     def queue(self, task: Task) -> None:
         self.__queue.put(task)
