@@ -13,6 +13,4 @@ class CaveBot:
         extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver)
         self.__resolver.queue(extract_game_context_data_task)
 
-
-
         self.__resolver.resolve()

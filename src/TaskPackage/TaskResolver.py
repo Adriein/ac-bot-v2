@@ -1,4 +1,5 @@
 import queue
+from src.TaskPackage.GameContext import GameContext
 from src.TaskPackage.Task import Task
 
 
@@ -6,9 +7,7 @@ class TaskResolver:
     def __new__(cls):
         cls.__queue = queue.Queue()
 
-    def resolve(self) -> None:
-        game_context = None
-
+    def resolve(self, game_context: GameContext) -> None:
         while not self.__queue.empty():
             task = self.dequeue()
 
