@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
+from src.TaskPackage.GameContext import GameContext
 
 
 class Task(ABC):
     @abstractmethod
-    def execute(self) -> None:
+    def execute(self, context: GameContext) -> GameContext:
         pass
 
     @abstractmethod
