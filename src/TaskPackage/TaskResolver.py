@@ -1,5 +1,5 @@
 import queue
-from src.TaskPackage.GameContext import GameContext
+from src.TaskPackage.GameContext.GameContext import GameContext
 from src.TaskPackage.Task import Task
 
 

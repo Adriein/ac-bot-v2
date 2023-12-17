@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.TaskPackage.GameContext import GameContext
+from src.TaskPackage.GameContext.GameContext import GameContext
 
 
 class Task(ABC):

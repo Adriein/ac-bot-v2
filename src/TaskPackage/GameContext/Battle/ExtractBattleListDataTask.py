@@ -1,4 +1,4 @@
-from src.TaskPackage.GameContext import GameContext
+from src.TaskPackage.GameContext.GameContext import GameContext
 from src.TaskPackage.Task import Task
 from src.TaskPackage.TaskResolver import TaskResolver
 
