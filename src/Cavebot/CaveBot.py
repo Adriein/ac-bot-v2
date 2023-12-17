@@ -4,8 +4,8 @@ from src.TaskPackage import TaskResolver
 
 class CaveBot:
 
-    def __new__(cls, resolver: TaskResolver):
-        cls.__resolver = resolver
+    def __init__(self, resolver: TaskResolver):
+        self.__resolver = resolver
 
     def init(self) -> None:
         # 1. extract game context
