@@ -1,6 +1,5 @@
-from src.TaskPackage.Battle.ExtractBattleListDataTask import ExtractBattleListDataTask
-from src.TaskPackage.ExtractGameContextDataTask import ExtractGameContextDataTask
-from src.TaskPackage.TaskResolver import TaskResolver
+from src.TaskPackage import ExtractGameContextDataTask
+from src.TaskPackage import TaskResolver
 
 
 class CaveBot:
@@ -9,8 +8,14 @@ class CaveBot:
         cls.__resolver = resolver
 
     def init(self) -> None:
-        # 0. check game context
+        # 1. extract game context
         extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver)
         self.__resolver.queue(extract_game_context_data_task)
+
+        # 2. auto healing
+
+        # 3. auto attacking
+
+        # 4. auto looting
 
         self.__resolver.resolve()

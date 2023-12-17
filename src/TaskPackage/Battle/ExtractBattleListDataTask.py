@@ -4,10 +4,10 @@ from src.TaskPackage.TaskResolver import TaskResolver
 
 
 class ExtractBattleListDataTask(Task):
-    def __new__(cls, resolver: TaskResolver):
-        cls.__resolver = resolver
-        cls.__succeed = False
-        cls.__completed = False
+    def __init__(self, resolver: TaskResolver):
+        self.__resolver = resolver
+        self.__succeed = False
+        self.__completed = False
 
     def execute(self, context: GameContext) -> GameContext:
         pass

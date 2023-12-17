@@ -1,4 +1,4 @@
-from src.Shared.ScreenRegion import ScreenRegion
+from src.SharedPackage.ScreenRegion import ScreenRegion
 
 
 class Coordinate:

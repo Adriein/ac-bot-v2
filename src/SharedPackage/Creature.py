@@ -1,4 +1,4 @@
-from src.Shared.Coordinate import Coordinate
+from src.SharedPackage.Coordinate import Coordinate
 
 
 class Creature:

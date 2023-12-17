@@ -1,24 +1,33 @@
-from src.Shared.Creature import Creature
+from src.SharedPackage.Creature import Creature
 
 
 class GameContext:
-    def __new__(cls, health: int, mana: int, is_attacking: bool, creatures_in_range: list[Creature]):
-        cls.__health = health
-        cls.__mana = mana
-        cls.__is_attacking = is_attacking
-        cls.__creatures_in_range = creatures_in_range
+    def __init__(self, health: int, mana: int, is_attacking: bool, creatures_in_range: list[Creature]):
+        self.__health = health
+        self.__mana = mana
+        self.__is_attacking = is_attacking
+        self.__creatures_in_range = creatures_in_range
 
-    def health(self) -> int:
+    def set_health(self, health: int) -> None:
+        self.__health = health
+
+    def get_health(self) -> int:
         return self.__health
 
-    def mana(self) -> int:
+    def set_mana(self, mana: int) -> None:
+        self.__mana = mana
+
+    def get_mana(self) -> int:
         return self.__mana
 
-    def is_attacking(self) -> bool:
+    def set_is_attacking(self, is_attacking: bool) -> None:
+        self.__is_attacking = is_attacking
+
+    def get_is_attacking(self) -> bool:
         return self.__is_attacking
 
-    def creatures_in_range(self) -> list[Creature]:
+    def get_creatures_in_range(self) -> list[Creature]:
         return self.__creatures_in_range
 
     def __str__(self):
-        return f"GameContext(health={self.health}, mana={self.mana}), is_attacking={self.is_attacking}), creatures_in_range={self.creatures_in_range})"
+        return f"GameContext(health={self.get_health}, mana={self.get_mana}), is_attacking={self.get_is_attacking}), creatures_in_range={self.get_creatures_in_range})"
