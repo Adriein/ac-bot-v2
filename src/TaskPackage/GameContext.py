@@ -30,4 +30,5 @@ class GameContext:
         return self.__creatures_in_range
 
     def __str__(self):
-        return f"GameContext(health={self.get_health}, mana={self.get_mana}), is_attacking={self.get_is_attacking}), creatures_in_range={self.get_creatures_in_range})"
+        return f"GameContext(health={self.get_health}, mana={self.get_mana}), is_attacking={self.get_is_attacking}), " \
+               f"creatures_in_range={self.get_creatures_in_range})"
