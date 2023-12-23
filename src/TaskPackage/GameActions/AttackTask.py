@@ -3,7 +3,7 @@ from src.TaskPackage.Task import Task
 from src.TaskPackage.TaskResolver import TaskResolver
 
 
-class ExtractBattleListDataTask(Task):
+class AttackTask(Task):
     def __init__(self, resolver: TaskResolver):
         super().__init__()
         self.__resolver = resolver
@@ -11,11 +11,10 @@ class ExtractBattleListDataTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext) -> GameContext:
-        self.success()
-        return context
-
-    def succeed(self) -> bool:
-        return self.__succeed
+        pass
 
     def completed(self) -> bool:
-        return self.__completed
+        pass
+
+    def succeed(self) -> bool:
+        pass

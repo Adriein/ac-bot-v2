@@ -8,6 +8,7 @@ from src.TaskPackage.TaskResolver import TaskResolver
 
 class ExtractGameContextDataTask(Task):
     def __init__(self, resolver: TaskResolver):
+        super().__init__()
         self.__resolver = resolver
         self.__succeed = False
         self.__completed = False
@@ -24,6 +25,8 @@ class ExtractGameContextDataTask(Task):
         # 3. check mana
         extract_mana_data_task = ExtractManaDataTask(self.__resolver)
         self.__resolver.queue(extract_mana_data_task)
+
+        self.success()
 
         return context
 

@@ -5,12 +5,14 @@ from src.TaskPackage.TaskResolver import TaskResolver
 
 class ExtractManaDataTask(Task):
     def __init__(self, resolver: TaskResolver):
+        super().__init__()
         self.__resolver = resolver
         self.__succeed = False
         self.__completed = False
 
     def execute(self, context: GameContext) -> GameContext:
-        pass
+        self.success()
+        return context
 
     def succeed(self) -> bool:
         return self.__succeed

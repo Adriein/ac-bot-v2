@@ -1,5 +1,4 @@
-from src.TaskPackage import ExtractGameContextDataTask
-from src.TaskPackage import TaskResolver
+from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask
 
 
 class CaveBot:
@@ -13,8 +12,12 @@ class CaveBot:
         self.__resolver.queue(extract_game_context_data_task)
 
         # 2. auto healing
+        healing_task = HealingTask(self.__resolver)
+        self.__resolver.queue(healing_task)
 
         # 3. auto attacking
+        attack_task = AttackTask(self.__resolver)
+        self.__resolver.queue(attack_task)
 
         # 4. auto looting
 
