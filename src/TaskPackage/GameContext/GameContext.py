@@ -2,11 +2,11 @@ from src.SharedPackage.Creature import Creature
 
 
 class GameContext:
-    def __init__(self, health: int, mana: int, is_attacking: bool, creatures_in_range: list[Creature]):
-        self.__health = health
-        self.__mana = mana
-        self.__is_attacking = is_attacking
-        self.__creatures_in_range = creatures_in_range
+    def __init__(self):
+        self.__health = 0
+        self.__mana = 0
+        self.__is_attacking = False
+        self.__creatures_in_range = list()
 
     def set_health(self, health: int) -> None:
         self.__health = health
