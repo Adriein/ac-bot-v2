@@ -1,6 +1,6 @@
 import subprocess
 import shlex
-from .Errors.CommandExecutionError import CommandExecutionError
+from .Exception.CommandExecutionException import CommandExecutionException
 
 
 class Console:
@@ -16,4 +16,4 @@ class Console:
 
             return process.stdout
         except subprocess.CalledProcessError:
-            raise CommandExecutionError(process.args, process.stderr)
+            raise CommandExecutionException(process.args, process.stderr)

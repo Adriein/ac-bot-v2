@@ -1,6 +1,5 @@
 from .Console import Console
-from .Errors.WindowSearchCommandError import WindowSearchCommandError
-from .Errors.CommandExecutionError import CommandExecutionError
+from .Exception.CommandExecutionException import CommandExecutionException
 
 from src.LoggerPackage import Logger
 from src.UtilPackage import Array
@@ -36,12 +35,12 @@ class Kernel:
                         if self.TIBIA_PID_BIN_PATH in pid_info.lower():
                             return int(window_id)
 
-                    except CommandExecutionError:
+                    except CommandExecutionException:
                         continue
 
-        except Exception as exception:
+        except CommandExecutionException as exception:
             Logger.error(str(exception), exception)
-            raise WindowSearchCommandError(self.TIBIA_WINDOW_NAME)
+            raise SystemExit
 
     def __get_obs_tibia_preview_window_id(self) -> int:
         try:
@@ -52,6 +51,6 @@ class Kernel:
 
             return int(window_id)
 
-        except Exception as exception:
+        except CommandExecutionException as exception:
             Logger.error(str(exception), exception)
-            raise WindowSearchCommandError(self.OBS_TIBIA_PREVIEW_WINDOW_NAME)
+            raise SystemExit

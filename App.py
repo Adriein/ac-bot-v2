@@ -30,6 +30,7 @@ class TibiaAcBot:
             raise SystemExit from error
 
     def setup_global(self) -> None:
+        Logger.info('Setup global...')
         Logger.info('Creating Kernel...')
         os_kernel = Kernel()
 
