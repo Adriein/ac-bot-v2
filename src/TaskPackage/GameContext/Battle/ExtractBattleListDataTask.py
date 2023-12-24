@@ -1,21 +1,26 @@
 import numpy as np
+import pytesseract
 
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
-from src.SharedPackage import PyAutoGui
+from src.OperatingSystemPackage import GlobalGameWidgetContainer
 
 
 class ExtractBattleListDataTask(Task):
-    def __init__(self, py_auto_gui: PyAutoGui):
+    def __init__(self, container: GlobalGameWidgetContainer):
         super().__init__()
-        self.__py_auto_gui = py_auto_gui
+        self.__container = container
         self.__succeed = False
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        battle_list = self.__py_auto_gui.locate_battle_list_widget(frame)
+        widget = self.__container.battle_list_widget()
 
+        battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
+        text = pytesseract.image_to_string(battle_list_roi)
+
+        print(text)
 
         self.success()
         return context

@@ -1,3 +1,5 @@
+import numpy as np
+
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 from src.TaskPackage.TaskResolver import TaskResolver
@@ -10,7 +12,7 @@ class ExtractManaDataTask(Task):
         self.__succeed = False
         self.__completed = False
 
-    def execute(self, context: GameContext) -> GameContext:
+    def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         self.success()
         return context
 

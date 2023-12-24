@@ -1,20 +1,20 @@
 import queue
+
+import numpy as np
+
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 
 
 class TaskResolver:
-    def __init__(self, game_context: GameContext):
+    def __init__(self,):
         self.__queue = queue.Queue()
-        self.__game_context = game_context
 
-    def resolve(self, ) -> None:
-        game_context = self.__game_context
-
+    def resolve(self, game_context: GameContext, frame: np.ndarray, ) -> None:
         while not self.__queue.empty():
             task = self.dequeue()
 
-            game_context = task.execute(game_context)
+            game_context = task.execute(game_context, frame)
 
     def queue(self, task: Task) -> None:
         self.__queue.put(task)

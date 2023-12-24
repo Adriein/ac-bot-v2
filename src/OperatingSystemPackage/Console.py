@@ -1,6 +1,6 @@
 import subprocess
 import shlex
-from .CommandExecutionError import CommandExecutionError
+from .Errors.CommandExecutionError import CommandExecutionError
 
 
 class Console:

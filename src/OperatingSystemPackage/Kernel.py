@@ -1,6 +1,8 @@
-from src.ConsolePackage import CommandExecutionError, Console
+from .Console import Console
+from .Errors.WindowSearchCommandError import WindowSearchCommandError
+from .Errors.CommandExecutionError import CommandExecutionError
+
 from src.LoggerPackage import Logger
-from src.OperatingSystemPackage.Errors.WindowSearchCommandError import WindowSearchCommandError
 from src.UtilPackage import Array
 
 
