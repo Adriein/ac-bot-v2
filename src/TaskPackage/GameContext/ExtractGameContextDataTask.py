@@ -1,21 +1,24 @@
+import numpy
+
 from src.TaskPackage.GameContext.Battle.ExtractBattleListDataTask import ExtractBattleListDataTask
 from src.TaskPackage.GameContext.Health.ExtractHealthDataTask import ExtractHealthDataTask
 from src.TaskPackage.GameContext.Mana.ExtractManaDataTask import ExtractManaDataTask
 from src.TaskPackage.Task import Task
-from src.TaskPackage.GameContext.GameContext import GameContext
+from src.SharedPackage import GameContext
 from src.TaskPackage.TaskResolver import TaskResolver
 
 
 class ExtractGameContextDataTask(Task):
-    def __init__(self, resolver: TaskResolver):
+    def __init__(self, resolver: TaskResolver, screenshot: numpy.ndarray):
         super().__init__()
         self.__resolver = resolver
+        self.__screenshot = screenshot
         self.__succeed = False
         self.__completed = False
 
     def execute(self, context: GameContext) -> GameContext:
         # 1. check battle list
-        extract_battle_list_data_task = ExtractBattleListDataTask(self.__resolver)
+        extract_battle_list_data_task = ExtractBattleListDataTask(self.__resolver, self.__screenshot)
         self.__resolver.queue(extract_battle_list_data_task)
 
         # 2. check health

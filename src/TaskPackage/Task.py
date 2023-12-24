@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
-from src.TaskPackage.GameContext.GameContext import GameContext
+
+import numpy as np
+
+from src.SharedPackage import GameContext
 
 
 class Task(ABC):
@@ -8,7 +11,7 @@ class Task(ABC):
         self.__completed = False
 
     @abstractmethod
-    def execute(self, context: GameContext) -> GameContext:
+    def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         pass
 
     @abstractmethod

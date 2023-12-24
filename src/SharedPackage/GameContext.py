@@ -1,4 +1,4 @@
-from src.SharedPackage.Creature import Creature
+from .Creature import Creature
 
 
 class GameContext:

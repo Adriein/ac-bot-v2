@@ -1,16 +1,22 @@
-from src.TaskPackage.GameContext.GameContext import GameContext
+import numpy as np
+
+from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
-from src.TaskPackage.TaskResolver import TaskResolver
+from src.SharedPackage import PyAutoGui
 
 
 class ExtractBattleListDataTask(Task):
-    def __init__(self, resolver: TaskResolver):
+    def __init__(self, py_auto_gui: PyAutoGui):
         super().__init__()
-        self.__resolver = resolver
+        self.__py_auto_gui = py_auto_gui
         self.__succeed = False
         self.__completed = False
 
-    def execute(self, context: GameContext) -> GameContext:
+    def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
+        battle_list = self.__py_auto_gui.locate_battle_list_widget(frame)
+
+
+
         self.success()
         return context
 
