@@ -8,6 +8,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+pytesseract = "^0.3.10"
+pyautogui = "^0.9.54"
+opencv-python = "^4.8.1.78"
+python3-xlib = "^0.15"
+python-xlib = "^0.33"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"

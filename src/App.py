@@ -1,14 +1,20 @@
 from src.LoggerPackage import Logger
+from src.OperatingSystemPackage import Kernel, Monitor
 
 
 class TibiaAcBot:
-    @staticmethod
-    def init():
-        try:
-            TibiaAcBot.setup_global()
+    __monitor = None
 
+    def __init__(self):
+        self.setup_global()
+
+    @staticmethod
+    def init() -> None:
+        try:
             Logger.info('Started...')
             Logger.info('Press Ctrl+C to stop the execution')
+
+            ac_bot_v2 = TibiaAcBot()
 
         except KeyboardInterrupt:
             Logger.info('Graceful shutdown')
@@ -17,9 +23,15 @@ class TibiaAcBot:
             Logger.error(str(error), error)
             raise SystemExit from error
 
-    @staticmethod
-    def setup_global() -> None:
-        Logger.info('Setting env...')
+    def setup_global(self) -> None:
+        Logger.info('Creating Kernel...')
+        os_kernel = Kernel()
+
+        Logger.info('Creating Monitor...')
+        self.__monitor = Monitor(os_kernel)
+
+    def initialize_dependencies(self):
+        pass
 
 
 TibiaAcBot().init()

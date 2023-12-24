@@ -2,7 +2,7 @@ from src.SharedPackage.Coordinate import Coordinate
 
 
 class Creature:
-    def __init__(self, name: str, runner: bool, has_to_loot: bool, battle_list_position: list[Coordinate]):
+    def __init__(self, name: str, runner: bool, has_to_loot: bool, battle_list_position: Coordinate):
         self.name = name
         self.runner = runner
         self.has_to_loot = has_to_loot
