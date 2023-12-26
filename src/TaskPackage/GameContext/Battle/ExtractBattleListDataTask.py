@@ -3,8 +3,9 @@ import cv2
 
 from src.SharedPackage import GameContext, ScreenRegion, Creature, Coordinate
 from src.TaskPackage.Task import Task
-from src.OperatingSystemPackage import GlobalGameWidgetContainer, Cv2File
+from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.UtilPackage import String
+from src.VendorPackage import Cv2File
 
 
 class ExtractBattleListDataTask(Task):
