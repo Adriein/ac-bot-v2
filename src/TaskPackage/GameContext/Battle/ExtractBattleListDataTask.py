@@ -5,6 +5,7 @@ import cv2
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
+from src.VendorPackage import PyAutoGui
 
 
 class ExtractBattleListDataTask(Task):
@@ -22,6 +23,8 @@ class ExtractBattleListDataTask(Task):
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
         battle_list_rgb = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2RGB)
+
+        PyAutoGui.debug_image(battle_list_rgb)
 
         text = pytesseract.image_to_string(battle_list_rgb)
 
