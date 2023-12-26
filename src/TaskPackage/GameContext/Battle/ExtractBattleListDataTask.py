@@ -26,7 +26,7 @@ class ExtractBattleListDataTask(Task):
 
         # Using cv2.imshow() method
         # Displaying the image
-        cv2.imshow(window_name, battle_list_roi)
+        cv2.imshow(window_name, frame)
 
         # waits for user to press any key
         # (this is necessary to avoid Python kernel form crashing)
