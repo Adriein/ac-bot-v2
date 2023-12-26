@@ -25,7 +25,7 @@ class ExtractBattleListDataTask(Task):
 
         text = pytesseract.image_to_string(battle_list_rgb)
 
-        print(text.split)
+        print(text.split())
 
         self.success()
         return context
