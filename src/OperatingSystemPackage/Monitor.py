@@ -15,6 +15,7 @@ class Monitor:
 
     def __init__(self, kernel: Kernel, pyautogui: PyAutoGui):
         [width, height] = pyautogui.screen_size()
+        print(width, height)
         self.__width = width
         self.__height = height
         self.__kernel = kernel

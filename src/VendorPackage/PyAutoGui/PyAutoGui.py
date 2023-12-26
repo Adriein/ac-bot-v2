@@ -6,6 +6,8 @@ from src.SharedPackage import ScreenRegion
 
 
 class PyAutoGui:
+    BATTLE_LIST_WIDGET_HEIGHT = 180
+
     def __init__(self):
         pass
 
@@ -17,7 +19,12 @@ class PyAutoGui:
             grayscale=True
         )
 
-        return ScreenRegion(region.left, region.top, region.width, region.height)
+        start_x = region.left
+        end_x = region.left + region.width
+        start_y = region.top
+        end_y = region.top + region.height + self.BATTLE_LIST_WIDGET_HEIGHT
+
+        return ScreenRegion(start_x, end_x, start_y, end_y)
 
     def screen_size(self) -> (int, int):
         return pyautogui.size()
