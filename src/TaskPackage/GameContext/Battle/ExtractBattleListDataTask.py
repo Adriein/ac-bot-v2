@@ -23,9 +23,9 @@ class ExtractBattleListDataTask(Task):
 
         battle_list_rgb = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2RGB)
 
-        text = pytesseract.image_to_string(battle_list_rgb)
+        text = pytesseract.image_to_data(battle_list_rgb)
 
-        print(text.split())
+        print(text)
 
         self.success()
         return context
