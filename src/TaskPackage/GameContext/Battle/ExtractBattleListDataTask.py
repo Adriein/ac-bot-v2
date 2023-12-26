@@ -26,7 +26,7 @@ class ExtractBattleListDataTask(Task):
 
         Image.open('src/Wiki/Ui/Battle/battle_list.png')
 
-        text = pytesseract.image_to_data(Image.open('src/Wiki/Ui/Battle/battle_list.png'))
+        text = pytesseract.image_to_string(Image.open('src/Wiki/Ui/Battle/battle_list.png'))
 
         print(text)
 
