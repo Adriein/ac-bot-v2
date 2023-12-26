@@ -1,5 +1,6 @@
 import numpy as np
 import pytesseract
+import cv2
 
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
@@ -18,7 +19,9 @@ class ExtractBattleListDataTask(Task):
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-        text = pytesseract.image_to_string(battle_list_roi)
+        battle_list_rgb = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2RGB)
+
+        text = pytesseract.image_to_string(battle_list_rgb)
 
         print(text)
 
