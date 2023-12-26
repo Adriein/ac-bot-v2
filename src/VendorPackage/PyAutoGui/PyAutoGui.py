@@ -33,7 +33,7 @@ class PyAutoGui:
             grayscale=True
         )
 
-        widget_height = self.__calculate_battle_list_height(monitor_dimensions)
+        widget_height = int(self.__calculate_battle_list_height(monitor_dimensions))
 
         start_x = region.left
         end_x = region.left + region.width
