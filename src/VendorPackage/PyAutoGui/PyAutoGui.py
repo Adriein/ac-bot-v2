@@ -12,9 +12,12 @@ class PyAutoGui:
     def locate_battle_list_widget(self, frame: np.ndarray) -> ScreenRegion:
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         region = pyautogui.locate(
-            'Wiki/Ui/Battle/battle_list.png',
+            'src/Wiki/Ui/Battle/battle_list.png',
             grey_scale_frame, confidence=0.8,
             grayscale=True
         )
 
         return ScreenRegion(region.left, region.top, region.width, region.height)
+
+    def screen_size(self) -> (int, int):
+        return pyautogui.size()

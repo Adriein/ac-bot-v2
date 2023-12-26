@@ -1,6 +1,6 @@
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer
-from src.SharedPackage import PyAutoGui
+from src.VendorPackage import PyAutoGui
 from src.Cavebot import CaveBot
 from src.TaskPackage import TaskResolver
 
@@ -18,7 +18,7 @@ class TibiaAcBot:
             Logger.info('Started...')
             Logger.info('Press Ctrl+C to stop the execution')
 
-            cavebot = CaveBot(self.__monitor, self.__task_resolver)
+            cavebot = CaveBot(self.__monitor, self.__task_resolver, self.__global_widget_container)
 
             cavebot.start()
 
@@ -33,12 +33,13 @@ class TibiaAcBot:
         Logger.info('Setup global...')
         Logger.info('Creating Kernel...')
         os_kernel = Kernel()
+        pyautogui = PyAutoGui()
 
         Logger.info('Creating Monitor...')
-        self.__monitor = Monitor(os_kernel)
+        self.__monitor = Monitor(os_kernel, pyautogui)
 
         Logger.info('Locating widgets in the screen...')
-        self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, PyAutoGui())
+        self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, pyautogui)
 
         Logger.info('Initialize TaskResolver...')
         self.__task_resolver = TaskResolver()

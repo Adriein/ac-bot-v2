@@ -1,4 +1,5 @@
-from src.SharedPackage import PyAutoGui, ScreenRegion
+from src.SharedPackage import ScreenRegion
+from src.VendorPackage import PyAutoGui
 from src.OperatingSystemPackage import Monitor
 
 

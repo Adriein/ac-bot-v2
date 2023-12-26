@@ -1,10 +1,11 @@
 import cv2
 import numpy
-import pyautogui
 from PIL import Image
 from Xlib import display, X
 
 from .Kernel import Kernel
+
+from src.VendorPackage import PyAutoGui
 
 
 class Monitor:
@@ -12,8 +13,8 @@ class Monitor:
     DECODER = 'raw'
     ORDER = 'BGRX'
 
-    def __init__(self, kernel: Kernel):
-        [width, height] = pyautogui.size()
+    def __init__(self, kernel: Kernel, pyautogui: PyAutoGui):
+        [width, height] = pyautogui.screen_size()
         self.__width = width
         self.__height = height
         self.__kernel = kernel
