@@ -1,4 +1,6 @@
 import numpy as np
+import pytesseract
+import cv2
 
 from src.SharedPackage import GameContext
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
@@ -21,7 +23,9 @@ class ExtractHealthDataTask(Task):
         widget = self.__widget.health_widget()
 
         hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x + 150]
-        PyAutoGui.debug_image(hp_roi)
+        grey_hp_roi = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2GRAY)
+        custom_config = r'--oem 3 --psm 6 outputbase digits'
+        print(pytesseract.image_to_string(grey_hp_roi, config=custom_config))
         self.success()
         return context
 
