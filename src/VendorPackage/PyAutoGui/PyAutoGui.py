@@ -61,7 +61,7 @@ class PyAutoGui:
 
         hp_roi = frame[hp_region.start_y: hp_region.end_y, hp_region.start_x: hp_region.end_x]
 
-        hp_stat_template = Cv2File.load_image('Wiki/Stat/hp.png')
+        hp_stat_template = Cv2File.load_image('src/Wiki/Stat/hp.png')
 
         match = cv2.matchTemplate(hp_roi, hp_stat_template, cv2.TM_CCOEFF_NORMED)
 
