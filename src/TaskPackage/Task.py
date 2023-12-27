@@ -22,6 +22,10 @@ class Task(ABC):
     def succeed(self) -> bool:
         pass
 
+    @abstractmethod
+    def __str__(self) -> str:
+        pass
+
     def success(self) -> None:
         self.__completed = True
         self.__succeed = True

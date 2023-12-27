@@ -11,6 +11,9 @@ from src.TaskPackage.TaskResolver import TaskResolver
 
 
 class ExtractGameContextDataTask(Task):
+    def __str__(self) -> str:
+        return f'ExtractGameContextDataTask'
+
     def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer):
         super().__init__()
         self.__resolver = resolver

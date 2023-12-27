@@ -6,6 +6,9 @@ from src.TaskPackage.TaskResolver import TaskResolver
 
 
 class ExtractManaDataTask(Task):
+    def __str__(self) -> str:
+        return f'ExtractManaDataTask'
+
     def __init__(self, resolver: TaskResolver):
         super().__init__()
         self.__resolver = resolver

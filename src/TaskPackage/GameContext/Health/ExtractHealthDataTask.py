@@ -8,6 +8,9 @@ from src.TaskPackage.Task import Task
 
 
 class ExtractHealthDataTask(Task):
+    def __str__(self) -> str:
+        return f'ExtractHealthDataTask'
+
     def __init__(self, widget: GlobalGameWidgetContainer):
         super().__init__()
         self.__widget = widget

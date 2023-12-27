@@ -9,6 +9,9 @@ from src.VendorPackage import Cv2File
 
 
 class ExtractBattleListDataTask(Task):
+    def __str__(self) -> str:
+        return f'ExtractBattleListDataTask'
+
     def __init__(self, container: GlobalGameWidgetContainer):
         super().__init__()
         self.__container = container
