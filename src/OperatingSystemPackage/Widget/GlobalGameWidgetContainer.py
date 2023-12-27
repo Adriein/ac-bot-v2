@@ -1,6 +1,7 @@
 from src.SharedPackage import ScreenRegion
 from src.VendorPackage import PyAutoGui
 from src.OperatingSystemPackage import Monitor
+from src.LoggerPackage import Logger
 
 
 class GlobalGameWidgetContainer:
@@ -8,11 +9,12 @@ class GlobalGameWidgetContainer:
         initial_setup_screenshot = monitor.screenshot()
         monitor_dimensions = monitor.specifications()
 
+        Logger.info('Locating BattleList...')
         self.__battle_list_widget_region = pyautogui.locate_battle_list_widget(
             initial_setup_screenshot,
             monitor_dimensions
         )
-
+        Logger.info('Locating Health...')
         self.__health_widget_region = pyautogui.locate_health_widget(
             initial_setup_screenshot,
             monitor_dimensions

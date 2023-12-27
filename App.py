@@ -30,7 +30,7 @@ class TibiaAcBot:
             raise SystemExit from error
 
     def setup_global(self) -> None:
-        Logger.info('Setup global...')
+        Logger.info('Setup Global Config')
         Logger.info('Creating Kernel...')
         os_kernel = Kernel()
         pyautogui = PyAutoGui()
@@ -38,10 +38,10 @@ class TibiaAcBot:
         Logger.info('Creating Monitor...')
         self.__monitor = Monitor(os_kernel, pyautogui)
 
-        Logger.info('Locating widgets in the screen...')
+        Logger.info('Locating Widgets...')
         self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, pyautogui)
 
-        Logger.info('Initialize TaskResolver...')
+        Logger.info('Initializing TaskResolver...')
         self.__task_resolver = TaskResolver()
 
     def initialize_dependencies(self):

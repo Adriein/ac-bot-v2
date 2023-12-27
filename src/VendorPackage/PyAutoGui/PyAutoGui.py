@@ -65,7 +65,7 @@ class PyAutoGui:
 
         match = cv2.matchTemplate(hp_roi, hp_stat_template, cv2.TM_CCOEFF_NORMED)
 
-        [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
+        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
 
         (start_x, start_y) = max_coordinates
 
