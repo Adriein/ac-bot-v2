@@ -24,7 +24,7 @@ class ExtractGameContextDataTask(Task):
         self.__resolver.queue(extract_battle_list_data_task)
 
         # 2. check health
-        extract_health_data_task = ExtractHealthDataTask(self.__resolver)
+        extract_health_data_task = ExtractHealthDataTask(self.__widget)
         self.__resolver.queue(extract_health_data_task)
 
         # 3. check mana

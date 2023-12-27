@@ -5,13 +5,11 @@ from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.VendorPackage import PyAutoGui
 
 from src.TaskPackage.Task import Task
-from src.TaskPackage.TaskResolver import TaskResolver
 
 
 class ExtractHealthDataTask(Task):
-    def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer):
+    def __init__(self, widget: GlobalGameWidgetContainer):
         super().__init__()
-        self.__resolver = resolver
         self.__widget = widget
         self.__succeed = False
         self.__completed = False
