@@ -23,14 +23,16 @@ class ExtractBattleListDataTask(Task):
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
+        grey_battle_list_roi = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2GRAY)
+
         results = list()
 
         for enemy in [Creature('wasp', False, True, Coordinate(0, 0))]:
             enemy_path = f'src/Wiki/Ui/Mobs/{String.snake_to_camel_case(enemy.name)}/{enemy.name}_label.png'
-            print(enemy_path)
+
             creature_template = Cv2File.load_image(enemy_path)
 
-            match = cv2.matchTemplate(battle_list_roi, creature_template, cv2.TM_CCOEFF_NORMED)
+            match = cv2.matchTemplate(grey_battle_list_roi, creature_template, cv2.TM_CCOEFF_NORMED)
 
             # match_locations = (y_match_coords, x_match_coords) >= similarity more than threshold
             match_locations = np.where(match >= 0.9)
