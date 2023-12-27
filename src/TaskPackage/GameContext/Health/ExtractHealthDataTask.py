@@ -27,14 +27,9 @@ class ExtractHealthDataTask(Task):
         grey_hp_roi = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2GRAY)
         h, w, c = hp_roi.shape
         custom_config = r'--oem 3 --psm 6 outputbase digits'
-        image = Image.frombytes(
-            'RGB',
-            (w, h),
-            hp_roi,
-            'raw',
-            'BGR', 0, 0
-        )
-        print(pytesseract.image_to_string(image, config=custom_config))
+        img = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2RGB)
+        im_pil = Image.fromarray(img)
+        print(pytesseract.image_to_string(im_pil, config=custom_config))
         self.success()
         return context
 
