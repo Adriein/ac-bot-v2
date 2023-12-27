@@ -27,6 +27,7 @@ class ExtractBattleListDataTask(Task):
 
         for enemy in [Creature('wasp', False, True, Coordinate(0, 0))]:
             enemy_path = f'src/Wiki/Ui/Mobs/{String.snake_to_camel_case(enemy.name)}/{enemy.name}_label.png'
+            print(enemy_path)
             creature_template = Cv2File.load_image(enemy_path)
 
             match = cv2.matchTemplate(battle_list_roi, creature_template, cv2.TM_CCOEFF_NORMED)
