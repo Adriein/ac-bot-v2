@@ -3,8 +3,8 @@ import numpy as np
 import pyautogui
 import math
 
-from src.VendorPackage import Cv2File
 from src.SharedPackage import ScreenRegion, Constants
+from src.VendorPackage.Cv2File import Cv2File
 
 
 class PyAutoGui:
