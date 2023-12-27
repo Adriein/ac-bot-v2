@@ -18,6 +18,8 @@ class CaveBot:
         extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget)
         self.__resolver.queue(extract_game_context_data_task)
 
+        self.__resolver.resolve(game_context, screenshot)
+
         # 2. auto healing
         healing_task = HealingTask(self.__resolver)
         self.__resolver.queue(healing_task)

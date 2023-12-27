@@ -16,8 +16,7 @@ class AttackTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        pass
-
+        return context
     def completed(self) -> bool:
         pass
 
