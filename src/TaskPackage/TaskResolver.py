@@ -13,7 +13,8 @@ class TaskResolver:
     def resolve(self, game_context: GameContext, frame: np.ndarray, ) -> None:
         while not self.__queue.empty():
             task = self.dequeue()
-
+            print(task)
+            print(game_context)
             game_context = task.execute(game_context, frame)
 
     def queue(self, task: Task) -> None:
