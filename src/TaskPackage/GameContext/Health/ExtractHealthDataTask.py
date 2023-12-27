@@ -25,7 +25,8 @@ class ExtractHealthDataTask(Task):
         hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x + 150]
         grey_hp_roi = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2GRAY)
         custom_config = r'--oem 3 --psm 6 outputbase digits'
-        print(pytesseract.image_to_string(grey_hp_roi, config=custom_config))
+        img_rgb = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2RGB)
+        print(pytesseract.image_to_string(img_rgb, config=custom_config))
         self.success()
         return context
 
