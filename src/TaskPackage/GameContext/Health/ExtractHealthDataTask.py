@@ -20,7 +20,7 @@ class ExtractHealthDataTask(Task):
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         widget = self.__widget.health_widget()
 
-        hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x + 100]
+        hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x + 200]
         PyAutoGui.debug_image(hp_roi)
         self.success()
         return context
