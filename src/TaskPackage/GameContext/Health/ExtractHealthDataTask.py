@@ -25,10 +25,11 @@ class ExtractHealthDataTask(Task):
 
         hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x + 150]
         grey_hp_roi = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2GRAY)
+        h, w = hp_roi.shape
         custom_config = r'--oem 3 --psm 6 outputbase digits'
         image = Image.frombytes(
             'RGB',
-            hp_roi.shape[:2],
+            (w, h),
             hp_roi,
             'raw',
             'BGR', 0, 0
