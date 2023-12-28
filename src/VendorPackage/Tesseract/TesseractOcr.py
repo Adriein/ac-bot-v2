@@ -20,7 +20,7 @@ class TesseractOcr:
 
         print(result)
 
-        digits_only = re.findall(r'\d', result)
+        # digits_only = re.findall(r'\d', result)
 
         #return ''.join(digits_only)
         return '111111'
