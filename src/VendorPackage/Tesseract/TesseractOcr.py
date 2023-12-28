@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import pytesseract
+import re
 
 
 class TesseractOcr:
@@ -12,4 +13,8 @@ class TesseractOcr:
     def number_img_to_string(self, frame: np.ndarray) -> str:
         rgb_img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        return pytesseract.image_to_string(rgb_img, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
+        result = pytesseract.image_to_string(rgb_img, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
+
+        digits_only = re.findall(r'\d', result)
+
+        return ''.join(digits_only)
