@@ -4,7 +4,7 @@ import pytesseract
 
 
 class TesseractOcr:
-    TESSERACT_EXTRACT_NUMBER_CONFIG = r'--oem 3 --psm 7 outputbase digits'
+    TESSERACT_EXTRACT_NUMBER_CONFIG = r'--oem 3 --psm 11 outputbase digits'
 
     def __init__(self):
         pass
