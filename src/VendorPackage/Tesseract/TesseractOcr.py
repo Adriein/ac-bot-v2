@@ -22,4 +22,5 @@ class TesseractOcr:
 
         digits_only = re.findall(r'\d', result)
 
-        return ''.join(digits_only)
+        #return ''.join(digits_only)
+        return '111111'
