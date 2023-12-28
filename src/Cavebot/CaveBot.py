@@ -1,6 +1,7 @@
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask
+from src.VendorPackage import TesseractOcr
 
 
 class CaveBot:
@@ -13,9 +14,10 @@ class CaveBot:
     def start(self) -> None:
         screenshot = self.__monitor.screenshot()
         game_context = GameContext()
+        tesseract = TesseractOcr()
 
         # 1. extract game context
-        extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget)
+        extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, tesseract)
         self.__resolver.queue(extract_game_context_data_task)
 
         self.__resolver.resolve(game_context, screenshot)
