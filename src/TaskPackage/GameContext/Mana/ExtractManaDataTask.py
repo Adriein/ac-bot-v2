@@ -27,7 +27,7 @@ class ExtractManaDataTask(Task):
 
         mana_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
         PyAutoGui.debug_image(mana_roi)
-        print(self.__tesseract.number_img_to_string(mana_roi))
+
         current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
 
         context.set_mana(current_mana)
