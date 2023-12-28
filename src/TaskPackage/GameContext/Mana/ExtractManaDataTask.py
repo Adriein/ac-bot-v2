@@ -5,7 +5,7 @@ from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.VendorPackage import TesseractOcr, PyAutoGui
+from src.VendorPackage import TesseractOcr
 
 
 class ExtractManaDataTask(Task):
@@ -26,7 +26,6 @@ class ExtractManaDataTask(Task):
         widget = self.__widget.mana_widget()
 
         mana_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
-        PyAutoGui.debug_image(mana_roi)
 
         current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
 
