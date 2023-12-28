@@ -15,6 +15,8 @@ class TesseractOcr:
 
         result = pytesseract.image_to_string(rgb_img, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
 
+        print(result)
+
         digits_only = re.findall(r'\d', result)
 
         return ''.join(digits_only)
