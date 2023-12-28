@@ -19,12 +19,7 @@ class TesseractOcr:
         # Apply thresholding to separate the digits from the background
         _, thresholded = cv2.threshold(grey_img, 127, 255, cv2.THRESH_BINARY_INV)
 
-        # Display the thresholded image
-        cv2.imshow('Thresholded Image', thresholded)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-        result = pytesseract.image_to_data(thresholded, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG, output_type=Output.DICT)
+        result = pytesseract.image_to_string(thresholded, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
 
         print(result)
 
