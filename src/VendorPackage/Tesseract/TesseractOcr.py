@@ -24,7 +24,7 @@ class TesseractOcr:
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-        result = pytesseract.image_to_data(grey_img, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG, output_type=Output.DICT)
+        result = pytesseract.image_to_data(thresholded, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG, output_type=Output.DICT)
 
         print(result)
 
