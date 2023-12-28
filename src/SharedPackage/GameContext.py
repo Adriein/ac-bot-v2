@@ -37,5 +37,12 @@ class GameContext:
         return self.__script_enemies
 
     def __str__(self):
-        return f"GameContext(health={self.__health}, mana={self.__mana}), is_attacking={self.__is_attacking}), " \
-               f"creatures_in_range={self.__creatures_in_range}, script_enemies={self.__script_enemies})"
+        return f"""
+                GameContext(
+                    health={self.__health},
+                    mana={self.__mana},
+                    is_attacking={self.__is_attacking}
+                    creatures_in_range={self.__creatures_in_range}
+                    script_enemies={self.__script_enemies}
+                )
+                """

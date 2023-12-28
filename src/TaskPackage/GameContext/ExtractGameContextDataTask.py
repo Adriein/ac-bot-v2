@@ -1,5 +1,6 @@
 import numpy as np
 
+from src.LoggerPackage import Logger
 from src.SharedPackage import GameContext
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 
@@ -13,7 +14,7 @@ from src.VendorPackage import TesseractOcr
 
 class ExtractGameContextDataTask(Task):
     def __str__(self) -> str:
-        return f'ExtractGameContextDataTask'
+        return f"""ExtractGameContextDataTask(extract_battle_list_data, extract_health_data, extract_mana_data)"""
 
     def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer, tesseract: TesseractOcr):
         super().__init__()
@@ -22,15 +23,18 @@ class ExtractGameContextDataTask(Task):
         self.__tesseract = tesseract
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        # 1. check battle list
+        Logger.debug("Executing ExtractGameContextDataTask")
+        Logger.debug(str(context))
+
+        Logger.debug("Queueing ExtractBattleListDataTask")
         extract_battle_list_data_task = ExtractBattleListDataTask(self.__widget)
         self.__resolver.queue(extract_battle_list_data_task)
 
-        # 2. check health
+        Logger.debug("Queueing ExtractHealthDataTask")
         extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__tesseract)
         self.__resolver.queue(extract_health_data_task)
 
-        # 3. check mana
+        Logger.debug("Queueing ExtractManaDataTask")
         extract_mana_data_task = ExtractManaDataTask(self.__resolver)
         self.__resolver.queue(extract_mana_data_task)
 

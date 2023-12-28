@@ -1,5 +1,6 @@
 import numpy as np
 
+from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
@@ -18,6 +19,9 @@ class ExtractHealthDataTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
+        Logger.debug("Executing ExtractHealthDataTask")
+        Logger.debug(str(context))
+
         widget = self.__widget.health_widget()
 
         hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]

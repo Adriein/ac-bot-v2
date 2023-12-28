@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 
+from src.LoggerPackage import Logger
 from src.SharedPackage import GameContext, ScreenRegion, Creature, Coordinate
 from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
@@ -19,6 +20,9 @@ class ExtractBattleListDataTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
+        Logger.debug("Executing ExtractBattleListDataTask")
+        Logger.debug(str(context))
+
         widget = self.__container.battle_list_widget()
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
