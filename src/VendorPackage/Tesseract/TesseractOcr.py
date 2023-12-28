@@ -12,8 +12,9 @@ class TesseractOcr:
 
     def number_img_to_string(self, frame: np.ndarray) -> str:
         rgb_img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        grey_img = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
 
-        result = pytesseract.image_to_string(rgb_img, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
+        result = pytesseract.image_to_string(grey_img, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
 
         print(result)
 
