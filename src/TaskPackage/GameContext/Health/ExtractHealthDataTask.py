@@ -23,7 +23,7 @@ class ExtractHealthDataTask(Task):
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         widget = self.__widget.health_widget()
 
-        hp_roi = frame[widget.start_y: widget.end_y, widget.start_x + 100: widget.end_x + 150]
+        hp_roi = frame[widget.start_y: widget.end_y, widget.start_x + 120: widget.end_x + 150]
         grey_hp_roi = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2GRAY)
         h, w, c = hp_roi.shape
         custom_config = r'--oem 3 --psm 8 outputbase digits'
