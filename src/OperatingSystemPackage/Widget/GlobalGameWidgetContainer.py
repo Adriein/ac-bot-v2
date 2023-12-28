@@ -14,14 +14,24 @@ class GlobalGameWidgetContainer:
             initial_setup_screenshot,
             monitor_dimensions
         )
+
         Logger.info('Locating Health...')
         self.__health_widget_region = pyautogui.locate_health_widget(
             initial_setup_screenshot,
             monitor_dimensions
         )
 
-    def battle_list_widget(self, ) -> ScreenRegion:
+        Logger.info('Locating Mana...')
+        self.__mana_widget_region = pyautogui.locate_mana_widget(
+            initial_setup_screenshot,
+            monitor_dimensions
+        )
+
+    def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
 
-    def health_widget(self, ) -> ScreenRegion:
+    def health_widget(self) -> ScreenRegion:
         return self.__health_widget_region
+
+    def mana_widget(self) -> ScreenRegion:
+        return self.__mana_widget_region

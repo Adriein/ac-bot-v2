@@ -8,18 +8,18 @@ from src.TaskPackage.GameContext.Health.ExtractHealthDataTask import ExtractHeal
 from src.TaskPackage.GameContext.Mana.ExtractManaDataTask import ExtractManaDataTask
 from src.TaskPackage.Task import Task
 from src.TaskPackage.TaskResolver import TaskResolver
+from src.VendorPackage import TesseractOcr
 
 
 class ExtractGameContextDataTask(Task):
     def __str__(self) -> str:
         return f'ExtractGameContextDataTask'
 
-    def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer):
+    def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer, tesseract: TesseractOcr):
         super().__init__()
         self.__resolver = resolver
         self.__widget = widget
-        self.__succeed = False
-        self.__completed = False
+        self.__tesseract = tesseract
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         # 1. check battle list
@@ -27,7 +27,7 @@ class ExtractGameContextDataTask(Task):
         self.__resolver.queue(extract_battle_list_data_task)
 
         # 2. check health
-        extract_health_data_task = ExtractHealthDataTask(self.__widget)
+        extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__tesseract)
         self.__resolver.queue(extract_health_data_task)
 
         # 3. check mana
