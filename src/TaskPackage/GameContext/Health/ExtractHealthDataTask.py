@@ -29,7 +29,7 @@ class ExtractHealthDataTask(Task):
         custom_config = r'--psm 8 outputbase digits'
         img = cv2.cvtColor(hp_roi, cv2.COLOR_BGR2RGB)
         im_pil = Image.fromarray(img)
-        print(pytesseract.image_to_string(im_pil))
+        print(pytesseract.image_to_string(im_pil, custom_config))
         self.success()
         return context
 
