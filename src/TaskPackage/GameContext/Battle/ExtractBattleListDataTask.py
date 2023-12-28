@@ -65,7 +65,7 @@ class ExtractBattleListDataTask(Task):
                     results.append(creature)
 
         context.set_creatures_in_range(results)
-        print(results)
+
         self.success()
 
         return context
