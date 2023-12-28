@@ -3,8 +3,6 @@ import cv2
 import pytesseract
 import re
 
-from pytesseract import Output
-
 
 class TesseractOcr:
     TESSERACT_EXTRACT_NUMBER_CONFIG = r'--oem 3 --psm 13 outputbase digits'
@@ -13,7 +11,6 @@ class TesseractOcr:
         pass
 
     def number_img_to_string(self, frame: np.ndarray) -> str:
-        rgb_img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         grey_img = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
 
         # Apply thresholding to separate the digits from the background
@@ -21,9 +18,6 @@ class TesseractOcr:
 
         result = pytesseract.image_to_string(thresholded, config=self.TESSERACT_EXTRACT_NUMBER_CONFIG)
 
-        print(result)
+        digits_only = re.findall(r'\d', result)
 
-        # digits_only = re.findall(r'\d', result)
-
-        #return ''.join(digits_only)
-        return '111111'
+        return ''.join(digits_only)
