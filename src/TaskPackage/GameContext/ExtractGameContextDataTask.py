@@ -24,7 +24,8 @@ class ExtractGameContextDataTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         Logger.debug("Executing ExtractGameContextDataTask")
-        Logger.debug(str(context))
+        Logger.debug("Received context")
+        Logger.debug(context, inspect_class=True)
 
         Logger.debug("Queueing ExtractBattleListDataTask")
         extract_battle_list_data_task = ExtractBattleListDataTask(self.__widget)
@@ -37,6 +38,9 @@ class ExtractGameContextDataTask(Task):
         Logger.debug("Queueing ExtractManaDataTask")
         extract_mana_data_task = ExtractManaDataTask(self.__widget, self.__tesseract)
         self.__resolver.queue(extract_mana_data_task)
+
+        Logger.debug("Updated context")
+        Logger.debug(context, inspect_class=True)
 
         self.success()
 

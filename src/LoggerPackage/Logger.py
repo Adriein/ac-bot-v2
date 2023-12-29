@@ -1,7 +1,10 @@
 import traceback
 import os
+from typing import Any
+
 from rich.console import Console
 from rich.table import Table
+from rich import inspect
 
 from src.SharedPackage import Constants
 from src.UtilPackage import Time
@@ -14,9 +17,13 @@ class Logger:
         print(f'[{Time.now()}][AcBotv2][INFO]: {message}')
 
     @staticmethod
-    def debug(message: str) -> None:
+    def debug(message: str | Any, inspect_class=False) -> None:
         if os.environ[Constants.DEBUG_MODE]:
-            print(f'[{Time.now()}][AcBotv2][DEBUG]: {message}')
+            if not inspect_class:
+                print(f'[{Time.now()}][AcBotv2][DEBUG]: {message}')
+                return
+
+            inspect(message)
 
     @staticmethod
     def error(message: str, error: Exception) -> None:
@@ -40,7 +47,14 @@ class Logger:
 
     @staticmethod
     def table(title: str, table: Table) -> None:
-        print(f'[{Time.now()}][AcBotv2][DEBUG]: {title}')
+        print(f'[{Time.now()}][AcBotv2][INFO]: {title}')
+
+        console = Console()
+        console.print(table)
+
+    @staticmethod
+    def inspect(message: str, cls: Any) -> None:
+        print(f'[{Time.now()}][AcBotv2][INSPECT]: {message}')
 
         console = Console()
         console.print(table)

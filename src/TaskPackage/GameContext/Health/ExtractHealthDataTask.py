@@ -20,7 +20,8 @@ class ExtractHealthDataTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         Logger.debug("Executing ExtractHealthDataTask")
-        Logger.debug(str(context))
+        Logger.debug("Received context")
+        Logger.debug(context, inspect_class=True)
 
         widget = self.__widget.health_widget()
 
@@ -29,6 +30,9 @@ class ExtractHealthDataTask(Task):
         current_health = int(self.__tesseract.number_img_to_string(hp_roi))
 
         context.set_health(current_health)
+
+        Logger.debug("Updated context")
+        Logger.debug(context, inspect_class=True)
 
         self.success()
         return context

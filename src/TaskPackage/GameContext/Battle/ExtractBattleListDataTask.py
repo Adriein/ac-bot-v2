@@ -21,7 +21,8 @@ class ExtractBattleListDataTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         Logger.debug("Executing ExtractBattleListDataTask")
-        Logger.debug(str(context))
+        Logger.debug("Received context")
+        Logger.debug(context, inspect_class=True)
 
         widget = self.__container.battle_list_widget()
 
@@ -69,6 +70,9 @@ class ExtractBattleListDataTask(Task):
                     results.append(creature)
 
         context.set_creatures_in_range(results)
+
+        Logger.debug("Updated context")
+        Logger.debug(context, inspect_class=True)
 
         self.success()
 

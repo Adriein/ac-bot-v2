@@ -21,7 +21,8 @@ class ExtractManaDataTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         Logger.debug("Executing ExtractManaDataTask")
-        Logger.debug(str(context))
+        Logger.debug("Received context")
+        Logger.debug(context, inspect_class=True)
 
         widget = self.__widget.mana_widget()
 
@@ -30,6 +31,9 @@ class ExtractManaDataTask(Task):
         current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
 
         context.set_mana(current_mana)
+
+        Logger.debug("Updated context")
+        Logger.debug(context, inspect_class=True)
 
         self.success()
         return context
