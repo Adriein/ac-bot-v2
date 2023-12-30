@@ -16,7 +16,7 @@ class Constants:
     MIN_MANA_SURPLUS = 10
     MAX_MANA_SURPLUS = 10
 
-    MIN_EAT_TIMES = 1
+    MIN_EAT_TIMES = 2
     MAX_EAT_TIMES = 4
 
     MIN_MINUTES_WITHOUT_FOOD = 5
