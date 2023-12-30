@@ -1,8 +1,9 @@
 from src.GamePackage import Player, Script
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor, Keyboard
-from src.TaskPackage import TaskResolver, ExtractHealthDataTask, ExtractManaDataTask, HealingTask, UseManaSurplusTask
 from src.SharedPackage import GameContext
+from src.TaskPackage import TaskResolver, ExtractHealthDataTask, ExtractManaDataTask, HealingTask, UseManaSurplusTask, \
+    EatTask
 from src.VendorPackage import TesseractOcr
 
 
@@ -45,6 +46,8 @@ class AutoTrainer:
             use_mana_surplus_task = UseManaSurplusTask(player)
             self.__task_resolver.queue(use_mana_surplus_task)
 
+            Logger.debug('Queuing EatTask')
+            eat_task = EatTask(player)
+            self.__task_resolver.queue(eat_task)
+
             self.__task_resolver.resolve(game_context, frame)
-
-
