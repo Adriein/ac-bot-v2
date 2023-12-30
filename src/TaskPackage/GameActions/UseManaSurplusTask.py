@@ -6,9 +6,9 @@ from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 
 
-class HealingTask(Task):
+class UseManaSurplusTask(Task):
     def __str__(self) -> str:
-        return f'HealingTask'
+        return f'UseManaSurplusTask'
 
     def __init__(self, player: Player):
         super().__init__()
@@ -18,11 +18,11 @@ class HealingTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        Logger.debug("Executing HealingTask")
+        Logger.debug("Executing UseManaSurplusTask")
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        self.__player.potion_heal()
+        self.__player.spell_heal('exura ico')
 
         self.succeed()
         return context

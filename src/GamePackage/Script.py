@@ -6,16 +6,16 @@ from src.UtilPackage import LinkedList
 
 class Script:
     __FILE_READ_MODE = 'r'
-    __PLAYER_HOTKEY_CONFIG_JSON = 'src/Wiki/Player/player_hotkey_config.json'
+    __PLAYER_HOTKEY_CONFIG_JSON = 'src/Wiki/Player/player_config.json'
 
     __waypoints: LinkedList = LinkedList()
     __creatures: list[Creature] = list()
-    __hotkey_bindings: dict = None
+    __player_config: dict = None
 
     __floor_levels: set[int] = set()
 
-    def __init__(self, script_json_data: dict, player_hotkey_config: dict):
-        self.__hotkey_bindings = player_hotkey_config
+    def __init__(self, script_json_data: dict, player_config: dict):
+        self.__player_config = player_config
 
         for creature in script_json_data['creatures']:
             self.__creatures.append(
@@ -37,9 +37,9 @@ class Script:
             script_data = json.load(file)
 
         with open(Script.__PLAYER_HOTKEY_CONFIG_JSON, Script.__FILE_READ_MODE) as file:
-            hotkey_binding = json.load(file)
+            player_config = json.load(file)
 
-        return Script(script_data, hotkey_binding)
+        return Script(script_data, player_config)
 
     def __extract_z_level_from_waypoint(self, waypoint: str) -> None:
         x, y, z = waypoint.split(',')
@@ -54,3 +54,6 @@ class Script:
 
     def floors(self) -> set[int]:
         return self.__floor_levels
+
+    def player_config(self) -> dict:
+        return self.__player_config

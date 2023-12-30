@@ -1,0 +1,9 @@
+{
+  "spells": {
+    "exura ico": "r"
+  },
+  "heal": {
+    "potion": 100,
+    "spell": 300
+  }
+}
