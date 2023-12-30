@@ -1,7 +1,7 @@
 from src.GamePackage import Player, Script
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor, Keyboard
-from src.TaskPackage import TaskResolver, ExtractHealthDataTask, ExtractManaDataTask, UseManaSurplusTask, HealingTask
+from src.TaskPackage import TaskResolver, ExtractHealthDataTask, ExtractManaDataTask, HealingTask, UseManaSurplusTask
 from src.SharedPackage import GameContext
 from src.VendorPackage import TesseractOcr
 
