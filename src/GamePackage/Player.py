@@ -6,7 +6,7 @@ class Player:
         self.__keyboard = keyboard
 
     def eat(self) -> None:
-        pass
+        self.__keyboard.press('v')
 
     def spell_heal(self, spell: str) -> None:
-        pass
+        self.__keyboard.press('r')

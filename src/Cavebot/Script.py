@@ -24,7 +24,7 @@ class Script:
             )
 
         for waypoint in script_json_data['walk']:
-            self.FLOORS_LEVELS.add(self.__extract_z_level_from_waypoint(waypoint[0]))
+            self.__extract_z_level_from_waypoint(waypoint[0])
             self.__waypoints.append(waypoint)
 
     @staticmethod
@@ -34,10 +34,10 @@ class Script:
 
         return Script(data)
 
-    def __extract_z_level_from_waypoint(self, waypoint: str) -> int:
+    def __extract_z_level_from_waypoint(self, waypoint: str) -> None:
         x, y, z = waypoint.split(',')
 
-        return int(z)
+        self.FLOORS_LEVELS.add(int(z))
 
     def creatures(self) -> list[Creature]:
         return self.__creatures
