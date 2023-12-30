@@ -1,11 +1,19 @@
 from .Creature import Creature
+from datetime import datetime
 
 
 class GameContext:
+    def __str__(self):
+        return f"GameContext"
+
     def __init__(self):
         self.__health = 0
         self.__mana = 0
+        self.__last_meal_time = None
+        self.__next_meal_time = None
+
         self.__is_attacking = False
+
         self.__creatures_in_range = list()
         self.__script_enemies = list()
 
@@ -36,13 +44,15 @@ class GameContext:
     def get_script_enemies(self) -> list[Creature]:
         return self.__script_enemies
 
-    def __str__(self):
-        return f"""
-                GameContext(
-                    health={self.__health},
-                    mana={self.__mana},
-                    is_attacking={self.__is_attacking}
-                    creatures_in_range={self.__creatures_in_range}
-                    script_enemies={self.__script_enemies}
-                )
-                """
+    def set_last_meal_time(self, meal_time: datetime) -> None:
+        self.__last_meal_time = meal_time
+
+    def get_last_meal_time(self) -> datetime:
+        return self.__last_meal_time
+
+    def set_next_meal_time(self, meal_time: datetime) -> None:
+        self.__next_meal_time = meal_time
+
+    def get_next_meal_time(self) -> datetime:
+        return self.__next_meal_time
+

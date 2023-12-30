@@ -14,13 +14,13 @@ from src.UtilPackage import Array
 class Logger:
     @staticmethod
     def info(message: str) -> None:
-        print(f'[{Time.now()}][AcBotv2][INFO]: {message}')
+        print(f'[{Time.format(Time.now())}][AcBotv2][INFO]: {message}')
 
     @staticmethod
     def debug(message: str | Any, inspect_class=False) -> None:
         if os.environ[Constants.DEBUG_MODE]:
             if not inspect_class:
-                print(f'[{Time.now()}][AcBotv2][DEBUG]: {message}')
+                print(f'[{Time.format(Time.now())}][AcBotv2][DEBUG]: {message}')
                 return
 
             inspect(message)
@@ -36,7 +36,7 @@ class Logger:
         if not message:
             message = 'Fatal Exception without message'
 
-        print(f'[{Time.now()}][AcBotv2][ERROR]: {message}')
+        print(f'[{Time.format(Time.now())}][AcBotv2][ERROR]: {message}')
         print(f'  [AcBotv2][TRACE]:')
         for index, stack_trace in enumerate(Array.reverse(traceback.format_tb(error.__traceback__))):
             stack_list = stack_trace.strip().replace("\n", "").split(",")
@@ -47,14 +47,7 @@ class Logger:
 
     @staticmethod
     def table(title: str, table: Table) -> None:
-        print(f'[{Time.now()}][AcBotv2][INFO]: {title}')
-
-        console = Console()
-        console.print(table)
-
-    @staticmethod
-    def inspect(message: str, cls: Any) -> None:
-        print(f'[{Time.now()}][AcBotv2][INSPECT]: {message}')
+        print(f'[{Time.format(Time.now())}][AcBotv2][INFO]: {title}')
 
         console = Console()
         console.print(table)

@@ -2,8 +2,9 @@ import numpy as np
 
 from src.GamePackage import Player
 from src.LoggerPackage import Logger
-from src.SharedPackage import GameContext
+from src.SharedPackage import GameContext, Constants
 from src.TaskPackage.Task import Task
+from src.UtilPackage import Number
 
 
 class UseManaSurplusTask(Task):
@@ -22,7 +23,12 @@ class UseManaSurplusTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        self.__player.spell_heal('exura ico')
+        random_mana_surplus = Number.random(Constants.MIN_MANA_SURPLUS, Constants.MAX_MANA_SURPLUS)
+
+        Logger.debug(f"Random mana surplus {random_mana_surplus}")
+
+        if context.get_mana() >= random_mana_surplus:
+            self.__player.spell_heal(Constants.LIGHT_HEALING)
 
         self.succeed()
         return context
