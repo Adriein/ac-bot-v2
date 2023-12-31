@@ -19,23 +19,28 @@ class ExtractHealthDataTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        Logger.debug("Executing ExtractHealthDataTask")
-        Logger.debug("Received context")
-        Logger.debug(context, inspect_class=True)
+        try:
+            Logger.debug("Executing ExtractHealthDataTask")
+            Logger.debug("Received context")
+            Logger.debug(context, inspect_class=True)
 
-        widget = self.__widget.health_widget()
+            widget = self.__widget.health_widget()
 
-        hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
+            hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-        current_health = int(self.__tesseract.number_img_to_string(hp_roi))
+            current_health = int(self.__tesseract.number_img_to_string(hp_roi))
 
-        context.set_health(current_health)
+            context.set_health(current_health)
 
-        Logger.debug("Updated context")
-        Logger.debug(context, inspect_class=True)
+            Logger.debug("Updated context")
+            Logger.debug(context, inspect_class=True)
 
-        self.success()
-        return context
+            self.success()
+            return context
+        except ValueError:
+            self.fail()
+
+            return context
 
     def succeed(self) -> bool:
         return self.__succeed

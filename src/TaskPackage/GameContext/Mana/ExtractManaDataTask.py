@@ -20,23 +20,28 @@ class ExtractManaDataTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        Logger.debug("Executing ExtractManaDataTask")
-        Logger.debug("Received context")
-        Logger.debug(context, inspect_class=True)
+        try:
+            Logger.debug("Executing ExtractManaDataTask")
+            Logger.debug("Received context")
+            Logger.debug(context, inspect_class=True)
 
-        widget = self.__widget.mana_widget()
+            widget = self.__widget.mana_widget()
 
-        mana_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
+            mana_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-        current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
+            current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
 
-        context.set_mana(current_mana)
+            context.set_mana(current_mana)
 
-        Logger.debug("Updated context")
-        Logger.debug(context, inspect_class=True)
+            Logger.debug("Updated context")
+            Logger.debug(context, inspect_class=True)
 
-        self.success()
-        return context
+            self.success()
+            return context
+        except ValueError:
+            self.fail()
+
+            return context
 
     def succeed(self) -> bool:
         return self.__succeed
