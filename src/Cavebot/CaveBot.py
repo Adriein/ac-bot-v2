@@ -21,7 +21,7 @@ class CaveBot:
         self.__widget = widget
         self.__tesseract = tesseract
 
-    def start(self, game_context: GameContext, player: Player, script: Script) -> None:
+    def start(self, game_context: GameContext, player: Player) -> None:
         screenshot = self.__monitor.screenshot()
 
         # 1. extract game context

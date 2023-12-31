@@ -1,9 +1,11 @@
+from src.GamePackage import Player
 from src.LoggerPackage import Logger
-from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer
-from src.VendorPackage import PyAutoGui
+from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard
+from src.VendorPackage import PyAutoGui, TesseractOcr
 from src.Cavebot import CaveBot
+from src.Train import AutoTrainer
 from src.TaskPackage import TaskResolver
-from src.SharedPackage import Constants
+from src.SharedPackage import Constants, GameContext
 
 from rich.table import Table
 import argparse
@@ -12,9 +14,13 @@ import os
 
 class TibiaAcBot:
     def __init__(self):
+        self.__kernel = None
         self.__monitor = None
+        self.__keyboard = None
         self.__global_widget_container = None
         self.__task_resolver = None
+        self.__pyautogui = None
+        self.__tesseract = None
 
         self.__collect_program_arguments()
         self.__setup_global()
@@ -24,9 +30,31 @@ class TibiaAcBot:
             Logger.info('Started...')
             Logger.info('Press Ctrl+C to stop the execution')
 
-            cavebot = CaveBot(self.__monitor, self.__task_resolver, self.__global_widget_container)
+            player = Player(self.__keyboard, dict())
+            game_context = GameContext()
 
-            cavebot.start()
+            if not os.environ[Constants.TRAIN_MODE]:
+                cavebot = CaveBot(
+                    self.__monitor,
+                    self.__keyboard,
+                    self.__task_resolver,
+                    self.__global_widget_container,
+                    self.__tesseract
+                )
+
+                cavebot.start(game_context, player)
+
+                return
+
+            auto_trainer = AutoTrainer(
+                self.__monitor,
+                self.__keyboard,
+                self.__task_resolver,
+                self.__global_widget_container,
+                self.__tesseract
+            )
+
+            auto_trainer.start(game_context, player)
 
         except KeyboardInterrupt:
             Logger.info('Graceful shutdown')
@@ -38,14 +66,22 @@ class TibiaAcBot:
     def __setup_global(self) -> None:
         Logger.info('Setup Global Config')
         Logger.info('Creating Kernel...')
-        os_kernel = Kernel()
-        pyautogui = PyAutoGui()
+        self.__kernel = os_kernel = Kernel()
+
+        Logger.info('Creating PyAutoGui...')
+        self.__pyautogui = PyAutoGui()
 
         Logger.info('Creating Monitor...')
-        self.__monitor = Monitor(os_kernel, pyautogui)
+        self.__monitor = Monitor(os_kernel, self.__pyautogui)
+
+        Logger.info('Creating Tesseract..')
+        self.__tesseract = TesseractOcr()
+
+        Logger.info('Creating Keyboard..')
+        self.__keyboard = Keyboard(self.__kernel)
 
         Logger.info('Locating Widgets...')
-        self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, pyautogui)
+        self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, self.__pyautogui)
 
         Logger.info('Initializing TaskResolver...')
         self.__task_resolver = TaskResolver()

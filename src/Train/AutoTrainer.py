@@ -22,7 +22,7 @@ class AutoTrainer:
         self.__widget = widget
         self.__tesseract = tesseract
 
-    def start(self, game_context: GameContext, player: Player, script: Script) -> None:
+    def start(self, game_context: GameContext, player: Player) -> None:
         Logger.info("Starting AutoTrainer")
 
         while True:

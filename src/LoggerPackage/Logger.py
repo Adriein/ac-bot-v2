@@ -27,7 +27,7 @@ class Logger:
 
     @staticmethod
     def error(message: str, error: Exception) -> None:
-        if os.environ[Constants.DEV_MODE]:
+        if os.environ[Constants.DEV_MODE] or os.environ[Constants.DEBUG_MODE]:
             console = Console()
             console.print_exception(show_locals=True)
 
