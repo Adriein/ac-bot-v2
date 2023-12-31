@@ -1,5 +1,6 @@
 from .Creature import Creature
 from datetime import datetime
+from src.UtilPackage import Time
 
 
 class GameContext:
@@ -9,8 +10,8 @@ class GameContext:
     def __init__(self):
         self.__health = 0
         self.__mana = 0
-        self.__last_meal_time = None
-        self.__next_meal_time = None
+        self.__last_meal_time = Time.now()
+        self.__next_meal_time = Time.now()
 
         self.__is_attacking = False
 
