@@ -18,7 +18,7 @@ class Logger:
 
     @staticmethod
     def debug(message: str | Any, inspect_class=False) -> None:
-        if os.environ[Constants.DEBUG_MODE]:
+        if Constants.DEBUG_MODE in os.environ:
             if not inspect_class:
                 print(f'[{Time.format(Time.now())}][AcBotv2][DEBUG]: {message}')
                 return
@@ -27,7 +27,7 @@ class Logger:
 
     @staticmethod
     def error(message: str, error: Exception) -> None:
-        if os.environ[Constants.DEV_MODE] or os.environ[Constants.DEBUG_MODE]:
+        if Constants.DEV_MODE in os.environ or Constants.DEBUG_MODE in os.environ:
             console = Console()
             console.print_exception(show_locals=True)
 

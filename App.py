@@ -33,7 +33,7 @@ class TibiaAcBot:
             player = Player(self.__keyboard, dict())
             game_context = GameContext()
 
-            if not os.environ[Constants.TRAIN_MODE]:
+            if Constants.TRAIN_MODE not in os.environ:
                 cavebot = CaveBot(
                     self.__monitor,
                     self.__keyboard,
