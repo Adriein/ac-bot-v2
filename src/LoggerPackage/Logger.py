@@ -23,7 +23,7 @@ class Logger:
                 print(f'[{Time.format(Time.now())}][AcBotv2][DEBUG]: {message}')
                 return
 
-            inspect(message)
+            inspect(message, private=True)
 
     @staticmethod
     def error(message: str, error: Exception) -> None:
