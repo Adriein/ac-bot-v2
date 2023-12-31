@@ -22,7 +22,9 @@ class HealingTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        self.__player.potion_heal()
+        # pending to inject the script and do it with the script config
+        if context.get_health() <= 100:
+            self.__player.potion_heal()
 
         self.succeed()
         return context
