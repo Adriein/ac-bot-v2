@@ -8,11 +8,12 @@ class Player:
     def __init__(self, keyboard: Keyboard, config: dict, pyautogui: PyAutoGui):
         self.__keyboard = keyboard
         self.__config = config
+        self.__pyautogui = pyautogui
 
     def precision_attack(self, creature: Creature) -> None:
         click_coordinate = creature.battle_list_position()
 
-
+        self.__pyautogui.click(click_coordinate)
 
     def eat(self) -> None:
         Logger.info('Eat food')
