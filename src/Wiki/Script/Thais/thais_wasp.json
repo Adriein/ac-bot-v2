@@ -33,7 +33,8 @@
     {
       "name": "wasp",
       "runner": false,
-      "loot": true
+      "loot": true,
+      "priority": 1
     }
   ]
 }

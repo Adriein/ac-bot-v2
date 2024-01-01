@@ -35,7 +35,7 @@ class CaveBot:
         self.__resolver.queue(healing_task)
 
         # 3. auto attacking
-        attack_task = AttackTask(self.__resolver)
+        attack_task = AttackTask(self.__resolver, player)
         self.__resolver.queue(attack_task)
 
         # 4. auto looting

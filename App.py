@@ -1,4 +1,4 @@
-from src.GamePackage import Player
+from src.GamePackage import Player, Script
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard
 from src.VendorPackage import PyAutoGui, TesseractOcr
@@ -30,10 +30,13 @@ class TibiaAcBot:
             Logger.info('Started...')
             Logger.info('Press Ctrl+C to stop the execution')
 
-            player = Player(self.__keyboard, dict())
+            player = Player(self.__keyboard, dict(), self.__pyautogui)
             game_context = GameContext()
 
             if Constants.TRAIN_MODE not in os.environ:
+                script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
+                game_context.set_script_enemies(script.creatures())
+
                 cavebot = CaveBot(
                     self.__monitor,
                     self.__keyboard,

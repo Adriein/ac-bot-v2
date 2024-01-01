@@ -19,22 +19,26 @@
     {
       "name": "salamander",
       "runner": true,
-      "loot": false
+      "loot": false,
+      "priority": 1
     },
     {
       "name": "swampling",
       "runner": true,
-      "loot": true
+      "loot": true,
+      "priority": 3
     },
     {
       "name": "emerald_damselfly",
       "runner": true,
-      "loot": true
+      "loot": false,
+      "priority": 1
     },
     {
       "name": "marsh_stalker",
       "runner": true,
-      "loot": true
+      "loot": true,
+      "priority": 2
     }
   ]
 }

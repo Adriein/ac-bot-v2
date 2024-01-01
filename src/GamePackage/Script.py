@@ -21,6 +21,7 @@ class Script:
             self.__creatures.append(
                 Creature(
                     creature['name'],
+                    creature['priority'],
                     creature['runner'],
                     creature['loot'],
                     Coordinate(0, 0)

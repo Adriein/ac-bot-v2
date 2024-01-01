@@ -42,6 +42,9 @@ class GameContext:
     def get_creatures_in_range(self) -> list[Creature]:
         return self.__creatures_in_range
 
+    def set_script_enemies(self, enemies: list[Creature]) -> None:
+        self.__script_enemies = enemies
+
     def get_script_enemies(self) -> list[Creature]:
         return self.__script_enemies
 
@@ -56,4 +59,3 @@ class GameContext:
 
     def get_next_meal_time(self) -> datetime:
         return self.__next_meal_time
-

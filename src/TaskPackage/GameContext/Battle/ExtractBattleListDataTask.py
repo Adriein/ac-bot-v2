@@ -32,8 +32,8 @@ class ExtractBattleListDataTask(Task):
 
         results = list()
 
-        for enemy in [Creature('wasp', False, True, Coordinate(0, 0))]:
-            enemy_path = f'src/Wiki/Ui/Mobs/{String.snake_to_camel_case(enemy.name)}/{enemy.name}_label.png'
+        for enemy in [Creature('wasp', 1, False, True, Coordinate(0, 0))]:
+            enemy_path = f'src/Wiki/Ui/Mobs/{String.snake_to_camel_case(enemy.name())}/{enemy.name}_label.png'
 
             creature_template = Cv2File.load_image(enemy_path)
 
@@ -65,7 +65,13 @@ class ExtractBattleListDataTask(Task):
 
                     click_coordinate = Coordinate.from_screen_region(battle_list_position)
 
-                    creature = Creature(enemy.name, enemy.runner, enemy.has_to_loot, click_coordinate)
+                    creature = Creature(
+                        enemy.name(),
+                        enemy.priority(),
+                        enemy.is_runner(),
+                        enemy.has_to_loot(),
+                        click_coordinate
+                    )
 
                     results.append(creature)
 
