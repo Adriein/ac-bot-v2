@@ -24,6 +24,8 @@ class AttackTask(Task):
 
         self.__player.precision_attack(target)
 
+        context.set_is_attacking(True)
+
         self.success()
         return context
 
