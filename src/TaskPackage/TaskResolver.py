@@ -17,9 +17,6 @@ class TaskResolver:
 
             game_context = task.execute(game_context, frame)
 
-            if not task.succeed():
-                self.__failed_tasks.append(task)
-
     def queue(self, task: Task) -> None:
         self.__queue.put(task)
 
