@@ -48,6 +48,19 @@ class ExtractAttackStatusBattleListTask(Task):
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
         red_mask_anchor_hsv = cv2.inRange(anchor_hsv, lower_red, upper_red)
 
+        # Find contours of the yellow square
+        contours, _ = cv2.findContours(red_mask_battle_list_roi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        # Find the largest contour
+        largest_contour = max(contours, key=cv2.contourArea)
+
+        # Crop the image to the largest contour
+        x, y, w, h = cv2.boundingRect(largest_contour)
+        cropped_image = red_mask_battle_list_roi[y:y + h, x:x + w]
+
+        PyAutoGui.debug_image(cropped_image)
+        PyAutoGui.debug_image(red_mask_anchor_hsv)
+
         # Calculate the template matching score
         result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
 
