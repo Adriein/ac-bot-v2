@@ -25,7 +25,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         widget = self.__container.battle_list_widget()
 
-        battle_list_roi = frame[widget.start_y + 2: widget.end_y + 2, widget.start_x +2: widget.end_x +2]
+        battle_list_roi = frame[widget.start_y - 10: widget.end_y + 10, widget.start_x - 10: widget.end_x + 10]
 
         anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attack_creature_anchor.png', False)
 
@@ -56,7 +56,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         # Crop the image to the largest contour
         x, y, w, h = cv2.boundingRect(largest_contour)
-        cropped_image = red_mask_battle_list_roi[y:y + h + 2, x:x + w + 2]
+        cropped_image = red_mask_battle_list_roi[y - 2:y + h + 2, x - 2:x + w + 2]
 
         PyAutoGui.debug_image(red_mask_battle_list_roi)
         PyAutoGui.debug_image(cropped_image)
