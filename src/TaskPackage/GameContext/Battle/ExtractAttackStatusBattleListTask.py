@@ -56,7 +56,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         # Crop the image to the largest contour
         x, y, w, h = cv2.boundingRect(largest_contour)
-        cropped_image = red_mask_battle_list_roi[y - 0.5:y + h + 2, x - 0.5:x + w + 2]
+        cropped_image = red_mask_battle_list_roi[y - 1:y + h + 2, x - 1:x + w + 2]
 
         PyAutoGui.debug_image(cropped_image)
         PyAutoGui.debug_image(red_mask_anchor_hsv)
