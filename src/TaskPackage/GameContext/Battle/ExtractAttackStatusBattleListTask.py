@@ -55,9 +55,8 @@ class ExtractAttackStatusBattleListTask(Task):
         result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
 
         [_, max_val, _, _] = cv2.minMaxLoc(result)
-        print(max_val)
-        raise SystemExit
-        if max_val >= 0.9:
+
+        if max_val >= 0.4:
             context.set_is_attacking(True)
 
             Logger.debug("Updated context is attacking")
