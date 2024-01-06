@@ -25,8 +25,8 @@ class ExtractAttackStatusBattleListTask(Task):
 
         widget = self.__container.battle_list_widget()
 
-        battle_list_roi = frame[widget.start_y - 10: widget.end_y + 10, widget.start_x - 10: widget.end_x + 10]
-        PyAutoGui.debug_image(battle_list_roi)
+        battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
+
         anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attack_creature_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
@@ -48,22 +48,11 @@ class ExtractAttackStatusBattleListTask(Task):
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
         red_mask_anchor_hsv = cv2.inRange(anchor_hsv, lower_red, upper_red)
 
-        # Find contours of the yellow square
-        contours, _ = cv2.findContours(red_mask_battle_list_roi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        # Find the largest contour
-        largest_contour = max(contours, key=cv2.contourArea)
-
-        # Crop the image to the largest contour
-        x, y, w, h = cv2.boundingRect(largest_contour)
-        cropped_image = red_mask_battle_list_roi[y - 2:y + h + 2, x - 2:x + w + 2]
-
         PyAutoGui.debug_image(red_mask_battle_list_roi)
-        PyAutoGui.debug_image(cropped_image)
         PyAutoGui.debug_image(red_mask_anchor_hsv)
 
         # Calculate the template matching score
-        result = cv2.matchTemplate(cropped_image, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
+        result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
 
         [_, max_val, _, _] = cv2.minMaxLoc(result)
         print(max_val)
