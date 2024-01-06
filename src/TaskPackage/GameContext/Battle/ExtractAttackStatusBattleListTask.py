@@ -30,6 +30,8 @@ class ExtractAttackStatusBattleListTask(Task):
         anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attacking_creature_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
+        hue_value = anchor_hsv[0, 0][0]
+        print(hue_value)
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
         PyAutoGui.debug_image(battle_list_roi_hsv)
         PyAutoGui.debug_image(anchor_hsv)
