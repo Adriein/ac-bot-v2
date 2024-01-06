@@ -26,7 +26,7 @@ class ExtractAttackStatusBattleListTask(Task):
         widget = self.__container.battle_list_widget()
 
         battle_list_roi = frame[widget.start_y - 10: widget.end_y + 10, widget.start_x - 10: widget.end_x + 10]
-
+        PyAutoGui.debug_image(battle_list_roi)
         anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attack_creature_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
