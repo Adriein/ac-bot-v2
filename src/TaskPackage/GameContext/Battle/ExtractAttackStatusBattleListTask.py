@@ -27,7 +27,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-        anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attacking_creature_anchor.png')
+        anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attacking_creature_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
