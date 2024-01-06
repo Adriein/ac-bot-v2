@@ -5,7 +5,7 @@ from src.LoggerPackage import Logger
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.VendorPackage import Cv2File, PyAutoGui
+from src.VendorPackage import Cv2File
 
 
 class ExtractAttackStatusBattleListTask(Task):
@@ -31,27 +31,19 @@ class ExtractAttackStatusBattleListTask(Task):
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
 
-        # Use a color picker tool to identify the red color in the image
-        red_color = (255, 0, 0)
-        color_bgr = np.uint8([[[255, 0, 0]]])
+        red_color_bgr = np.uint8([[[255, 0, 0]]])
 
-        # Convert the red color to HSV
-        red_hsv = cv2.cvtColor(color_bgr, cv2.COLOR_RGB2HSV)
+        red_hsv = cv2.cvtColor(red_color_bgr, cv2.COLOR_RGB2HSV)
 
-        # Adjust the lower_red and upper_red arrays
         lower_red = np.array([red_hsv[0][0][0] - 30, 255, 255])
         upper_red = np.array([red_hsv[0][0][0] + 30, 255, 255])
 
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
 
-        # Apply color detection to the widget
+        # Apply color detection to the battle list
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
         red_mask_anchor_hsv = cv2.inRange(anchor_hsv, lower_red, upper_red)
 
-        PyAutoGui.debug_image(red_mask_battle_list_roi)
-        PyAutoGui.debug_image(red_mask_anchor_hsv)
-
-        # Calculate the template matching score
         result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
 
         [_, max_val, _, _] = cv2.minMaxLoc(result)
