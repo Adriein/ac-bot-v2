@@ -38,18 +38,18 @@ class ExtractAttackStatusBattleListTask(Task):
         # Convert the red color to HSV
         red_hsv = cv2.cvtColor(color_bgr, cv2.COLOR_RGB2HSV)
 
-        print(red_hsv[0][0][0])
-
         # Adjust the lower_red and upper_red arrays
-        lower_red = np.array([red_hsv[0][0][0] -30, 255, 255])
+        lower_red = np.array([red_hsv[0][0][0] - 30, 255, 255])
         upper_red = np.array([red_hsv[0][0][0] + 30, 255, 255])
 
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
 
         # Apply color detection to the widget
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
+        red_mask_anchor_hsv = cv2.inRange(anchor_hsv, lower_red, upper_red)
         PyAutoGui.debug_image(red_mask_battle_list_roi)
         PyAutoGui.debug_image(anchor_hsv)
+        PyAutoGui.debug_image(red_mask_anchor_hsv)
 
         # Calculate the template matching score
         result = cv2.matchTemplate(red_mask_battle_list_roi, anchor_hsv, cv2.TM_CCOEFF_NORMED)
