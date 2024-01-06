@@ -25,7 +25,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         widget = self.__container.battle_list_widget()
 
-        battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
+        battle_list_roi = frame[widget.start_y + 2: widget.end_y + 2, widget.start_x +2: widget.end_x +2]
 
         anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attack_creature_anchor.png', False)
 
