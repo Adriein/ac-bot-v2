@@ -41,7 +41,7 @@ class ExtractAttackStatusBattleListTask(Task):
         print(red_hsv[0][0])
 
         # Adjust the lower_red and upper_red arrays
-        lower_red = np.array([-30, 100, 100])
+        lower_red = np.array([-30, 255, 255])
         upper_red = np.array([30, 255, 255])
 
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
