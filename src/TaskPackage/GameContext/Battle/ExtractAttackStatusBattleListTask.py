@@ -47,14 +47,11 @@ class ExtractAttackStatusBattleListTask(Task):
         # Apply color detection to the widget
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
         red_mask_anchor_hsv = cv2.inRange(anchor_hsv, lower_red, upper_red)
-        PyAutoGui.debug_image(red_mask_battle_list_roi)
-        PyAutoGui.debug_image(anchor_hsv)
-        PyAutoGui.debug_image(red_mask_anchor_hsv)
 
         # Calculate the template matching score
         result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
 
-        [max_val, _, _, _] = cv2.minMaxLoc(result)
+        [_, max_val, _, _] = cv2.minMaxLoc(result)
         print(max_val)
         if max_val >= 0.9:
             context.set_is_attacking(True)
