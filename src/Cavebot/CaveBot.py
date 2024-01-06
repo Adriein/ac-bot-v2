@@ -30,6 +30,8 @@ class CaveBot:
 
         self.__resolver.resolve(game_context, screenshot)
 
+        return
+
         # 2. auto healing
         healing_task = HealingTask(player)
         self.__resolver.queue(healing_task)

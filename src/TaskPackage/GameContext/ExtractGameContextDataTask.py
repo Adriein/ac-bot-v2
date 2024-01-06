@@ -5,6 +5,7 @@ from src.SharedPackage import GameContext
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 
 from src.TaskPackage.GameContext.Battle.ExtractBattleListDataTask import ExtractBattleListDataTask
+from src.TaskPackage.GameContext.Battle.ExtractAttackStatusBattleListTask import ExtractAttackStatusBattleListTask
 from src.TaskPackage.GameContext.Health.ExtractHealthDataTask import ExtractHealthDataTask
 from src.TaskPackage.GameContext.Mana.ExtractManaDataTask import ExtractManaDataTask
 from src.TaskPackage.Task import Task
@@ -26,6 +27,10 @@ class ExtractGameContextDataTask(Task):
         Logger.debug("Executing ExtractGameContextDataTask")
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
+
+        Logger.debug("Queueing ExtractAttackStatusBattleListTask")
+        extract_attack_status_battle_list_task = ExtractAttackStatusBattleListTask(self.__widget)
+        self.__resolver.queue(extract_attack_status_battle_list_task)
 
         Logger.debug("Queueing ExtractBattleListDataTask")
         extract_battle_list_data_task = ExtractBattleListDataTask(self.__widget)
