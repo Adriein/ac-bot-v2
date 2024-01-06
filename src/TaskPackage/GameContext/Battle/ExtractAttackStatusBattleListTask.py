@@ -31,8 +31,15 @@ class ExtractAttackStatusBattleListTask(Task):
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
 
+        # Use a color picker tool to identify the red color in the image
+        red_color = (255, 0, 0)
+        color_bgr = np.uint8([[[255, 0, 0]]])
+
+        # Convert the red color to HSV
+        red_hsv = cv2.cvtColor(color_bgr, cv2.COLOR_RGB2HSV)
+
         # Adjust the lower_red and upper_red arrays
-        lower_red = np.array([0, 100, 100])
+        lower_red = np.array([-30, 100, 100])
         upper_red = np.array([30, 255, 255])
 
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
