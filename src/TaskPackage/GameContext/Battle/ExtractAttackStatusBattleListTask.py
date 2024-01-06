@@ -30,14 +30,21 @@ class ExtractAttackStatusBattleListTask(Task):
         anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attacking_creature_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
-        hue_value = anchor_hsv[0, 0][0]
-        print(hue_value)
+
+        # Use a color picker tool to identify the red color in the image
+        red_color = (255, 0, 0)  # This is the red color from the widget image
+
+        # Convert the red color to HSV
+        red_hsv = cv2.cvtColor(np.uint8([red_color]), cv2.COLOR_RGB2HSV)
+
+        # Extract the red channel value
+        red_channel = red_hsv[0][0]
+
+        # Adjust the lower_red and upper_red arrays
+        lower_red = np.array([red_channel - 30, 100, 100])
+        upper_red = np.array([red_channel + 30, 255, 255])
+
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
-        PyAutoGui.debug_image(battle_list_roi_hsv)
-        PyAutoGui.debug_image(anchor_hsv)
-        # Extract the red pixels from the template
-        lower_red = np.array([35, 255, 255 - 15])  # Yellow
-        upper_red = np.array([40, 255, 255 + 15])  # Yellow
 
         red_mask_anchor = cv2.inRange(anchor_hsv, lower_red, upper_red)
 
