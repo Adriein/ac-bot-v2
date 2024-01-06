@@ -40,7 +40,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         # Apply color detection to the widget
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
-        PyAutoGui.screen_size(red_mask_battle_list_roi)
+        PyAutoGui.debug_image(red_mask_battle_list_roi)
         # Segment the widget image
         kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
         red_segments = cv2.dilate(red_mask_battle_list_roi, kernel, iterations=2)
