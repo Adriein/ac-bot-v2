@@ -32,7 +32,8 @@ class ExtractAttackStatusBattleListTask(Task):
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
 
         # Use a color picker tool to identify the red color in the image
-        red_color = (255, 1, 0)  # This is the red color from the widget image
+        red_color = (255, 0, 0)  # This is the red color from the widget image
+        red_color = np.expand_dims(red_color, axis=0)  # This is the red color from the widget image
 
         # Convert the red color to HSV
         red_hsv = cv2.cvtColor(np.uint8([red_color]), cv2.COLOR_RGB2HSV)
