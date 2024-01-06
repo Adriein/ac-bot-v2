@@ -27,7 +27,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-        anchor = Cv2File.load_image('src/Wiki/Ui/Battle/creature_attacked_anchor.png', False)
+        anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attack_creature_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
 
@@ -52,7 +52,7 @@ class ExtractAttackStatusBattleListTask(Task):
         PyAutoGui.debug_image(red_mask_anchor_hsv)
 
         # Calculate the template matching score
-        result = cv2.matchTemplate(red_mask_battle_list_roi, anchor_hsv, cv2.TM_CCOEFF_NORMED)
+        result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor_hsv, cv2.TM_CCOEFF_NORMED)
 
         [max_val, _, _, _] = cv2.minMaxLoc(result)
         print(max_val)
