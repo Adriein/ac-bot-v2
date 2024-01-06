@@ -34,8 +34,8 @@ class ExtractAttackStatusBattleListTask(Task):
         PyAutoGui.debug_image(battle_list_roi_hsv)
         PyAutoGui.debug_image(anchor_hsv)
         # Extract the red pixels from the template
-        lower_red = np.array([140, 100, 100])  # Yellow
-        upper_red = np.array([200, 255, 255])  # Yellow
+        lower_red = np.array([35, 255, 255 - 15])  # Yellow
+        upper_red = np.array([40, 255, 255 + 15])  # Yellow
 
         red_mask_anchor = cv2.inRange(anchor_hsv, lower_red, upper_red)
 
