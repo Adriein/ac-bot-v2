@@ -27,7 +27,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-        anchor = Cv2File.load_image('src/Wiki/Ui/Battle/attacking_creature_anchor.png', False)
+        anchor = Cv2File.load_image('src/Wiki/Ui/Battle/creature_attacked_anchor.png', False)
 
         anchor_hsv = cv2.cvtColor(anchor, cv2.COLOR_BGR2HSV)
 
@@ -51,28 +51,22 @@ class ExtractAttackStatusBattleListTask(Task):
         # Apply color detection to the widget
         red_mask_battle_list_roi = cv2.inRange(battle_list_roi_hsv, lower_red, upper_red)
         PyAutoGui.debug_image(red_mask_battle_list_roi)
-        # Segment the widget image
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        red_segments = cv2.dilate(red_mask_battle_list_roi, kernel, iterations=2)
+        PyAutoGui.debug_image(red_mask_anchor)
 
-        for segment in red_segments:
-            # Extract the red area from the segment
-            red_area = cv2.bitwise_and(segment, red_mask_anchor)
+        # Calculate the template matching score
+        result = cv2.matchTemplate(red_mask_battle_list_roi, red_mask_anchor, cv2.TM_CCOEFF_NORMED)
 
-            # Calculate the template matching score
-            result = cv2.matchTemplate(red_area, red_mask_anchor, cv2.TM_CCOEFF_NORMED)
+        [max_val, _, _, _] = cv2.minMaxLoc(result)
+        print(max_val)
+        if max_val >= 0.9:
+            context.set_is_attacking(True)
 
-            [max_val, _, _, _] = cv2.minMaxLoc(result)
+            Logger.debug("Updated context is attacking")
+            Logger.debug(context, inspect_class=True)
 
-            if max_val >= 0.9:
-                context.set_is_attacking(True)
+            self.success()
 
-                Logger.debug("Updated context is attacking")
-                Logger.debug(context, inspect_class=True)
-
-                self.success()
-
-                return context
+            return context
 
         context.set_is_attacking(False)
 
