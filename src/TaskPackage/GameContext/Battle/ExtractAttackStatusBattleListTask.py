@@ -33,8 +33,8 @@ class ExtractAttackStatusBattleListTask(Task):
         battle_list_roi_hsv = cv2.cvtColor(battle_list_roi, cv2.COLOR_BGR2HSV)
 
         # Extract the red pixels from the template
-        lower_red = np.array([160, 100, 100])
-        upper_red = np.array([180, 255, 255])
+        lower_red = np.array([255, 0, 0])  # Red
+        upper_red = np.array([255, 255, 255])  # Red
 
         red_mask_anchor = cv2.inRange(anchor_hsv, lower_red, upper_red)
 
