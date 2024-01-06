@@ -53,6 +53,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
         [_, max_val, _, _] = cv2.minMaxLoc(result)
         print(max_val)
+        raise SystemExit
         if max_val >= 0.9:
             context.set_is_attacking(True)
 
