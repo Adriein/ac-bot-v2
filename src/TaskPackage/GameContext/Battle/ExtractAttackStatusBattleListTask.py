@@ -38,8 +38,7 @@ class ExtractAttackStatusBattleListTask(Task):
         # Convert the red color to HSV
         red_hsv = cv2.cvtColor(color_bgr, cv2.COLOR_RGB2HSV)
 
-        print(red_hsv)
-        return
+        print(red_hsv[0][0])
 
         # Adjust the lower_red and upper_red arrays
         lower_red = np.array([-30, 100, 100])
