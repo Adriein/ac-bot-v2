@@ -32,7 +32,7 @@ class CaveBot:
 
         # 2. auto healing
         healing_task = HealingTask(player)
-        self.__resolver.queue(healing_task)
+        # self.__resolver.queue(healing_task)
 
         # 3. auto attacking
         attack_task = AttackTask(self.__resolver, player)
