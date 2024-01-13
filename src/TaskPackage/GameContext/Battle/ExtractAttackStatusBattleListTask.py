@@ -23,6 +23,24 @@ class ExtractAttackStatusBattleListTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
+        self.__determine_is_attacking(context, frame)
+
+        self.__assert_creature_has_been_killed()
+
+        self.success()
+
+        return context
+
+    def succeed(self) -> bool:
+        return self.__succeed
+
+    def completed(self) -> bool:
+        return self.__completed
+
+    def __assert_creature_has_been_killed(self, previous_context: GameContext, actual_context: GameContext) -> None:
+        pass
+
+    def __determine_is_attacking(self, context: GameContext, frame: np.ndarray) -> None:
         widget = self.__container.battle_list_widget()
 
         battle_list_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
@@ -54,21 +72,10 @@ class ExtractAttackStatusBattleListTask(Task):
             Logger.debug("Updated context is attacking")
             Logger.debug(context, inspect_class=True)
 
-            self.success()
-
-            return context
+            return
 
         context.set_is_attacking(False)
 
         Logger.debug("Updated context is not attacking")
         Logger.debug(context, inspect_class=True)
 
-        self.success()
-
-        return context
-
-    def succeed(self) -> bool:
-        return self.__succeed
-
-    def completed(self) -> bool:
-        return self.__completed
