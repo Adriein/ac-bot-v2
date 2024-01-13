@@ -1,7 +1,8 @@
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Keyboard, Mouse
-from src.SharedPackage import Creature
+from src.SharedPackage import Creature, Coordinate
 from src.VendorPackage import PyAutoGui
+from src.UtilPackage import Number
 
 
 class Player:
@@ -21,6 +22,12 @@ class Player:
         click_coordinate = creature.battle_list_position()
 
         self.__mouse.use_left_button(click_coordinate)
+
+        random_x = Number.random(100, 150)
+        random_y = Number.random(30, 60)
+
+        space_move = Coordinate(click_coordinate.x - random_x, click_coordinate.y + random_y)
+        self.__mouse.move_mouse(space_move)
 
     def eat(self) -> None:
         Logger.info('Eat food')
