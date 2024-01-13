@@ -37,7 +37,7 @@ class Mouse:
         self.fixed_coordinate_y = tibia_window_coords.y - y_offset
 
     def use_right_button(self, coordinate: Coordinate) -> None:
-        self.move_mouse(coordinate)
+        self.__move_mouse(coordinate)
 
         # Send a right-click event
         xtest.fake_input(self.disp, X.ButtonPress, self.RIGHT_MOUSE_BUTTON, X.NONE)
@@ -47,7 +47,7 @@ class Mouse:
         self.disp.sync()
 
     def use_left_button(self, coordinate: Coordinate) -> None:
-        self.move_mouse(coordinate)
+        self.__move_mouse(coordinate)
 
         # Send a left-click event
         xtest.fake_input(self.disp, X.ButtonPress, self.LEFT_MOUSE_BUTTON, X.NONE)
@@ -56,6 +56,6 @@ class Mouse:
         xtest.fake_input(self.disp, X.ButtonRelease, self.LEFT_MOUSE_BUTTON, X.NONE)
         self.disp.sync()
 
-    def move_mouse(self, coordinate: Coordinate) -> None:
+    def __move_mouse(self, coordinate: Coordinate) -> None:
         # Move the pointer to the target position
         self.root_window.warp_pointer(self.fixed_coordinate_x + coordinate.x, self.fixed_coordinate_y + coordinate.y)
