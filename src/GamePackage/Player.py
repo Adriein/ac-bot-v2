@@ -1,11 +1,18 @@
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Keyboard, Mouse
-from src.SharedPackage import Creature
+from src.SharedPackage import Creature, Coordinate
 from src.VendorPackage import PyAutoGui
+from src.UtilPackage import Number
 
 
 class Player:
-    def __init__(self, keyboard: Keyboard, mouse: Mouse, config: dict, pyautogui: PyAutoGui):
+    def __init__(
+            self,
+            keyboard: Keyboard,
+            mouse: Mouse,
+            config: dict,
+            pyautogui: PyAutoGui
+    ):
         self.__keyboard = keyboard
         self.__mouse = mouse
         self.__config = config
@@ -14,7 +21,13 @@ class Player:
     def precision_attack(self, creature: Creature) -> None:
         click_coordinate = creature.battle_list_position()
 
+        x = Number.random(-30, 30)
+        y = Number.random(-30, 30)
+
+        space = Coordinate(x, y)
+
         self.__mouse.use_left_button(click_coordinate)
+        self.__mouse.move_mouse(space)
 
     def eat(self) -> None:
         Logger.info('Eat food')
