@@ -1,6 +1,6 @@
 from src.GamePackage import Player, Script
 from src.LoggerPackage import Logger
-from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard
+from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard, Mouse
 from src.VendorPackage import PyAutoGui, TesseractOcr
 from src.Cavebot import CaveBot
 from src.Train import AutoTrainer
@@ -17,6 +17,7 @@ class TibiaAcBot:
         self.__kernel = None
         self.__monitor = None
         self.__keyboard = None
+        self.__mouse = None
         self.__global_widget_container = None
         self.__task_resolver = None
         self.__pyautogui = None
@@ -39,7 +40,6 @@ class TibiaAcBot:
 
                 cavebot = CaveBot(
                     self.__monitor,
-                    self.__keyboard,
                     self.__task_resolver,
                     self.__global_widget_container,
                     self.__tesseract
@@ -51,7 +51,6 @@ class TibiaAcBot:
 
             auto_trainer = AutoTrainer(
                 self.__monitor,
-                self.__keyboard,
                 self.__task_resolver,
                 self.__global_widget_container,
                 self.__tesseract
@@ -83,6 +82,9 @@ class TibiaAcBot:
         Logger.info('Creating Keyboard..')
         self.__keyboard = Keyboard(self.__kernel)
 
+        Logger.info('Creating Mouse..')
+        self.__mouse = Mouse(self.__kernel)
+
         Logger.info('Locating Widgets...')
         self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, self.__pyautogui)
 
@@ -98,6 +100,8 @@ class TibiaAcBot:
 
         table.add_row("Creating Kernel", "OK")
         table.add_row("Creating Monitor", "OK")
+        table.add_row("Creating Keyboard", "OK")
+        table.add_row("Creating Mouse", "OK")
         table.add_row("Locating Widgets", "OK")
         table.add_row("Initializing TaskResolver", "OK")
 

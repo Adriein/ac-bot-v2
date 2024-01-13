@@ -129,9 +129,6 @@ class PyAutoGui:
     def screen_size(self) -> (int, int):
         return pyautogui.size()
 
-    def click(self, coordinate: Coordinate) -> None:
-        pyautogui.click(coordinate.x, coordinate.y)
-
     def __calculate_battle_list_height(self, monitor_dimensions: tuple[int, int]) -> int:
         [width, _] = monitor_dimensions
 

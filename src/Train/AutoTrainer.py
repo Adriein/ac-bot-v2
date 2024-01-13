@@ -1,6 +1,6 @@
 from src.GamePackage import Player, Script
 from src.LoggerPackage import Logger
-from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor, Keyboard
+from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, ExtractHealthDataTask, ExtractManaDataTask, HealingTask, UseManaSurplusTask, \
     EatTask
@@ -11,13 +11,11 @@ class AutoTrainer:
     def __init__(
             self,
             monitor: Monitor,
-            keyboard: Keyboard,
             task_resolver: TaskResolver,
             widget: GlobalGameWidgetContainer,
             tesseract: TesseractOcr
     ):
         self.__monitor = monitor
-        self.__keyboard = keyboard
         self.__task_resolver = task_resolver
         self.__widget = widget
         self.__tesseract = tesseract
