@@ -46,6 +46,7 @@ class Mouse:
         xtest.fake_input(self.disp, X.ButtonRelease, self.RIGHT_MOUSE_BUTTON, X.NONE)
         self.disp.sync()
         self.__move_mouse(Coordinate(10 + coordinate.x, 10 + coordinate.y))
+        self.disp.sync()
 
     def use_left_button(self, coordinate: Coordinate) -> None:
         self.__move_mouse(coordinate)
