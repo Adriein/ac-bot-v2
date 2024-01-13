@@ -1,5 +1,6 @@
 from Xlib import X, display
 from Xlib.ext import xtest
+import time
 
 from src.SharedPackage import Coordinate
 from src.OperatingSystemPackage import Kernel
@@ -45,6 +46,7 @@ class Mouse:
 
         xtest.fake_input(self.disp, X.ButtonRelease, self.RIGHT_MOUSE_BUTTON, X.NONE)
         self.disp.sync()
+        time.sleep(0.05)
         self.__move_mouse(Coordinate(10 + coordinate.x, 10 + coordinate.y))
         self.disp.sync()
 
