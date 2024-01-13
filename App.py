@@ -31,7 +31,7 @@ class TibiaAcBot:
             Logger.info('Started...')
             Logger.info('Press Ctrl+C to stop the execution')
 
-            player = Player(self.__keyboard, dict(), self.__pyautogui)
+            player = Player(self.__keyboard, self.__mouse, dict(), self.__pyautogui)
             game_context = GameContext()
 
             if Constants.TRAIN_MODE not in os.environ:
