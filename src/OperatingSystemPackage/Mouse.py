@@ -57,6 +57,7 @@ class Mouse:
         self.disp.sync()
         time.sleep(0.4)
         self.__move_mouse(Coordinate(5 - coordinate.x, 5 - coordinate.y))
+        self.disp.sync()
 
     def __move_mouse(self, coordinate: Coordinate) -> None:
         # Move the pointer to the target position
