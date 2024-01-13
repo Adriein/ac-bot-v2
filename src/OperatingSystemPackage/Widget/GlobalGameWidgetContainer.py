@@ -46,6 +46,8 @@ class GlobalGameWidgetContainer:
         return self.__game_window
 
     def __locate_game_window_location(self, frame: np.ndarray, monitor_dimensions: tuple[int, int]) -> ScreenRegion:
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
         left_game_window_arrow = Cv2File.load_image(f'src/Wiki/Ui/GameWindow/left_game_window_arrow.png')
         right_game_window_arrow = Cv2File.load_image(f'src/Wiki/Ui/GameWindow/right_game_window_arrow.png')
 
