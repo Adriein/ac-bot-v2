@@ -24,7 +24,7 @@ class Player:
         x = Number.random(-30, 30)
         y = Number.random(-30, 30)
 
-        space = Coordinate(x, y)
+        space = Coordinate(click_coordinate.x - x, click_coordinate.y - y)
         print(space)
         self.__mouse.use_left_button(click_coordinate)
         self.__mouse.move_mouse(space)
