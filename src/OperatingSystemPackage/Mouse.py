@@ -59,3 +59,4 @@ class Mouse:
     def move_mouse(self, coordinate: Coordinate) -> None:
         # Move the pointer to the target position
         self.root_window.warp_pointer(self.fixed_coordinate_x + coordinate.x, self.fixed_coordinate_y + coordinate.y)
+        self.disp.sync()
