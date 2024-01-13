@@ -45,6 +45,7 @@ class Mouse:
 
         xtest.fake_input(self.disp, X.ButtonRelease, self.RIGHT_MOUSE_BUTTON, X.NONE)
         self.disp.sync()
+        time.sleep(0.2)
 
     def use_left_button(self, coordinate: Coordinate) -> None:
         self.move_mouse(coordinate)
@@ -55,9 +56,10 @@ class Mouse:
 
         xtest.fake_input(self.disp, X.ButtonRelease, self.LEFT_MOUSE_BUTTON, X.NONE)
         self.disp.sync()
+        time.sleep(0.2)
 
     def move_mouse(self, coordinate: Coordinate) -> None:
         # Move the pointer to the target position
         self.root_window.warp_pointer(self.fixed_coordinate_x + coordinate.x, self.fixed_coordinate_y + coordinate.y)
-
+        self.disp.sync()
         time.sleep(0.2)
