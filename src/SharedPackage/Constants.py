@@ -21,6 +21,9 @@ class Constants:
     MIN_MANA_SURPLUS = 10
     MAX_MANA_SURPLUS = 100
 
+    MIN_SPELL_HEAL_TIMES = 1
+    MAX_SPELL_HEAL_TIMES = 10
+
     MIN_EAT_TIMES = 1
     MAX_EAT_TIMES = 4
 

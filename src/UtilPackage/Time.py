@@ -19,15 +19,15 @@ class Time:
     @staticmethod
     def minutes_between(date1: datetime, date2: datetime) -> int:
         """
-            Get difference between two dates in minutes
+        Get difference between two dates in minutes
 
-            Args:
-                date1 (datetime): nearest date to now which means bigger date
-                date2 (datetime): farthest date to current date which means smaller date
+        Args:
+            date1 (datetime): nearest date to now which means bigger date
+            date2 (datetime): farthest date to current date which means smaller date
 
-            Returns:
-                int: minutes
-            """
+        Returns:
+            int: minutes
+        """
         delta = date1 - date2
 
         return int(round(delta.total_seconds() / 60, 0))

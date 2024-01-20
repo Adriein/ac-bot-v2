@@ -26,20 +26,6 @@ class AutoTrainer:
         while True:
             frame = self.__monitor.screenshot()
 
-            Logger.debug('Queuing ExtractHealthDataTask')
-            extract_health_task = ExtractHealthDataTask(self.__widget, self.__tesseract)
-            self.__task_resolver.queue(extract_health_task)
-
-            Logger.debug('Queuing ExtractManaDataTask')
-            extract_mana_task = ExtractManaDataTask(self.__widget, self.__tesseract)
-            self.__task_resolver.queue(extract_mana_task)
-
-            self.__task_resolver.resolve(game_context, frame)
-
-            Logger.debug('Queuing HealingTask')
-            healing_task = HealingTask(player)
-            self.__task_resolver.queue(healing_task)
-
             Logger.debug('Queuing UseManaSurplusTask')
             use_mana_surplus_task = UseManaSurplusTask(player)
             self.__task_resolver.queue(use_mana_surplus_task)

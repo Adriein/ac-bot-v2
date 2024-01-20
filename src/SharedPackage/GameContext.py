@@ -15,6 +15,7 @@ class GameContext:
     def __init__(self):
         self.__health = 0
         self.__mana = 0
+
         self.__last_meal_time = Time.now()
         self.__next_meal_time = Time.now()
 
