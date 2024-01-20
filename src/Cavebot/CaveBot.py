@@ -1,7 +1,7 @@
 from src.GamePackage import Player, Script
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask
+from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, UseManaSurplusTask
 from src.VendorPackage import TesseractOcr
 
 
@@ -39,5 +39,13 @@ class CaveBot:
         # 4. auto looting
         loot_task = LootTask(player, self.__widget)
         self.__resolver.queue(loot_task)
+
+        # 5. waste mana
+        waste_mana_task = UseManaSurplusTask(player)
+        self.__resolver.queue(waste_mana_task)
+
+        # 6. Eat food
+        eat_task = EatTask(player)
+        self.__resolver.queue(eat_task)
 
         self.__resolver.resolve(game_context, screenshot)
