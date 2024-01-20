@@ -37,7 +37,7 @@ class CaveBot:
         self.__resolver.queue(attack_task)
 
         # 4. auto looting
-        loot_task = LootTask(player)
+        loot_task = LootTask(player, self.__widget)
         self.__resolver.queue(loot_task)
 
         self.__resolver.resolve(game_context, screenshot)
