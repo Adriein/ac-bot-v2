@@ -6,6 +6,7 @@ from Xlib import display, X
 from .Kernel import Kernel
 
 from src.VendorPackage import PyAutoGui
+from src.SharedPackage import Constants
 
 
 class Monitor:
@@ -50,3 +51,6 @@ class Monitor:
 
     def specifications(self) -> tuple[int, int]:
         return self.__width, self.__height
+
+    def adjust_pixel_to_monitor(self, reference_pixel: int) -> int:
+        return int((self.__width / Constants.REFERENCE_WINDOW_WIDTH) * reference_pixel)
