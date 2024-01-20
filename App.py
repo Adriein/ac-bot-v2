@@ -151,15 +151,3 @@ class TibiaAcBot:
 
 
 TibiaAcBot().init()
-
-'''
-1. enemies in the battle list?
-2. attack
-3. need healing?
-4. heal
-'''
-
-'''
-first check status of the game and queue taks with prio
-then resolve the tasks and loop again
-'''

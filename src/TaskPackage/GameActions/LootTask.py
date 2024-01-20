@@ -43,27 +43,7 @@ class LootTask(Task):
         return context
 
     def __create_looting_area(self) -> list[Coordinate]:
-        center_game_window_coordinate = Coordinate.from_screen_region(self.__widget.game_window())
-
-        first_looting_point = Coordinate(center_game_window_coordinate.x, center_game_window_coordinate.y - 44)
-        second_looting_point = Coordinate(center_game_window_coordinate.x + 44, first_looting_point.y)
-        third_looting_point = Coordinate(center_game_window_coordinate.x + 44, center_game_window_coordinate.y)
-        fourth_looting_point = Coordinate(third_looting_point.x, third_looting_point.y + 44)
-        fifth_looting_point = Coordinate(center_game_window_coordinate.x, center_game_window_coordinate.y + 44)
-        six_looting_point = Coordinate(center_game_window_coordinate.x - 44, fifth_looting_point.y)
-        seven_looting_point = Coordinate(center_game_window_coordinate.x - 44, center_game_window_coordinate.y)
-        eight_looting_point = Coordinate(seven_looting_point.x, center_game_window_coordinate.y - 44)
-
-        looting_points = list([
-            first_looting_point,
-            second_looting_point,
-            third_looting_point,
-            fourth_looting_point,
-            fifth_looting_point,
-            six_looting_point,
-            seven_looting_point,
-            eight_looting_point
-        ])
+        looting_points = self.__widget.looting_area()
 
         random.shuffle(looting_points)
 
