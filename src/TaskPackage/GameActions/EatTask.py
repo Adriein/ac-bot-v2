@@ -49,9 +49,3 @@ class EatTask(Task):
 
     def __is_time_to_eat(self, context: GameContext) -> bool:
         return Time.now() > context.get_next_meal_time()
-
-    def completed(self) -> bool:
-        pass
-
-    def succeed(self) -> bool:
-        pass

@@ -83,9 +83,3 @@ class ExtractBattleListDataTask(Task):
         self.success()
 
         return context
-
-    def succeed(self) -> bool:
-        return self.__succeed
-
-    def completed(self) -> bool:
-        return self.__completed

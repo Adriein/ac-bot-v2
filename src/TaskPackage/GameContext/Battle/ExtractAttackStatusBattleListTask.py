@@ -23,9 +23,11 @@ class ExtractAttackStatusBattleListTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
+        previous_context = GameContext.copy(context)
+
         self.__determine_is_attacking(context, frame)
 
-        self.__assert_creature_has_been_killed()
+        self.__assert_creature_has_been_killed(previous_context, context)
 
         self.success()
 
@@ -38,7 +40,11 @@ class ExtractAttackStatusBattleListTask(Task):
         return self.__completed
 
     def __assert_creature_has_been_killed(self, previous_context: GameContext, actual_context: GameContext) -> None:
-        pass
+        if previous_context.get_is_attacking() and not actual_context.get_is_attacking():
+            actual_context.set_pending_loot(True)
+
+            Logger.debug("Updated context has a creature pending to loot")
+            Logger.debug(actual_context, inspect_class=True)
 
     def __determine_is_attacking(self, context: GameContext, frame: np.ndarray) -> None:
         widget = self.__container.battle_list_widget()

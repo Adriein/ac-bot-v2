@@ -1,9 +1,14 @@
 from .Creature import Creature
 from datetime import datetime
+from copy import deepcopy
 from src.UtilPackage import Time
 
 
 class GameContext:
+    @staticmethod
+    def copy(game_context: 'GameContext') -> 'GameContext':
+        return deepcopy(game_context)
+
     def __str__(self):
         return f"GameContext"
 
@@ -17,6 +22,8 @@ class GameContext:
 
         self.__creatures_in_range = list()
         self.__script_enemies = list()
+
+        self.__pending_loot = False
 
     def set_health(self, health: int) -> None:
         self.__health = health
@@ -59,3 +66,9 @@ class GameContext:
 
     def get_next_meal_time(self) -> datetime:
         return self.__next_meal_time
+
+    def set_pending_loot(self, pending_loot: bool) -> None:
+        self.__pending_loot =  pending_loot
+
+    def get_pending_loot(self) -> bool:
+        return self.__pending_loot

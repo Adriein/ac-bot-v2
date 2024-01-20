@@ -3,7 +3,6 @@ import numpy as np
 from src.GamePackage import Player
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
-from src.TaskPackage.TaskResolver import TaskResolver
 from src.LoggerPackage import Logger
 
 
@@ -11,9 +10,8 @@ class AttackTask(Task):
     def __str__(self) -> str:
         return f'AttackTask'
 
-    def __init__(self, resolver: TaskResolver, player: Player):
+    def __init__(self, player: Player):
         super().__init__()
-        self.__resolver = resolver
         self.__player = player
         self.__succeed = False
         self.__completed = False

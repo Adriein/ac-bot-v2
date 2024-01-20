@@ -28,9 +28,3 @@ class HealingTask(Task):
 
         self.succeed()
         return context
-
-    def completed(self) -> bool:
-        pass
-
-    def succeed(self) -> bool:
-        pass

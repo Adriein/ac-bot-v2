@@ -29,6 +29,11 @@ class Player:
         space_move = Coordinate(click_coordinate.x - random_x, click_coordinate.y + random_y)
         self.__mouse.move_mouse(space_move)
 
+    def loot(self, coordinate: Coordinate) -> None:
+        self.__keyboard.key_down('shift')
+        self.__mouse.use_right_button(coordinate)
+        self.__keyboard.key_up('shift')
+
     def eat(self) -> None:
         Logger.info('Eat food')
         self.__keyboard.press('v')

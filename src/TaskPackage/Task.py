@@ -14,13 +14,11 @@ class Task(ABC):
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         pass
 
-    @abstractmethod
-    def completed(self) -> bool:
-        pass
-
-    @abstractmethod
     def succeed(self) -> bool:
-        pass
+        return self.__succeed
+
+    def completed(self) -> bool:
+        return self.__completed
 
     @abstractmethod
     def __str__(self) -> str:

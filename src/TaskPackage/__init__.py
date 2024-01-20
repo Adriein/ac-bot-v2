@@ -11,3 +11,4 @@ from .GameActions.AttackTask import AttackTask
 from .GameActions.HealingTask import HealingTask
 from .GameActions.UseManaSurplusTask import UseManaSurplusTask
 from .GameActions.EatTask import EatTask
+from .GameActions.LootTask import LootTask

@@ -1,7 +1,7 @@
 from src.GamePackage import Player, Script
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask
+from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask
 from src.VendorPackage import TesseractOcr
 
 
@@ -33,9 +33,11 @@ class CaveBot:
         self.__resolver.queue(healing_task)
 
         # 3. auto attacking
-        attack_task = AttackTask(self.__resolver, player)
+        attack_task = AttackTask(player)
         self.__resolver.queue(attack_task)
 
         # 4. auto looting
+        loot_task = LootTask(player)
+        self.__resolver.queue(loot_task)
 
         self.__resolver.resolve(game_context, screenshot)

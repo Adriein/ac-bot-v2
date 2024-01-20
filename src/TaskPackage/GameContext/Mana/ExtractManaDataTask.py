@@ -42,9 +42,3 @@ class ExtractManaDataTask(Task):
             self.fail()
 
             return context
-
-    def succeed(self) -> bool:
-        return self.__succeed
-
-    def completed(self) -> bool:
-        return self.__completed
