@@ -30,7 +30,9 @@ class LocationTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if context.get_last_known_waypoint() in self.FLOOR_CHANGE_TYPE:
+        waypoint_type = context.get_last_known_waypoint().type
+
+        if waypoint_type in self.FLOOR_CHANGE_TYPE:
             current_floor = self.__map.which_floor_i_am()
 
         map_position = self.__map.where_am_i(frame, context.get_last_known_waypoint(), context.get_current_floor())
