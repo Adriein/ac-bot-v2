@@ -2,13 +2,14 @@ from collections import ChainMap
 
 import numpy as np
 import cv2
+import math
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.VendorPackage import Cv2File
+from src.SharedPackage import Waypoint, Coordinate
 
 from .MapTile import MapTile
 from .Script import Script
-from .Waypoint import Waypoint
 
 
 class Map:
@@ -35,11 +36,8 @@ class Map:
     def __init__(self, widget: GlobalGameWidgetContainer, script: Script):
         self.__widget = widget
 
-        self.IGNORE_WAYPOINTS = list()
+        self.IGNORE_WAYPOINTS = self.FALSE_NON_WALKABLE_POSITIVES
         self.IN_MEMORY_FLOOR_PNG_MAP = ChainMap()
-
-        for waypoint in self.FALSE_NON_WALKABLE_POSITIVES:
-            self.IGNORE_WAYPOINTS.append(Waypoint.from_string(waypoint))
 
         for floor in script.floors():
             self.IN_MEMORY_FLOOR_PNG_MAP.setdefault(
@@ -65,7 +63,7 @@ class Map:
         height, width = mini_map_frame.shape
 
         # cut a portion of the map based on last waypoint
-        pixel_on_map = self.__get_pixel_from_waypoint(last_waypoint)
+        pixel_on_map = self.__get_map_coordinate_from_last_visited_waypoint(last_known_waypoint)
 
         map_start_x = pixel_on_map.x - (math.floor(width / 2) + 20)
         map_end_x = pixel_on_map.x + (math.floor(width / 2) + 20)
@@ -76,7 +74,6 @@ class Map:
         tibia_map_roi = tibia_map[map_start_y:map_end_y, map_start_x:map_end_x]
 
         # find on this map portion the minimap
-
         match = cv2.matchTemplate(tibia_map_roi, mini_map_frame, cv2.TM_CCOEFF_NORMED)
 
         [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
@@ -86,4 +83,10 @@ class Map:
         start_x = pixel_on_map.x - 20 + x
         start_y = pixel_on_map.y - 20 + y
 
-        return self.__get_map_tile_from_pixel(Coordinate(start_x, start_y), current_floor)
+        return MapTile.from_pixel(Coordinate(start_x, start_y), current_floor)
+
+    def which_floor_i_am(self) -> int:
+        pass
+
+    def __get_map_coordinate_from_last_visited_waypoint(self, waypoint: Waypoint) -> Coordinate:
+        return Coordinate(waypoint.x - 31744, waypoint.y - 30976)

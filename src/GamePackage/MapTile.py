@@ -1,14 +1,12 @@
 import uuid
 
-from src.SharedPackage import Coordinate
-
-from .Waypoint import Waypoint
+from src.SharedPackage import Coordinate, Waypoint
 
 
 class MapTile:
     @staticmethod
     def from_pixel(coordinate: Coordinate, floor: int) -> 'MapTile':
-        return MapTile(uuid.uuid4(), Waypoint(coordinate.x + 31744, coordinate.y + 30976, floor))
+        return MapTile(uuid.uuid4(), Waypoint(coordinate.x + 31744, coordinate.y + 30976, floor, Waypoint.UNKNOWN_TYPE))
 
     @staticmethod
     def build(waypoint: Waypoint) -> 'MapTile':
@@ -47,22 +45,50 @@ class MapTile:
     def create_adjacent_tiles(self) -> None:
         for cardinal_point in range(4):
             if cardinal_point == 0:
-                north_tile = MapTile.build(Waypoint(self.waypoint.x, self.waypoint.y + 1, self.waypoint.z))
+                north_tile = MapTile.build(
+                    Waypoint(
+                        self.waypoint.x,
+                        self.waypoint.y + 1,
+                        self.waypoint.z,
+                        Waypoint.UNKNOWN_TYPE
+                    )
+                )
                 self.adjacent_tiles.append(north_tile)
 
                 continue
             if cardinal_point == 1:
-                south_tile = MapTile.build(Waypoint(self.waypoint.x, self.waypoint.y - 1, self.waypoint.z))
+                south_tile = MapTile.build(
+                    Waypoint(
+                        self.waypoint.x,
+                        self.waypoint.y - 1,
+                        self.waypoint.z,
+                        Waypoint.UNKNOWN_TYPE
+                    )
+                )
                 self.adjacent_tiles.append(south_tile)
 
                 continue
             if cardinal_point == 2:
-                east_tile = MapTile.build(Waypoint(self.waypoint.x + 1, self.waypoint.y, self.waypoint.z))
+                east_tile = MapTile.build(
+                    Waypoint(
+                        self.waypoint.x + 1,
+                        self.waypoint.y,
+                        self.waypoint.z,
+                        Waypoint.UNKNOWN_TYPE
+                    )
+                )
                 self.adjacent_tiles.append(east_tile)
 
                 continue
             if cardinal_point == 3:
-                west_tile = MapTile.build(Waypoint(self.waypoint.x - 1, self.waypoint.y, self.waypoint.z))
+                west_tile = MapTile.build(
+                    Waypoint(
+                        self.waypoint.x - 1,
+                        self.waypoint.y,
+                        self.waypoint.z,
+                        Waypoint.UNKNOWN_TYPE
+                    )
+                )
                 self.adjacent_tiles.append(west_tile)
 
                 continue

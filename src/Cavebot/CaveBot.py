@@ -1,7 +1,8 @@
 from src.GamePackage import Player, Script
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask
+from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask
+from src.TaskPackage.GameActions.LocationTask import LocationTask
 from src.VendorPackage import TesseractOcr
 
 
@@ -49,3 +50,8 @@ class CaveBot:
         self.__resolver.queue(eat_task)
 
         self.__resolver.resolve(game_context, screenshot)
+
+        # 7. TODO: Check if I should walk or not
+        # 8. Walk
+        location_task = LocationTask()
+        self.__resolver.queue()

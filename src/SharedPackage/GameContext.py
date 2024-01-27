@@ -1,4 +1,5 @@
 from .Creature import Creature
+from .Waypoint import Waypoint
 from datetime import datetime
 from copy import deepcopy
 from src.UtilPackage import Time
@@ -25,6 +26,9 @@ class GameContext:
         self.__script_enemies = list()
 
         self.__pending_loot = False
+
+        self.__last_known_waypoint = None
+        self.__current_floor = None
 
     def set_health(self, health: int) -> None:
         self.__health = health
@@ -69,7 +73,19 @@ class GameContext:
         return self.__next_meal_time
 
     def set_pending_loot(self, pending_loot: bool) -> None:
-        self.__pending_loot =  pending_loot
+        self.__pending_loot = pending_loot
 
     def get_pending_loot(self) -> bool:
         return self.__pending_loot
+
+    def set_last_known_waypoint(self, waypoint: Waypoint) -> None:
+        self.__last_known_waypoint = waypoint
+
+    def get_last_known_waypoint(self) -> Waypoint:
+        return self.__last_known_waypoint
+
+    def set_current_floor(self, floor: int) -> None:
+        self.__current_floor = floor
+
+    def get_current_floor(self) -> int:
+        return self.__current_floor
