@@ -1,3 +1,6 @@
+from .Coordinate import Coordinate
+
+
 class Waypoint:
     UNKNOWN_TYPE = 'unknown'
     HOLE_UP_TYPE = 'hole_up'
@@ -28,3 +31,6 @@ class Waypoint:
 
     def to_string(self) -> str:
         return f'{self.x},{self.y},{self.z}'
+
+    def to_coordinate(self) -> Coordinate:
+        return Coordinate(self.x - 31744, self.y - 30976)

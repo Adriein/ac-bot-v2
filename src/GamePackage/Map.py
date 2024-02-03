@@ -13,30 +13,9 @@ from .Script import Script
 
 
 class Map:
-    FALSE_NON_WALKABLE_POSITIVES = [
-        "32439, 32308, 8",
-        "32435, 32295, 8",
-        "32423, 32303, 8",
-        "32429, 32306, 8",
-        "32430, 32302, 8",
-        "32444, 32295, 9",
-        "32444, 32294, 9",
-        "32444, 32293, 9",
-        "32883, 32066, 9",
-        "32828, 32107, 9",
-        "32828, 32107, 9",
-        "32917 ,32187, 8",
-        "32933, 32173, 9",
-        "32894, 31905, 8",
-        "32822, 31933, 6",
-        "32828, 31927, 6",
-        "32845, 31922, 6",
-    ]
-
     def __init__(self, widget: GlobalGameWidgetContainer, script: Script):
         self.__widget = widget
 
-        self.IGNORE_WAYPOINTS = self.FALSE_NON_WALKABLE_POSITIVES
         self.IN_MEMORY_FLOOR_PNG_MAP = ChainMap()
 
         for floor in script.floors():
@@ -63,7 +42,7 @@ class Map:
         height, width = mini_map_frame.shape
 
         # cut a portion of the map based on last waypoint
-        pixel_on_map = self.__get_map_coordinate_from_last_visited_waypoint(last_known_waypoint)
+        pixel_on_map = last_known_waypoint.to_coordinate()
 
         map_start_x = pixel_on_map.x - (math.floor(width / 2) + 20)
         map_end_x = pixel_on_map.x + (math.floor(width / 2) + 20)
@@ -100,6 +79,3 @@ class Map:
         actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
 
         return 8
-
-    def __get_map_coordinate_from_last_visited_waypoint(self, waypoint: Waypoint) -> Coordinate:
-        return Coordinate(waypoint.x - 31744, waypoint.y - 30976)

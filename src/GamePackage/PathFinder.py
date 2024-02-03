@@ -1,4 +1,5 @@
 import heapq
+import numpy as np
 
 from .Map import Map
 from .MapTile import MapTile
@@ -8,6 +9,26 @@ from src.SharedPackage import Waypoint
 
 
 class PathFinder:
+    FALSE_NON_WALKABLE_POSITIVES = [
+        "32439, 32308, 8",
+        "32435, 32295, 8",
+        "32423, 32303, 8",
+        "32429, 32306, 8",
+        "32430, 32302, 8",
+        "32444, 32295, 9",
+        "32444, 32294, 9",
+        "32444, 32293, 9",
+        "32883, 32066, 9",
+        "32828, 32107, 9",
+        "32828, 32107, 9",
+        "32917 ,32187, 8",
+        "32933, 32173, 9",
+        "32894, 31905, 8",
+        "32822, 31933, 6",
+        "32828, 31927, 6",
+        "32845, 31922, 6",
+    ]
+
     def __init__(self, map: Map):
         self.__map = map
 
@@ -80,11 +101,11 @@ class PathFinder:
         lower_yellow = np.array([0, 100, 100], dtype=np.uint8)
         upper_yellow = np.array([100, 255, 255], dtype=np.uint8)
 
-        for waypoint in self.__FALSE_POSITIVES:
+        for waypoint in self.FALSE_NON_WALKABLE_POSITIVES:
             if waypoint == current.waypoint:
                 return False
 
-        pixel = self.__get_pixel_from_waypoint(current.waypoint)
+        pixel = current.waypoint.to_coordinate()
 
         pixel_color = None
 
