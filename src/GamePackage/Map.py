@@ -85,8 +85,21 @@ class Map:
 
         return MapTile.from_pixel(Coordinate(start_x, start_y), current_floor)
 
-    def which_floor_i_am(self) -> int:
-        pass
+    def which_floor_am_i(self, frame: np.array) -> int:
+        grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        mini_map_screen_region = self.__widget.mini_map_widget()
+
+        width = mini_map_screen_region.start_x - mini_map_screen_region.end_x
+
+        left = mini_map_screen_region.start_x + width + 8
+        top = mini_map_screen_region.start_y - 7
+        height = 67
+        width = 2
+
+        actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
+
+        return 8
 
     def __get_map_coordinate_from_last_visited_waypoint(self, waypoint: Waypoint) -> Coordinate:
         return Coordinate(waypoint.x - 31744, waypoint.y - 30976)

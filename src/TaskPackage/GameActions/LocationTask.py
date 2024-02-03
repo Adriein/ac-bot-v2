@@ -33,7 +33,17 @@ class LocationTask(Task):
         waypoint_type = context.get_last_known_waypoint().type
 
         if waypoint_type in self.FLOOR_CHANGE_TYPE:
-            current_floor = self.__map.which_floor_i_am()
+            current_floor = self.__map.which_floor_am_i(frame)
+
+            map_position = self.__map.where_am_i(frame, context.get_last_known_waypoint(), current_floor)
+
+            context.set_last_known_waypoint(map_position.waypoint)
+
+            Logger.debug("Updated context")
+            Logger.debug(context, inspect_class=True)
+
+            self.success()
+            return context
 
         map_position = self.__map.where_am_i(frame, context.get_last_known_waypoint(), context.get_current_floor())
 
