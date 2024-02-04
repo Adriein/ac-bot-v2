@@ -6,7 +6,7 @@ from src.LoggerPackage import Logger
 from src.GamePackage import Map
 
 
-class LocationTask(Task):
+class WalkTask(Task):
     FLOOR_CHANGE_TYPE = [
         Waypoint.HOLE_UP_TYPE,
         Waypoint.HOLE_DOWN_TYPE,
@@ -15,7 +15,7 @@ class LocationTask(Task):
     ]
 
     def __str__(self) -> str:
-        return f'LocationTask'
+        return f'WalkTask'
 
     def __init__(self, map: Map):
         super().__init__()
@@ -24,28 +24,22 @@ class LocationTask(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        Logger.debug("Executing LocationTask")
+        Logger.debug("Executing WalkTask")
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        waypoint_type = context.get_current_waypoint().type
+        route = context.get_cave_route()
 
-        if waypoint_type in self.FLOOR_CHANGE_TYPE:
-            current_floor = self.__map.which_floor_am_i(frame)
+        real_current_position = context.get_current_waypoint()
 
-            map_position = self.__map.where_am_i(frame, context.get_current_waypoint(), current_floor)
+        destination = route.peak_next()
 
-            context.set_current_waypoint(map_position.waypoint)
+        if destination is None:
+            route.reset()
 
-            Logger.debug("Updated context")
-            Logger.debug(context, inspect_class=True)
+            destination = route.current
 
-            self.success()
-            return context
-
-        map_position = self.__map.where_am_i(frame, context.get_current_waypoint(), context.get_current_floor())
-
-        context.set_current_waypoint(map_position.waypoint)
+        walk_instructions = self.__map.find_shortest_path(real_current_position, destination)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)

@@ -1,4 +1,4 @@
-from src.GamePackage import Player, Script
+from src.GamePackage import Player, Script, Map
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask
@@ -13,12 +13,14 @@ class CaveBot:
             monitor: Monitor,
             resolver: TaskResolver,
             widget: GlobalGameWidgetContainer,
-            tesseract: TesseractOcr
+            tesseract: TesseractOcr,
+            map: Map
     ):
         self.__monitor = monitor
         self.__resolver = resolver
         self.__widget = widget
         self.__tesseract = tesseract
+        self.__map = map
 
     def start(self, game_context: GameContext, player: Player) -> None:
         screenshot = self.__monitor.screenshot()
@@ -53,5 +55,5 @@ class CaveBot:
 
         # 7. TODO: Check if I should walk or not
         # 8. Walk
-        location_task = LocationTask()
-        self.__resolver.queue()
+        location_task = LocationTask(self.__map)
+        self.__resolver.queue(location_task)

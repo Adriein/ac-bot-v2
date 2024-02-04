@@ -1,11 +1,14 @@
 import heapq
-import numpy as np
 
-from .Map import Map
+import numpy as np
+import cv2
+
 from .MapTile import MapTile
 
-from src.UtilPackage import LinkedList
-from src.SharedPackage import Waypoint
+from src.UtilPackage import LinkedList, MapCollection
+from src.SharedPackage import Waypoint, MoveCommand
+from src.GamePackage import Script
+from src.VendorPackage import Cv2File
 
 
 class PathFinder:
@@ -29,29 +32,51 @@ class PathFinder:
         "32845, 31922, 6",
     ]
 
-    def __init__(self, map: Map):
-        self.__map = map
+    def __init__(self, script: Script):
+        self.RESOLVED_PATHS_CACHE = MapCollection()
+        self.IN_MEMORY_FLOOR_PATH_PNG_MAP = MapCollection()
 
-    def execute(self, current: Waypoint, destination: Waypoint, floor: int) -> LinkedList:
+        for floor in script.floors():
+            map_path_screenshot = Cv2File.load_image(
+                f'Wiki/Ui/Map/Walkable/floor-{floor}-path.png',
+                False
+            )
+
+            map_path_screenshot_hsv = cv2.cvtColor(map_path_screenshot, cv2.COLOR_BGR2HSV)
+
+            self.IN_MEMORY_FLOOR_PATH_PNG_MAP.set(
+                floor,
+                map_path_screenshot_hsv
+            )
+
+    def execute(self, current: Waypoint, destination: Waypoint) -> LinkedList:
+        hashed_route = self.__hash_waypoint_set(current, destination)
+
+        if self.RESOLVED_PATHS_CACHE.has(hashed_route):
+            return self.RESOLVED_PATHS_CACHE.get(hashed_route)
+
         path = LinkedList()
 
         tile_path = self.__a_star_algorithm(current, destination)
 
-        if tile_path is None:
+        if not tile_path:
             return path
 
         for index, current_tile in enumerate(tile_path):
             try:
                 destination_tile = tile_path[index + 1]
 
-                direction = self.__waypoints_to_cardinal_direction(current_tile, destination_tile)
+                direction = current_tile.waypoint.cardinal_direction_between_waypoints(destination_tile.waypoint)
+
                 path.append(MoveCommand(1, direction))
             except IndexError:
                 pass
 
+        self.RESOLVED_PATHS_CACHE.set(hashed_route, path)
+
         return path
 
-    def __a_star_algorithm(self, current: Waypoint, destination: Waypoint):
+    def __a_star_algorithm(self, current: Waypoint, destination: Waypoint) -> list[MapTile]:
         open_set = []
         visited = set()
 
@@ -107,26 +132,13 @@ class PathFinder:
 
         pixel = current.waypoint.to_coordinate()
 
-        pixel_color = None
+        map_path_screenshot_hsv = self.IN_MEMORY_FLOOR_PATH_PNG_MAP.get(current.waypoint.z)
 
-        if current.waypoint.z == 5:
-            pixel_color = self.tibia_walkable_map_hsv_floor_5[pixel.y, pixel.x]
-
-        if current.waypoint.z == 6:
-            pixel_color = self.tibia_walkable_map_hsv_floor_6[pixel.y, pixel.x]
-
-        if current.waypoint.z == 7:
-            pixel_color = self.tibia_walkable_map_hsv_floor_7[pixel.y, pixel.x]
-
-        if current.waypoint.z == 8:
-            pixel_color = self.tibia_walkable_map_hsv_floor_8[pixel.y, pixel.x]
-
-        if current.waypoint.z == 9:
-            pixel_color = self.tibia_walkable_map_hsv_floor_9[pixel.y, pixel.x]
-
-        if current.waypoint.z == 10:
-            pixel_color = self.tibia_walkable_map_hsv_floor_10[pixel.y, pixel.x]
+        pixel_color = map_path_screenshot_hsv[pixel.y, pixel.x]
 
         mask = cv2.inRange(pixel_color, lower_yellow, upper_yellow)
 
         return np.all(mask == 255)
+
+    def __hash_waypoint_set(self, current: Waypoint, destination: Waypoint) -> str:
+        return f'{current.hash()}{destination.hash()}'

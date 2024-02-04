@@ -7,14 +7,17 @@ import math
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.VendorPackage import Cv2File
 from src.SharedPackage import Waypoint, Coordinate
+from src.UtilPackage import LinkedList
 
 from .MapTile import MapTile
 from .Script import Script
+from .PathFinder import PathFinder
 
 
 class Map:
-    def __init__(self, widget: GlobalGameWidgetContainer, script: Script):
+    def __init__(self, widget: GlobalGameWidgetContainer, script: Script, path_finder: PathFinder):
         self.__widget = widget
+        self.__path_finder = path_finder
 
         self.IN_MEMORY_FLOOR_PNG_MAP = ChainMap()
 
@@ -79,3 +82,7 @@ class Map:
         actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
 
         return 8
+
+    def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList:
+        return self.__path_finder.execute(current, destination)
+

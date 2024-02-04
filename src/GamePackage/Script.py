@@ -1,6 +1,6 @@
 import json
 
-from src.SharedPackage import Creature, Coordinate
+from src.SharedPackage import Creature, Coordinate, Waypoint
 from src.UtilPackage import LinkedList
 
 
@@ -8,7 +8,7 @@ class Script:
     __FILE_READ_MODE = 'r'
     __PLAYER_HOTKEY_CONFIG_JSON = 'src/Wiki/Player/player_config.json'
 
-    __waypoints: LinkedList = LinkedList()
+    __waypoints: LinkedList = LinkedList[Waypoint]()
     __creatures: list[Creature] = list()
     __player_config: dict = None
 
@@ -29,8 +29,13 @@ class Script:
             )
 
         for waypoint in script_json_data['walk']:
-            self.__extract_z_level_from_waypoint(waypoint[0])
-            self.__waypoints.append(waypoint)
+            x, y, z = waypoint[0].split(',')
+
+            waypoint_type = waypoint[1]
+
+            self.__floor_levels.add(int(z))
+
+            self.__waypoints.append(Waypoint(int(x), int(y), int(z), waypoint_type))
 
     @staticmethod
     def load(name: str) -> 'Script':
@@ -42,15 +47,10 @@ class Script:
 
         return Script(script_data, player_config)
 
-    def __extract_z_level_from_waypoint(self, waypoint: str) -> None:
-        x, y, z = waypoint.split(',')
-
-        self.__floor_levels.add(int(z))
-
     def creatures(self) -> list[Creature]:
         return self.__creatures
 
-    def waypoints(self) -> LinkedList:
+    def waypoints(self) -> LinkedList[Waypoint]:
         return self.__waypoints
 
     def floors(self) -> set[int]:

@@ -2,7 +2,7 @@ from .Creature import Creature
 from .Waypoint import Waypoint
 from datetime import datetime
 from copy import deepcopy
-from src.UtilPackage import Time
+from src.UtilPackage import Time, LinkedList
 
 
 class GameContext:
@@ -27,8 +27,9 @@ class GameContext:
 
         self.__pending_loot = False
 
-        self.__last_known_waypoint = None
+        self.__current_waypoint = None
         self.__current_floor = None
+        self.__cave_route = None
 
     def set_health(self, health: int) -> None:
         self.__health = health
@@ -78,14 +79,21 @@ class GameContext:
     def get_pending_loot(self) -> bool:
         return self.__pending_loot
 
-    def set_last_known_waypoint(self, waypoint: Waypoint) -> None:
-        self.__last_known_waypoint = waypoint
+    def set_current_waypoint(self, waypoint: Waypoint) -> None:
+        self.__current_waypoint = waypoint
 
-    def get_last_known_waypoint(self) -> Waypoint:
-        return self.__last_known_waypoint
+    def get_current_waypoint(self) -> Waypoint:
+        return self.__current_waypoint
 
     def set_current_floor(self, floor: int) -> None:
         self.__current_floor = floor
 
     def get_current_floor(self) -> int:
         return self.__current_floor
+
+    def set_cave_route(self, route: LinkedList[Waypoint]) -> None:
+        self.__cave_route = route
+
+    def get_cave_route(self) -> LinkedList[Waypoint]:
+        return self.__cave_route
+

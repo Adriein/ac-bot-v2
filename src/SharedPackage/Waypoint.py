@@ -29,8 +29,24 @@ class Waypoint:
 
         return False
 
+    def hash(self) -> str:
+        return f'{self.x}{self.y}{self.z}'
+
     def to_string(self) -> str:
         return f'{self.x},{self.y},{self.z}'
 
     def to_coordinate(self) -> Coordinate:
         return Coordinate(self.x - 31744, self.y - 30976)
+
+    def cardinal_direction_between_waypoints(self, destination: 'Waypoint') -> str:
+        if destination.x > self.x:
+            return 'east'
+
+        if destination.x < self.x:
+            return 'west'
+
+        if destination.y < self.y:
+            return 'north'
+
+        if destination.y > self.y:
+            return 'south'
