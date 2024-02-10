@@ -48,6 +48,10 @@ class LocationTask(Task):
             return context
 
         map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), context.get_current_floor())
+        current_floor = self.__game_map.which_floor_am_i(frame)
+
+        print(map_position)
+        print(current_floor)
 
         context.set_current_waypoint(map_position.waypoint)
 
