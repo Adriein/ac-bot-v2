@@ -40,8 +40,6 @@ class Map:
 
         tibia_map = self.IN_MEMORY_FLOOR_PNG_MAP.get(current_floor)
 
-        print(self.IN_MEMORY_FLOOR_PNG_MAP)
-
         # find position of minimap in the screen
         mini_map_screen_region = self.__widget.mini_map_widget()
 
