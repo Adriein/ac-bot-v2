@@ -1,4 +1,3 @@
-import numpy as np
 import cv2
 
 from src.SharedPackage import ScreenRegion, Constants, Coordinate
@@ -14,13 +13,22 @@ class GlobalGameWidgetContainer:
         self.__monitor_dimensions = monitor.specifications()
 
         Logger.info('Locating BattleList...')
-        self.__battle_list_widget_region = pyautogui.locate_battle_list_widget()
+        self.__battle_list_widget_region = pyautogui.locate_battle_list_widget(
+            self.__initial_setup_screenshot,
+            self.__monitor_dimensions
+        )
 
         Logger.info('Locating Health...')
-        self.__health_widget_region = pyautogui.locate_health_widget()
+        self.__health_widget_region = pyautogui.locate_health_widget(
+            self.__initial_setup_screenshot,
+            self.__monitor_dimensions
+        )
 
         Logger.info('Locating Mana...')
-        self.__mana_widget_region = pyautogui.locate_mana_widget()
+        self.__mana_widget_region = pyautogui.locate_mana_widget(
+            self.__initial_setup_screenshot,
+            self.__monitor_dimensions
+        )
 
         Logger.info('Locating Game Window...')
         self.__game_window = self.__locate_game_window_location()
