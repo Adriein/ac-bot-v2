@@ -13,13 +13,13 @@ class CaveBot:
             resolver: TaskResolver,
             widget: GlobalGameWidgetContainer,
             tesseract: TesseractOcr,
-            map: Map
+            game_map: Map
     ):
         self.__monitor = monitor
         self.__resolver = resolver
         self.__widget = widget
         self.__tesseract = tesseract
-        self.__map = map
+        self.__game_map = game_map
 
     def start(self, game_context: GameContext, player: Player) -> None:
         screenshot = self.__monitor.screenshot()
@@ -53,15 +53,15 @@ class CaveBot:
         self.__resolver.resolve(game_context, screenshot)
 
         # 8. Locate player position
-        location_task = LocationTask(self.__map)
+        location_task = LocationTask(self.__game_map)
         self.__resolver.queue(location_task)
 
         # 8. Walk
-        walk_task = WalkTask(self.__map, player)
+        walk_task = WalkTask(self.__game_map, player)
         self.__resolver.queue(walk_task)
 
         # 9. Resolve waypoint
-        resolve_waypoint_task = ResolveWaypointActionTask(self.__map, player, self.__widget)
+        resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
         self.__resolver.queue(resolve_waypoint_task)
 
         self.__resolver.resolve(game_context, screenshot)

@@ -10,9 +10,9 @@ class WalkTask(Task):
     def __str__(self) -> str:
         return f'WalkTask'
 
-    def __init__(self, map: Map, player: Player):
+    def __init__(self, game_map: Map, player: Player):
         super().__init__()
-        self.__map = map
+        self.__game_map = game_map
         self.__player = player
         self.__succeed = False
         self.__completed = False
@@ -41,7 +41,7 @@ class WalkTask(Task):
         if destination is None:
             destination = route.head.data
 
-        walk_instructions = self.__map.find_shortest_path(real_current_position, destination)
+        walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
 
         while walk_instructions.current is not None:
             command = walk_instructions.current.data

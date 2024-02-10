@@ -42,14 +42,14 @@ class TibiaAcBot:
                 game_context.set_cave_route(script.waypoints())
 
                 pathfinder = PathFinder(script)
-                map = Map(self.__global_widget_container, script, pathfinder)
+                game_map = Map(self.__global_widget_container, script, pathfinder)
 
                 cavebot = CaveBot(
                     self.__monitor,
                     self.__task_resolver,
                     self.__global_widget_container,
                     self.__tesseract,
-                    map
+                    game_map
                 )
 
                 cavebot.start(game_context, player)

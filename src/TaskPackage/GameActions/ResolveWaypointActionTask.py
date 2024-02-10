@@ -18,9 +18,9 @@ class ResolveWaypointActionTask(Task):
     def __str__(self) -> str:
         return f'ResolveWaypointActionTask'
 
-    def __init__(self, map: Map, player: Player, widget: GlobalGameWidgetContainer):
+    def __init__(self, game_map: Map, player: Player, widget: GlobalGameWidgetContainer):
         super().__init__()
-        self.__map = map
+        self.__game_map = game_map
         self.__player = player
         self.__widget = widget
         self.__succeed = False

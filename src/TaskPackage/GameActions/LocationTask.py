@@ -17,9 +17,9 @@ class LocationTask(Task):
     def __str__(self) -> str:
         return f'LocationTask'
 
-    def __init__(self, map: Map):
+    def __init__(self, game_map: Map):
         super().__init__()
-        self.__map = map
+        self.__game_map = game_map
         self.__succeed = False
         self.__completed = False
 
@@ -35,9 +35,9 @@ class LocationTask(Task):
         waypoint_type = context.get_current_waypoint().type
 
         if waypoint_type in self.FLOOR_CHANGE_TYPE:
-            current_floor = self.__map.which_floor_am_i(frame)
+            current_floor = self.__game_map.which_floor_am_i(frame)
 
-            map_position = self.__map.where_am_i(frame, context.get_current_waypoint(), current_floor)
+            game_map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), current_floor)
 
             context.set_current_waypoint(map_position.waypoint)
 
