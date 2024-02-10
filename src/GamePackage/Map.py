@@ -1,13 +1,12 @@
-from collections import ChainMap
-
 import numpy as np
 import cv2
 import math
+import hashlib
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.VendorPackage import Cv2File
 from src.SharedPackage import Waypoint, Coordinate, MoveCommand
-from src.UtilPackage import LinkedList
+from src.UtilPackage import LinkedList, MapCollection
 
 from .MapTile import MapTile
 from .Script import Script
@@ -19,12 +18,21 @@ class Map:
         self.__widget = widget
         self.__path_finder = path_finder
 
-        self.IN_MEMORY_FLOOR_PNG_MAP = ChainMap()
+        self.IN_MEMORY_FLOOR_PNG_MAP = MapCollection()
+        self.IN_MEMORY_FLOOR_LVL_MAP = MapCollection()
 
         for floor in script.floors():
-            self.IN_MEMORY_FLOOR_PNG_MAP.setdefault(
+            self.IN_MEMORY_FLOOR_PNG_MAP.set(
                 floor,
                 Cv2File.load_image(f'src/Wiki/Ui/Map/Floors/floor-{floor}.png')
+            )
+
+            floor_lvl_image = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{floor}.png')
+            image_hash = hashlib.sha256(floor_lvl_image.tobytes()).hexdigest()
+
+            self.IN_MEMORY_FLOOR_LVL_MAP.set(
+                image_hash,
+                floor
             )
 
     def where_am_i(self, frame: np.ndarray, last_known_waypoint: Waypoint, current_floor: int) -> MapTile:
@@ -81,7 +89,9 @@ class Map:
 
         actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
 
-        return 8
+        image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
+
+        return self.IN_MEMORY_FLOOR_LVL_MAP.get(image_hash)
 
     def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
         return self.__path_finder.execute(current, destination)
