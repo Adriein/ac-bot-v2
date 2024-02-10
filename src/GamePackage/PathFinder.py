@@ -38,7 +38,7 @@ class PathFinder:
 
         for floor in script.floors():
             map_path_screenshot = Cv2File.load_image(
-                f'Wiki/Ui/Map/Walkable/floor-{floor}-path.png',
+                f'src/Wiki/Ui/Map/Walkable/floor-{floor}-path.png',
                 False
             )
 
