@@ -35,11 +35,11 @@ class WalkTask(Task):
         if route_current_waypoint.is_floor_change_type():
             if real_current_position.is_in_same_floor(route_current_waypoint):
                 # im in the wrong position and I have to fix it
-                destination = route.current
+                destination = route.current.data
                 route.move_pointer_back()
 
         if destination is None:
-            destination = route.head
+            destination = route.head.data
 
         walk_instructions = self.__map.find_shortest_path(real_current_position, destination)
 
