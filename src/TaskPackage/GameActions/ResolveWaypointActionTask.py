@@ -1,9 +1,10 @@
 import numpy as np
 
-from src.SharedPackage import GameContext, Waypoint
+from src.SharedPackage import GameContext, Waypoint, Coordinate
+from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
-from src.GamePackage import Map
+from src.GamePackage import Map, Player
 
 
 class ResolveWaypointActionTask(Task):
@@ -17,9 +18,11 @@ class ResolveWaypointActionTask(Task):
     def __str__(self) -> str:
         return f'ResolveWaypointActionTask'
 
-    def __init__(self, map: Map):
+    def __init__(self, map: Map, player: Player, widget: GlobalGameWidgetContainer):
         super().__init__()
         self.__map = map
+        self.__player = player
+        self.__widget = widget
         self.__succeed = False
         self.__completed = False
 
@@ -32,9 +35,21 @@ class ResolveWaypointActionTask(Task):
             self.success()
             return context
 
+        current_waypoint = context.get_current_waypoint()
+        game_window = self.__widget.game_window()
 
-        Logger.debug("Updated context")
-        Logger.debug(context, inspect_class=True)
+        if current_waypoint.is_floor_change_type():
+            if current_waypoint.type is Waypoint.HOLE_UP_TYPE:
+                self.__player.rope(Coordinate.from_screen_region(game_window))
+
+                self.success()
+                return context
+
+            if current_waypoint.type is Waypoint.HAND_STAIR_UP_TYPE:
+                self.__player.use_hand_stair(Coordinate.from_screen_region(game_window))
+
+                self.success()
+                return context
 
         self.success()
         return context

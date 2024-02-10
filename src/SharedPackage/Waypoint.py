@@ -7,6 +7,8 @@ class Waypoint:
     HOLE_DOWN_TYPE = 'hole_down'
     STAIR_UP_TYPE = 'stair_up'
     STAIR_DOWN_TYPE = 'stair_down'
+    HAND_STAIR_UP_TYPE = 'hand_stair_up'
+    HAND_STAIR_DOWN_TYPE = 'hand_stair_down'
 
     @staticmethod
     def from_string(string_waypoint: str, type: str) -> 'Waypoint':
@@ -56,18 +58,12 @@ class Waypoint:
             self.HOLE_UP_TYPE,
             self.HOLE_DOWN_TYPE,
             self.STAIR_UP_TYPE,
-            self.STAIR_DOWN_TYPE
+            self.STAIR_DOWN_TYPE,
+            self.HAND_STAIR_UP_TYPE,
+            self.HAND_STAIR_DOWN_TYPE,
         ]
 
         return self.type in floor_change_type
-
-    def is_floor_up(self) -> bool:
-        floor_up_type = [
-            self.HOLE_UP_TYPE,
-            self.STAIR_UP_TYPE,
-        ]
-
-        return self.type in floor_up_type
 
     def is_in_same_floor(self, other: 'Waypoint') -> bool:
         return self.z == other.z

@@ -1,7 +1,7 @@
 from src.GamePackage import Player, Script, Map
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask, WalkTask
+from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask, WalkTask, ResolveWaypointActionTask
 from src.VendorPackage import TesseractOcr
 
 
@@ -59,5 +59,9 @@ class CaveBot:
         # 8. Walk
         walk_task = WalkTask(self.__map, player)
         self.__resolver.queue(walk_task)
+
+        # 9. Resolve waypoint
+        resolve_waypoint_task = ResolveWaypointActionTask(self.__map, player, self.__widget)
+        self.__resolver.queue(resolve_waypoint_task)
 
         self.__resolver.resolve(game_context, screenshot)

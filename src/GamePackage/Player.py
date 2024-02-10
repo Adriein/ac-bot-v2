@@ -51,3 +51,10 @@ class Player:
 
     def move(self, command: MoveCommand) -> None:
         self.__keyboard.press(command.key)
+
+    def rope(self, coordinates: Coordinate) -> None:
+        self.__keyboard.press('f')
+        self.__mouse.use_left_button(coordinates)
+
+    def use_hand_stair(self, coordinates: Coordinate) -> None:
+        self.__mouse.use_right_button(coordinates)

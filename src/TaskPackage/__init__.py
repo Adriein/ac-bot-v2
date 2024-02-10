@@ -15,3 +15,4 @@ from .GameActions.LootTask import LootTask
 from .GameActions.SmartSpellHealingTask import SmartSpellHealingTask
 from .GameActions.LocationTask import LocationTask
 from .GameActions.WalkTask import WalkTask
+from .GameActions.ResolveWaypointActionTask import ResolveWaypointActionTask
