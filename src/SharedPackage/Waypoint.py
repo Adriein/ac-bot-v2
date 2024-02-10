@@ -50,3 +50,24 @@ class Waypoint:
 
         if destination.y > self.y:
             return 'south'
+
+    def is_floor_change_type(self) -> bool:
+        floor_change_type = [
+            self.HOLE_UP_TYPE,
+            self.HOLE_DOWN_TYPE,
+            self.STAIR_UP_TYPE,
+            self.STAIR_DOWN_TYPE
+        ]
+
+        return self.type in floor_change_type
+
+    def is_floor_up(self) -> bool:
+        floor_up_type = [
+            self.HOLE_UP_TYPE,
+            self.STAIR_UP_TYPE,
+        ]
+
+        return self.type in floor_up_type
+
+    def is_in_same_floor(self, other: 'Waypoint') -> bool:
+        return self.z == other.z

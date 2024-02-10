@@ -45,6 +45,9 @@ class LinkedList(Generic[T]):
         self.previous = self.current
         self.current = self.current.next
 
+    def move_pointer_back(self) -> None:
+        self.current = self.previous
+
     def peak_previous(self) -> T | None:
         return self.previous.data
 

@@ -97,3 +97,6 @@ class GameContext:
     def get_cave_route(self) -> LinkedList[Waypoint]:
         return self.__cave_route
 
+    def has_creatures_in_range(self) -> bool:
+        return len(self.__creatures_in_range) > 0
+

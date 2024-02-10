@@ -14,3 +14,4 @@ from .GameActions.EatTask import EatTask
 from .GameActions.LootTask import LootTask
 from .GameActions.SmartSpellHealingTask import SmartSpellHealingTask
 from .GameActions.LocationTask import LocationTask
+from .GameActions.WalkTask import WalkTask

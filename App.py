@@ -1,4 +1,4 @@
-from src.GamePackage import Player, Script
+from src.GamePackage import Player, Script, Map, PathFinder
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard, Mouse
 from src.VendorPackage import PyAutoGui, TesseractOcr
@@ -32,6 +32,7 @@ class TibiaAcBot:
             Logger.info('Press Ctrl+C to stop the execution')
 
             player = Player(self.__keyboard, self.__mouse, dict(), self.__pyautogui)
+
             game_context = GameContext()
 
             if Constants.TRAIN_MODE not in os.environ:
@@ -40,11 +41,15 @@ class TibiaAcBot:
                 game_context.set_script_enemies(script.creatures())
                 game_context.set_cave_route(script.waypoints())
 
+                pathfinder = PathFinder(script)
+                map = Map(self.__global_widget_container, script, pathfinder)
+
                 cavebot = CaveBot(
                     self.__monitor,
                     self.__task_resolver,
                     self.__global_widget_container,
-                    self.__tesseract
+                    self.__tesseract,
+                    map
                 )
 
                 cavebot.start(game_context, player)
