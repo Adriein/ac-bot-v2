@@ -3,7 +3,7 @@ import numpy as np
 from src.SharedPackage import GameContext, Waypoint
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
-from src.GamePackage import Map
+from src.GamePackage import Map, Player
 
 
 class WalkTask(Task):
@@ -17,9 +17,10 @@ class WalkTask(Task):
     def __str__(self) -> str:
         return f'WalkTask'
 
-    def __init__(self, map: Map):
+    def __init__(self, map: Map, player: Player):
         super().__init__()
         self.__map = map
+        self.__player = player
         self.__succeed = False
         self.__completed = False
 
@@ -41,8 +42,12 @@ class WalkTask(Task):
 
         walk_instructions = self.__map.find_shortest_path(real_current_position, destination)
 
-        Logger.debug("Updated context")
-        Logger.debug(context, inspect_class=True)
+        while walk_instructions.current is not None:
+            command = walk_instructions.current.data
+
+            self.__player.move(command)
+
+        route.next()
 
         self.success()
         return context

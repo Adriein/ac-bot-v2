@@ -49,7 +49,7 @@ class PathFinder:
                 map_path_screenshot_hsv
             )
 
-    def execute(self, current: Waypoint, destination: Waypoint) -> LinkedList:
+    def execute(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
         hashed_route = self.__hash_waypoint_set(current, destination)
 
         if self.RESOLVED_PATHS_CACHE.has(hashed_route):

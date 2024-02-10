@@ -6,7 +6,7 @@ import math
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.VendorPackage import Cv2File
-from src.SharedPackage import Waypoint, Coordinate
+from src.SharedPackage import Waypoint, Coordinate, MoveCommand
 from src.UtilPackage import LinkedList
 
 from .MapTile import MapTile
@@ -83,6 +83,6 @@ class Map:
 
         return 8
 
-    def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList:
+    def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
         return self.__path_finder.execute(current, destination)
 

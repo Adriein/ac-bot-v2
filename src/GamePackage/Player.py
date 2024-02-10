@@ -1,6 +1,6 @@
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Keyboard, Mouse
-from src.SharedPackage import Creature, Coordinate
+from src.SharedPackage import Creature, Coordinate, MoveCommand
 from src.VendorPackage import PyAutoGui
 from src.UtilPackage import Number
 
@@ -48,3 +48,6 @@ class Player:
 
     def config(self) -> dict:
         return self.__config
+
+    def move(self, command: MoveCommand) -> None:
+        self.__keyboard.press(command.key)
