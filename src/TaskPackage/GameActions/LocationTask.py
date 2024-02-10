@@ -37,9 +37,9 @@ class LocationTask(Task):
         if waypoint_type in self.FLOOR_CHANGE_TYPE:
             current_floor = self.__game_map.which_floor_am_i(frame)
 
-            game_map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), current_floor)
+            map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), current_floor)
 
-            context.set_current_waypoint(game_map_position.waypoint)
+            context.set_current_waypoint(map_position.waypoint)
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
