@@ -2,7 +2,7 @@ from src.GamePackage import Player, Script, Map
 from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask, WalkTask, ResolveWaypointActionTask
-from src.VendorPackage import TesseractOcr
+from src.VendorPackage import TesseractOcr, PyAutoGui
 
 
 class CaveBot:
@@ -24,6 +24,8 @@ class CaveBot:
     def start(self, game_context: GameContext, player: Player) -> None:
         while True:
             screenshot = self.__monitor.screenshot()
+
+            PyAutoGui.debug_image(screenshot)
 
             # 1. extract game context
             extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract)
