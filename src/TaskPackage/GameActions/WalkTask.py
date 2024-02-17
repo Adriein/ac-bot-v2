@@ -40,17 +40,16 @@ class WalkTask(Task):
                 destination = previous
                 route.move_pointer_back()
 
+        if previous and previous != real_current_position and not previous.is_floor_change_type():
+            destination = previous
+
+            route.move_pointer_back()
+
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
-        print('...................................')
-        print(real_current_position)
-        print(destination)
-        print('...................................')
 
         while walk_instructions.current is not None:
             command = walk_instructions.current.data
-
-            time.sleep(0.5)
-            print(command)
+            time.sleep(0.2)
             self.__player.move(command)
 
             walk_instructions.next()
