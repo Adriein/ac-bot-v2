@@ -69,5 +69,7 @@ class WalkTask(Task):
         Logger.debug(context, inspect_class=True)
         context.set_current_waypoint(destination)
 
+        time.sleep(1)
+
         self.success()
         return context
