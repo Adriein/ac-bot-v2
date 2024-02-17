@@ -72,8 +72,8 @@ class Map:
 
         (x, y) = max_coordinates
 
-        start_x = pixel_on_map.x - 20 + x
-        start_y = pixel_on_map.y - 20 + y
+        start_x = pixel_on_map.x - 40 + x
+        start_y = pixel_on_map.y - 40 + y
 
         return MapTile.from_pixel(Coordinate(start_x, start_y), current_floor)
 
