@@ -27,13 +27,10 @@ class Map:
                 Cv2File.load_image(f'src/Wiki/Ui/Map/Floors/floor-{floor}.png')
             )
 
-            floor_lvl_image = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{floor}.png', False)
-            floor_lvl_image= cv2.cvtColor(floor_lvl_image, cv2.COLOR_BGR2GRAY)
-            image_hash = hashlib.sha256(floor_lvl_image.tobytes()).hexdigest()
+            color_floor_lvl_image = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{floor}.png', False)
+            floor_lvl_image = cv2.cvtColor(color_floor_lvl_image, cv2.COLOR_BGR2GRAY)
 
-            if floor == 7:
-                PyAutoGui.debug_image(floor_lvl_image)
-                print(image_hash)
+            image_hash = hashlib.sha256(floor_lvl_image.tobytes()).hexdigest()
 
             self.IN_MEMORY_FLOOR_LVL_MAP.set(
                 image_hash,
@@ -93,9 +90,6 @@ class Map:
         actual_floor_lvl = grey_scale_frame[start_y:end_y, start_x:end_x]
 
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
-
-        PyAutoGui.debug_image(actual_floor_lvl)
-        print(image_hash)
 
         return self.IN_MEMORY_FLOOR_LVL_MAP.get(image_hash)
 
