@@ -157,7 +157,7 @@ class GlobalGameWidgetContainer:
         y_diff = start_y + end_y - height
         mini_map_width = start_x - end_x
         print(mini_map_width)
-        mini_map_frame = frame[start_y + y_diff:end_y, start_x + width:end_x + 10]
+        mini_map_frame = frame[start_y + y_diff:end_y, end_x:end_x + 10]
         PyAutoGui.debug_image(mini_map_frame)
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
