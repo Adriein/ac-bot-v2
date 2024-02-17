@@ -61,7 +61,7 @@ class Map:
         map_end_x = pixel_on_map.x + (math.floor(width / 2) + 20)
 
         map_start_y = pixel_on_map.y - (math.floor(height / 2) + 20)
-        map_end_y = pixel_on_map.y + (math.floor(height / 2) + 1 + 20)
+        map_end_y = pixel_on_map.y + (math.floor(height / 2) + 20)
 
         tibia_map_roi = tibia_map[map_start_y:map_end_y, map_start_x:map_end_x]
 
