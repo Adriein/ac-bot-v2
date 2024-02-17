@@ -31,6 +31,7 @@ class Map:
             image_hash = hashlib.sha256(floor_lvl_image.tobytes()).hexdigest()
 
             if floor == 7:
+                PyAutoGui.debug_image(floor_lvl_image)
                 print(image_hash)
 
             self.IN_MEMORY_FLOOR_LVL_MAP.set(
