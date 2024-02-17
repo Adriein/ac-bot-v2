@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 from src.GamePackage import Player
 from src.LoggerPackage import Logger
@@ -28,6 +29,7 @@ class EatTask(Task):
 
             for _ in range(random_eat_times):
                 self.__player.eat()
+                time.sleep(0.5)
 
             context.set_last_meal_time(Time.now())
 
