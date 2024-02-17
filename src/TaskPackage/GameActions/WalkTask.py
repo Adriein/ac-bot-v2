@@ -41,8 +41,10 @@ class WalkTask(Task):
                 route.move_pointer_back()
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
+        print('...................................')
         print(real_current_position)
         print(destination)
+        print('...................................')
 
         while walk_instructions.current is not None:
             command = walk_instructions.current.data
