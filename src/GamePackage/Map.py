@@ -89,6 +89,9 @@ class Map:
 
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
 
+        PyAutoGui.debug_image(actual_floor_lvl)
+        print(image_hash)
+
         return self.IN_MEMORY_FLOOR_LVL_MAP.get(image_hash)
 
     def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
