@@ -39,6 +39,9 @@ class GlobalGameWidgetContainer:
         Logger.info('Locating MiniMap...')
         self.__mini_map_widget_region = self.__locate_mini_map_widget()
 
+        Logger.info('Locating Floor Widget...')
+        self.__floor_widget_region = self.__locate_floor_widget()
+
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
 
@@ -134,5 +137,26 @@ class GlobalGameWidgetContainer:
         end_x = start_x + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_MINI_MAP_END_X)
         start_y = y - self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_MINI_MAP_START_Y)
         end_y = start_y + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_MINI_MAP_END_Y)
+
+        return ScreenRegion(start_x, end_x, start_y, end_y)
+
+    def __locate_floor_widget(self) -> ScreenRegion:
+        frame = cv2.cvtColor(self.__initial_setup_screenshot, cv2.COLOR_BGR2GRAY)
+
+        floor_widget_anchor = Cv2File.load_image('src/Wiki/Ui/Map/FloorLevel/7.png')
+
+        mini_map_widget = self.__mini_map_widget_region
+
+        height, width = floor_widget_anchor.shape
+
+        start_y = mini_map_widget.start_y
+        end_y = mini_map_widget.end_y
+        start_x = mini_map_widget.start_x
+        end_x = mini_map_widget.end_x
+
+        y_diff = start_y + end_y - height
+
+        mini_map_frame = frame[start_y - y_diff:end_y, start_x+end_x:end_x+10]
+        PyAutoGui.debug_image(mini_map_frame)
 
         return ScreenRegion(start_x, end_x, start_y, end_y)

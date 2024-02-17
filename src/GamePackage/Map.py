@@ -80,21 +80,16 @@ class Map:
 
         mini_map_screen_region = self.__widget.mini_map_widget()
 
-        start_y = mini_map_screen_region.start_y
-        end_y = mini_map_screen_region.end_y
-        start_x = mini_map_screen_region.start_x
-        end_x = mini_map_screen_region.end_x
-
-        mini_map_frame = grey_scale_frame[start_y:end_y, start_x:end_x]
 
         width = mini_map_screen_region.start_x - mini_map_screen_region.end_x
-        PyAutoGui.debug_image(mini_map_frame)
+
         left = mini_map_screen_region.start_x + width + 8
         top = mini_map_screen_region.start_y - 7
         height = 67
         width = 2
 
         actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
+
 
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
 
