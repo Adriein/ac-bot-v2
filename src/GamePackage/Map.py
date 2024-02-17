@@ -80,7 +80,6 @@ class Map:
 
         mini_map_screen_region = self.__widget.mini_map_widget()
 
-
         width = mini_map_screen_region.start_x - mini_map_screen_region.end_x
 
         left = mini_map_screen_region.start_x + width + 8
@@ -90,11 +89,9 @@ class Map:
 
         actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
 
-
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
 
         return self.IN_MEMORY_FLOOR_LVL_MAP.get(image_hash)
 
     def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
         return self.__path_finder.execute(current, destination)
-
