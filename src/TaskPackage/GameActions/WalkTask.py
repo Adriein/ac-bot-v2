@@ -28,14 +28,14 @@ class WalkTask(Task):
             return context
 
         route = context.get_cave_route()
-        destination = route.current
+        destination = route.current.data
 
         real_current_position = context.get_current_waypoint()
 
         previous = route.peak_previous()
 
         if previous and previous.is_floor_change_type():
-            if not real_current_position.is_in_same_floor(destination.data):
+            if not real_current_position.is_in_same_floor(destination):
                 # im in the wrong position and I have to fix it
                 destination = previous
                 route.move_pointer_back()
