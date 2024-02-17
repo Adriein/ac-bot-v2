@@ -57,6 +57,9 @@ class GlobalGameWidgetContainer:
     def mini_map_widget(self) -> ScreenRegion:
         return self.__mini_map_widget_region
 
+    def floor_level_widget(self) -> ScreenRegion:
+        return self.__floor_widget_region
+
     def looting_area(self) -> list[Coordinate]:
         return self.__looting_area_coordinates
 

@@ -78,16 +78,14 @@ class Map:
     def which_floor_am_i(self, frame: np.array) -> int:
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        mini_map_screen_region = self.__widget.mini_map_widget()
+        floor_lvl_widget = self.__widget.floor_level_widget()
 
-        width = mini_map_screen_region.start_x - mini_map_screen_region.end_x
+        start_y = floor_lvl_widget.start_y
+        end_y = floor_lvl_widget.end_y
+        start_x = floor_lvl_widget.start_x
+        end_x = floor_lvl_widget.end_x
 
-        left = mini_map_screen_region.start_x + width + 8
-        top = mini_map_screen_region.start_y - 7
-        height = 67
-        width = 2
-
-        actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
+        actual_floor_lvl = grey_scale_frame[start_y:end_y, start_x:end_x]
 
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
 
