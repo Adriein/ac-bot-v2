@@ -53,6 +53,7 @@ class WalkTask(Task):
             walk_instructions.next()
 
         if route.peak_next() is None:
+            raise Exception
             route.reset()
 
             Logger.debug("Updated context")
