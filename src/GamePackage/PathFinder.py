@@ -52,12 +52,12 @@ class PathFinder:
     def execute(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
         hashed_route = self.__hash_waypoint_set(current, destination)
 
-        if self.RESOLVED_PATHS_CACHE.has(hashed_route):
-            path: LinkedList[MoveCommand] = self.RESOLVED_PATHS_CACHE.get(hashed_route)
+        # if self.RESOLVED_PATHS_CACHE.has(hashed_route):
+           # path: LinkedList[MoveCommand] = self.RESOLVED_PATHS_CACHE.get(hashed_route)
 
-            path.reset()
+           # path.reset()
 
-            return path
+           # return path
 
         path = LinkedList()
 
