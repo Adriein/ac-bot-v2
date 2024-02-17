@@ -71,5 +71,7 @@ class WalkTask(Task):
         Logger.debug(context, inspect_class=True)
         context.set_current_waypoint(destination)
 
+        raise Exception
+
         self.success()
         return context
