@@ -52,6 +52,9 @@ class LinkedList(Generic[T]):
         return self.previous.data
 
     def peak_next(self) -> T | None:
+        if not self.current.next:
+            return None
+
         return self.current.next.data
 
     def reverse(self) -> None:
