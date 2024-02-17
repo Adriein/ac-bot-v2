@@ -1,0 +1,14 @@
+{
+  "walk": [
+    ["32312,32249,7", "walk"],
+    ["32322,32249,7", "walk"]
+  ],
+  "creatures": [
+    {
+      "name": "wasp",
+      "runner": false,
+      "loot": true,
+      "priority": 1
+    }
+  ]
+}

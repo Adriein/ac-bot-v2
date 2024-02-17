@@ -92,7 +92,11 @@ class GameContext:
         return self.__current_floor
 
     def set_cave_route(self, route: LinkedList[Waypoint]) -> None:
-        self.set_current_waypoint(route.head.data)
+        initial_waypoint = route.head.data
+
+        self.set_current_floor(initial_waypoint.z)
+        self.set_current_waypoint(initial_waypoint)
+
         self.__cave_route = route
 
     def get_cave_route(self) -> LinkedList[Waypoint]:

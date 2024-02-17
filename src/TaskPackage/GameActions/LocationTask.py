@@ -40,6 +40,7 @@ class LocationTask(Task):
             map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), current_floor)
 
             context.set_current_waypoint(map_position.waypoint)
+            context.set_current_floor(current_floor)
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
