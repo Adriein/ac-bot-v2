@@ -35,7 +35,7 @@ class PathFinder:
     def __init__(self, script: Script):
         self.RESOLVED_PATHS_CACHE = MapCollection()
         self.IN_MEMORY_FLOOR_PATH_PNG_MAP = MapCollection()
-
+        print(script.floors())
         for floor in script.floors():
             map_path_screenshot = Cv2File.load_image(
                 f'src/Wiki/Ui/Map/Walkable/floor-{floor}-path.png',
