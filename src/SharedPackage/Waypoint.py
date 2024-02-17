@@ -27,7 +27,7 @@ class Waypoint:
 
     def __eq__(self, other):
         if isinstance(other, Waypoint):
-            return self.x == other.x and self.y == other.y and self.z == other.z and self.type == other.type
+            return self.x == other.x and self.y == other.y and self.z == other.z
 
         return False
 
