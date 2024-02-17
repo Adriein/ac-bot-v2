@@ -48,7 +48,8 @@ class WalkTask(Task):
             command = walk_instructions.current.data
 
             time.sleep(0.2)
-            self.__player.move(command)
+            print(command)
+            # self.__player.move(command)
 
             walk_instructions.next()
 
