@@ -49,7 +49,7 @@ class WalkTask(Task):
 
             time.sleep(1)
             print(command)
-            self.__player.move(command)
+            #self.__player.move(command)
 
             walk_instructions.next()
 
