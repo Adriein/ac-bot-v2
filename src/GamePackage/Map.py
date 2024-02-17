@@ -27,7 +27,8 @@ class Map:
                 Cv2File.load_image(f'src/Wiki/Ui/Map/Floors/floor-{floor}.png')
             )
 
-            floor_lvl_image = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{floor}.png')
+            floor_lvl_image = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{floor}.png', False)
+            floor_lvl_image= cv2.cvtColor(floor_lvl_image, cv2.COLOR_BGR2GRAY)
             image_hash = hashlib.sha256(floor_lvl_image.tobytes()).hexdigest()
 
             if floor == 7:
