@@ -4,7 +4,7 @@ import math
 import hashlib
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.VendorPackage import Cv2File
+from src.VendorPackage import Cv2File, PyAutoGui
 from src.SharedPackage import Waypoint, Coordinate, MoveCommand
 from src.UtilPackage import LinkedList, MapCollection
 
@@ -88,6 +88,8 @@ class Map:
         width = 2
 
         actual_floor_lvl = grey_scale_frame[top:top + height, left:left + width]
+
+        PyAutoGui.debug_image(actual_floor_lvl)
 
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
 
