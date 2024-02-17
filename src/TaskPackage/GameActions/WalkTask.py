@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 from src.SharedPackage import GameContext, Waypoint
 from src.TaskPackage.Task import Task
@@ -47,7 +48,7 @@ class WalkTask(Task):
             command = walk_instructions.current.data
 
             print(command)
-
+            time.sleep(0.2)
             self.__player.move(command)
 
             walk_instructions.next()
