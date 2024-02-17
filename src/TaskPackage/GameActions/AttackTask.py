@@ -28,6 +28,10 @@ class AttackTask(Task):
 
         context.get_creatures_in_range().sort(key=lambda enemy: enemy.priority())
 
+        if not context.get_creatures_in_range():
+            self.success()
+            return context
+
         target = context.get_creatures_in_range()[0]
 
         self.__player.precision_attack(target)
