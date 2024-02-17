@@ -53,7 +53,7 @@ class PathFinder:
         hashed_route = self.__hash_waypoint_set(current, destination)
 
         if self.RESOLVED_PATHS_CACHE.has(hashed_route):
-           return self.RESOLVED_PATHS_CACHE.get(hashed_route)
+            return self.RESOLVED_PATHS_CACHE.get(hashed_route)
 
         path = LinkedList()
 

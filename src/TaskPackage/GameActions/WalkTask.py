@@ -28,19 +28,17 @@ class WalkTask(Task):
             return context
 
         route = context.get_cave_route()
-        destination = route.peak_next()
+        destination = route.current
 
-        route_current_waypoint = route.current.data
         real_current_position = context.get_current_waypoint()
 
-        if route_current_waypoint.is_floor_change_type():
-            if real_current_position.is_in_same_floor(route_current_waypoint):
-                # im in the wrong position and I have to fix it
-                destination = route.current.data
-                route.move_pointer_back()
+        previous = route.peak_previous()
 
-        if destination is None:
-            destination = route.head.data
+        if previous and previous.is_floor_change_type():
+            if not real_current_position.is_in_same_floor(destination.data):
+                # im in the wrong position and I have to fix it
+                destination = previous
+                route.move_pointer_back()
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
         print(real_current_position)
@@ -49,9 +47,8 @@ class WalkTask(Task):
         while walk_instructions.current is not None:
             command = walk_instructions.current.data
 
-            print(command)
             time.sleep(0.2)
-            # self.__player.move(command)
+            self.__player.move(command)
 
             walk_instructions.next()
 
@@ -60,7 +57,7 @@ class WalkTask(Task):
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
-            context.set_current_waypoint(route.current.data)
+            context.set_current_waypoint(destination)
 
             self.success()
             return context
@@ -70,8 +67,6 @@ class WalkTask(Task):
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
         context.set_current_waypoint(destination)
-
-        raise Exception
 
         self.success()
         return context
