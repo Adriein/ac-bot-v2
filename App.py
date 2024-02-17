@@ -22,6 +22,7 @@ class TibiaAcBot:
         self.__task_resolver = None
         self.__pyautogui = None
         self.__tesseract = None
+        self.__script = None
 
         self.__collect_program_arguments()
         self.__setup_global()
@@ -92,8 +93,13 @@ class TibiaAcBot:
         Logger.info('Creating Mouse..')
         self.__mouse = Mouse(self.__kernel)
 
+        Logger.info('Loading Script...')
+        self.__script = Script.load('src/Wiki/Script/Thais/test.json')
+
+        initial_floor_lvl = list(self.__script.floors())[0]
+
         Logger.info('Locating Widgets...')
-        self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, self.__pyautogui)
+        self.__global_widget_container = GlobalGameWidgetContainer(self.__monitor, self.__pyautogui, initial_floor_lvl)
 
         Logger.info('Initializing TaskResolver...')
         self.__task_resolver = TaskResolver()

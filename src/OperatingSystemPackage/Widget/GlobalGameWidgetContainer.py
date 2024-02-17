@@ -7,7 +7,7 @@ from src.LoggerPackage import Logger
 
 
 class GlobalGameWidgetContainer:
-    def __init__(self, monitor: Monitor, pyautogui: PyAutoGui):
+    def __init__(self, monitor: Monitor, pyautogui: PyAutoGui, initial_floor_lvl: int):
         self.__monitor = monitor
         self.__initial_setup_screenshot = monitor.screenshot()
         self.__monitor_dimensions = monitor.specifications()
@@ -40,7 +40,7 @@ class GlobalGameWidgetContainer:
         self.__mini_map_widget_region = self.__locate_mini_map_widget()
 
         Logger.info('Locating Floor Widget...')
-        self.__floor_widget_region = self.__locate_floor_widget()
+        self.__floor_widget_region = self.__locate_floor_widget(initial_floor_lvl)
 
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
@@ -140,10 +140,10 @@ class GlobalGameWidgetContainer:
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
 
-    def __locate_floor_widget(self) -> ScreenRegion:
+    def __locate_floor_widget(self, initial_floor_lvl: int) -> ScreenRegion:
         frame = cv2.cvtColor(self.__initial_setup_screenshot, cv2.COLOR_BGR2GRAY)
 
-        floor_widget_anchor = Cv2File.load_image('src/Wiki/Ui/Map/FloorLevel/7.png')
+        floor_widget_anchor = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{initial_floor_lvl}.png')
 
         match = cv2.matchTemplate(frame, floor_widget_anchor, cv2.TM_CCOEFF_NORMED)
 
@@ -151,23 +151,11 @@ class GlobalGameWidgetContainer:
 
         (x, y) = max_coordinates
 
-        print(x,y)
-
-        mini_map_widget = self.__mini_map_widget_region
-
         height, width = floor_widget_anchor.shape
 
-        start_y = mini_map_widget.start_y
-        end_y = mini_map_widget.end_y
-        start_x = mini_map_widget.start_x
-        end_x = mini_map_widget.end_x
-
-        y_diff = height - start_y
-        mini_map_width = start_x - end_x
-        print(height)
-        print(end_y - start_y - height)
-        start_y = end_y - start_y - height
-        mini_map_frame = frame[y:y+height, x:x+width]
-        PyAutoGui.debug_image(mini_map_frame)
+        start_y = y
+        end_y = y + height
+        start_x = x
+        end_x = x + width
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
