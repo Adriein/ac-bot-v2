@@ -156,7 +156,9 @@ class GlobalGameWidgetContainer:
 
         y_diff = start_y + end_y - height
         mini_map_width = start_x - end_x
-        print(mini_map_width)
+        print(height)
+        print(start_y)
+        print(end_y)
         mini_map_frame = frame[start_y + y_diff:end_y, end_x:end_x + 80]
         PyAutoGui.debug_image(mini_map_frame)
 
