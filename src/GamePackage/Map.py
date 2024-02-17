@@ -30,6 +30,9 @@ class Map:
             floor_lvl_image = Cv2File.load_image(f'src/Wiki/Ui/Map/FloorLevel/{floor}.png')
             image_hash = hashlib.sha256(floor_lvl_image.tobytes()).hexdigest()
 
+            if floor == 7:
+                print(image_hash)
+
             self.IN_MEMORY_FLOOR_LVL_MAP.set(
                 image_hash,
                 floor
