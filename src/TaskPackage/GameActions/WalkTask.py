@@ -49,9 +49,9 @@ class WalkTask(Task):
         while walk_instructions.current is not None:
             command = walk_instructions.current.data
 
-            #time.sleep(2)
+            time.sleep(0.4)
 
-            #self.__player.move(command)
+            self.__player.move(command)
 
             walk_instructions.next()
 
