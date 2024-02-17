@@ -145,6 +145,14 @@ class GlobalGameWidgetContainer:
 
         floor_widget_anchor = Cv2File.load_image('src/Wiki/Ui/Map/FloorLevel/7.png')
 
+        match = cv2.matchTemplate(frame, floor_widget_anchor, cv2.TM_CCOEFF_NORMED)
+
+        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+
+        (x, y) = max_coordinates
+
+        print(x,y)
+
         mini_map_widget = self.__mini_map_widget_region
 
         height, width = floor_widget_anchor.shape
