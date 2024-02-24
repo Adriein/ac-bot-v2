@@ -32,19 +32,18 @@ class WalkTask(Task):
 
         real_current_position = context.get_current_waypoint()
 
-        previous = route.peak_previous()
-
-        if previous and previous.is_floor_change_type():
-            if not real_current_position.is_in_same_floor(destination):
-                # im in the wrong position and I have to fix it
-                destination = previous
-                route.move_pointer_back()
-
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
 
         for instruction in walk_instructions:
             self.__player.move(instruction)
             time.sleep(0.4)
+
+        current_floor = self.__game_map.which_floor_am_i(frame)
+        real_current_position = self.__game_map.where_am_i(frame, destination, current_floor)
+
+        if real_current_position != destination:
+            self.fail()
+            return context
 
         if route.peak_next() is None:
             route.reset()

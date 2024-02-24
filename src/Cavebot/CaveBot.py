@@ -25,7 +25,6 @@ class CaveBot:
         while True:
             screenshot = self.__monitor.screenshot()
 
-            print('1. extract game context')
             # 1. extract game context
             extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract)
             self.__resolver.queue(extract_game_context_data_task)
@@ -36,12 +35,10 @@ class CaveBot:
             healing_task = HealingTask(player)
             # self.__resolver.queue(healing_task)
 
-            print('3. auto attacking')
             # 3. auto attacking
             attack_task = AttackTask(player)
             self.__resolver.queue(attack_task)
 
-            print('4. auto looting')
             # 4. auto looting
             loot_task = LootTask(player, self.__widget)
             self.__resolver.queue(loot_task)
@@ -56,17 +53,14 @@ class CaveBot:
 
             self.__resolver.resolve(game_context, screenshot)
 
-            print('7. Locate player position')
             # 7. Locate player position
             location_task = LocationTask(self.__game_map)
             self.__resolver.queue(location_task)
 
-            print('8. Walk')
             # 8. Walk
             walk_task = WalkTask(self.__game_map, player)
             self.__resolver.queue(walk_task)
 
-            print('9. Resolve waypoint')
             # 9. Resolve waypoint
             resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
             self.__resolver.queue(resolve_waypoint_task)
