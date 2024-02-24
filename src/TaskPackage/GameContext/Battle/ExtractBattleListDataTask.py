@@ -32,7 +32,7 @@ class ExtractBattleListDataTask(Task):
 
         results = list()
 
-        for enemy in [Creature('mad_sheep', 1, False, False, Coordinate(0, 0))]:
+        for enemy in context.get_script_enemies():
             enemy_path = f'src/Wiki/Ui/Mobs/{String.snake_to_camel_case(enemy.name())}/{enemy.name()}_label.png'
 
             creature_template = Cv2File.load_image(enemy_path)
