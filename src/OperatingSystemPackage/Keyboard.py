@@ -50,7 +50,7 @@ class Keyboard:
         # Sync to make sure the event is processed
         d.flush()
         """
-        pyautogui.press(key)
+        pyautogui.press(keys=key, interval=0.0, _pause=False)
 
     def key_down(self, key: str) -> None:
         pyautogui.keyDown(key)
