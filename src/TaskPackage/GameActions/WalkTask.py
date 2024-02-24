@@ -43,8 +43,10 @@ class WalkTask(Task):
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
 
         for instruction in walk_instructions:
-            self.__player.move(instruction)
+            print(instruction)
+            # self.__player.move(instruction)
 
+        raise Exception
         if route.peak_next() is None:
             route.reset()
 
