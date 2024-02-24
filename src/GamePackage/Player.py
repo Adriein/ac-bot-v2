@@ -49,9 +49,8 @@ class Player:
     def config(self) -> dict:
         return self.__config
 
-    def move(self, moves: list[MoveCommand]) -> None:
-        keys = [move.key for move in moves]
-        self.__keyboard.press(keys)
+    def move(self, command: MoveCommand) -> None:
+        self.__keyboard.press(command.key)
 
     def rope(self, coordinates: Coordinate) -> None:
         self.__keyboard.press('f')

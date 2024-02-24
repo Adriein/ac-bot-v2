@@ -11,7 +11,7 @@ class Keyboard:
     def __init__(self, kernel: Kernel):
         self.__kernel = kernel
 
-    def press(self, key: str | Iterable[str]):
+    def press(self, key: str):
         """
         tibia_window_id = self.__kernel.tibia_window_id()
 
@@ -50,7 +50,7 @@ class Keyboard:
         # Sync to make sure the event is processed
         d.flush()
         """
-        pyautogui.press(keys=key, interval=0.0, _pause=False)
+        pyautogui.press(keys=key)
 
     def key_down(self, key: str) -> None:
         pyautogui.keyDown(key)
