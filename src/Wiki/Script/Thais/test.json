@@ -15,6 +15,7 @@
     {
       "name": "mountain_troll",
       "runner": true,
+      "loot": true,
       "priority": 1
     },
     {
