@@ -44,7 +44,7 @@ class WalkTask(Task):
 
         for instruction in walk_instructions:
             self.__player.move(instruction)
-            time.sleep(2)
+            time.sleep(0.5)
 
         if route.peak_next() is None:
             route.reset()
@@ -61,8 +61,6 @@ class WalkTask(Task):
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
         context.set_current_waypoint(destination)
-
-        time.sleep(1)
 
         self.success()
         return context
