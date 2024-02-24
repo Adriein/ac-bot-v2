@@ -4,9 +4,9 @@ import math
 import hashlib
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.VendorPackage import Cv2File, PyAutoGui
+from src.VendorPackage import Cv2File
 from src.SharedPackage import Waypoint, Coordinate, MoveCommand
-from src.UtilPackage import LinkedList, MapCollection
+from src.UtilPackage import MapCollection
 
 from .MapTile import MapTile
 from .Script import Script
@@ -93,5 +93,5 @@ class Map:
 
         return self.IN_MEMORY_FLOOR_LVL_MAP.get(image_hash)
 
-    def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
+    def find_shortest_path(self, current: Waypoint, destination: Waypoint) -> list[MoveCommand]:
         return self.__path_finder.execute(current, destination)

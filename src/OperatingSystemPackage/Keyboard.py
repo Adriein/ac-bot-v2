@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from Xlib import X, display, XK
 from Xlib.protocol import event
 import pyautogui
@@ -9,7 +11,7 @@ class Keyboard:
     def __init__(self, kernel: Kernel):
         self.__kernel = kernel
 
-    def press(self, key: str):
+    def press(self, key: str | Iterable[str]):
         """
         tibia_window_id = self.__kernel.tibia_window_id()
 

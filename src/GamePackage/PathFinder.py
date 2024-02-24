@@ -5,7 +5,7 @@ import cv2
 
 from .MapTile import MapTile
 
-from src.UtilPackage import LinkedList, MapCollection
+from src.UtilPackage import MapCollection
 from src.SharedPackage import Waypoint, MoveCommand
 from src.GamePackage import Script
 from src.VendorPackage import Cv2File
@@ -49,17 +49,13 @@ class PathFinder:
                 map_path_screenshot_hsv
             )
 
-    def execute(self, current: Waypoint, destination: Waypoint) -> LinkedList[MoveCommand]:
+    def execute(self, current: Waypoint, destination: Waypoint) -> list[MoveCommand]:
         hashed_route = self.__hash_waypoint_set(current, destination)
 
         if self.RESOLVED_PATHS_CACHE.has(hashed_route):
-           path: LinkedList[MoveCommand] = self.RESOLVED_PATHS_CACHE.get(hashed_route)
+            return self.RESOLVED_PATHS_CACHE.get(hashed_route)
 
-           path.reset()
-
-           return path
-
-        path = LinkedList()
+        path = list()
 
         tile_path = self.__a_star_algorithm(current, destination)
 
