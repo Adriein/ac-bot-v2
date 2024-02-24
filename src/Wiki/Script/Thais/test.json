@@ -1,15 +1,26 @@
 {
   "walk": [
-    ["32062,31888,5", "walk"],
-    ["32067,31888,5", "walk"],
-    ["32067,31885,5", "walk"]
+    ["32065,31884,5", "walk"],
+    ["32065,31876,5", "walk"],
+    ["32063,31871,6", "walk"],
+    ["32074,31874,6", "walk"],
+    ["32079,31876,6", "walk"],
+    ["32084,31885,6", "walk"],
+    ["32082,31907,6", "walk"],
+    ["32064,31909,6", "walk"],
+    ["32064,31905,6", "walk"]
 
   ],
   "creatures": [
     {
-      "name": "wasp",
+      "name": "mountain_troll",
+      "runner": true,
+      "priority": 1
+    },
+    {
+      "name": "troll_trained_salamander",
       "runner": false,
-      "loot": true,
+      "loot": false,
       "priority": 1
     }
   ]
