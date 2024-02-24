@@ -46,10 +46,9 @@ class CaveBot:
             loot_task = LootTask(player, self.__widget)
             self.__resolver.queue(loot_task)
 
-            print('5. waste mana')
             # 5. waste mana
             spell_healing_task = SmartSpellHealingTask(player)
-            self.__resolver.queue(spell_healing_task)
+            # self.__resolver.queue(spell_healing_task)
 
             # 6. Eat food
             eat_task = EatTask(player)
@@ -57,7 +56,7 @@ class CaveBot:
 
             self.__resolver.resolve(game_context, screenshot)
 
-            print('8¡7. Locate player position')
+            print('7. Locate player position')
             # 7. Locate player position
             location_task = LocationTask(self.__game_map)
             self.__resolver.queue(location_task)
