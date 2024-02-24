@@ -117,6 +117,9 @@ class TibiaAcBot:
         table.add_row("Creating Mouse", "OK")
         table.add_row("Locating Widgets", "OK")
         table.add_row("Initializing TaskResolver", "OK")
+        table.add_row("Creating PyAutoGui", "OK")
+        table.add_row("Creating Tesseract", "OK")
+        table.add_row("Loading Script", "OK")
 
         Logger.table('Global Setup Resume', table)
 
@@ -159,6 +162,10 @@ class TibiaAcBot:
             if parser.parse_args().dev:
                 os.environ[Constants.DEV_MODE] = Constants.DEV_MODE
                 table.add_row("--dev", Constants.DEV_MODE)
+
+            if not parser.parse_args().dev and not parser.parse_args().train and not parser.parse_args().debug:
+                os.environ[Constants.PRODUCTION_MODE] = Constants.PRODUCTION_MODE
+                table.add_row("production", Constants.PRODUCTION_MODE)
 
             Logger.table('Program Arguments Resume', table)
 
