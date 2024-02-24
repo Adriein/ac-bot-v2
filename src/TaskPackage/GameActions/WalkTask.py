@@ -44,7 +44,7 @@ class WalkTask(Task):
 
         for instruction in walk_instructions:
             self.__player.move(instruction)
-            time.sleep(0.2)
+            time.sleep(0.4)
 
         if route.peak_next() is None:
             route.reset()
