@@ -50,5 +50,4 @@ class EatTask(Task):
         return context
 
     def __is_time_to_eat(self, context: GameContext) -> bool:
-        print(Time.now() > context.get_next_meal_time())
         return Time.now() > context.get_next_meal_time()
