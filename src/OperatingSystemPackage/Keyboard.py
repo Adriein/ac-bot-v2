@@ -1,5 +1,3 @@
-from typing import Iterable
-
 from Xlib import X, display, XK
 from Xlib.protocol import event
 import pyautogui
@@ -12,7 +10,6 @@ class Keyboard:
         self.__kernel = kernel
 
     def press(self, key: str):
-        """
         tibia_window_id = self.__kernel.tibia_window_id()
 
         # Create a connection to the X server
@@ -49,8 +46,6 @@ class Keyboard:
 
         # Sync to make sure the event is processed
         d.flush()
-        """
-        pyautogui.press(keys=key)
 
     def key_down(self, key: str) -> None:
         pyautogui.keyDown(key)
