@@ -5,16 +5,18 @@ from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
 from src.GamePackage import Map, Player
+from src.OperatingSystemPackage import Monitor
 
 
 class WalkTask(Task):
     def __str__(self) -> str:
         return f'WalkTask'
 
-    def __init__(self, game_map: Map, player: Player):
+    def __init__(self, game_map: Map, player: Player, monitor: Monitor):
         super().__init__()
         self.__game_map = game_map
         self.__player = player
+        self.__monitor = monitor
         self.__succeed = False
         self.__completed = False
 
@@ -37,6 +39,15 @@ class WalkTask(Task):
         for instruction in walk_instructions:
             self.__player.move(instruction)
             time.sleep(0.4)
+
+        check_screenshot = self.__monitor.screenshot()
+
+        current_floor = self.__game_map.which_floor_am_i(check_screenshot)
+        real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor)
+
+        if real_current_position != destination:
+            self.fail()
+            return context
 
         if route.peak_next() is None:
             route.reset()
