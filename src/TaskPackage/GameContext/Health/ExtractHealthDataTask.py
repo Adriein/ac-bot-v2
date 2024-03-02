@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
@@ -20,6 +21,7 @@ class ExtractHealthDataTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         try:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             Logger.debug("Executing ExtractHealthDataTask")
             Logger.debug("Received context")
             Logger.debug(context, inspect_class=True)
