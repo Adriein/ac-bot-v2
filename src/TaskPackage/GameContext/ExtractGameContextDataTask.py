@@ -11,18 +11,19 @@ from src.TaskPackage.GameContext.Health.ExtractHealthDataTask import ExtractHeal
 from src.TaskPackage.GameContext.Mana.ExtractManaDataTask import ExtractManaDataTask
 from src.TaskPackage.Task import Task
 from src.TaskPackage.TaskResolver import TaskResolver
-from src.VendorPackage import TesseractOcr
+from src.VendorPackage import TesseractOcr, PyAutoGui
 
 
 class ExtractGameContextDataTask(Task):
     def __str__(self) -> str:
         return f"""ExtractGameContextDataTask(extract_battle_list_data, extract_health_data, extract_mana_data)"""
 
-    def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer, tesseract: TesseractOcr):
+    def __init__(self, resolver: TaskResolver, widget: GlobalGameWidgetContainer, tesseract: TesseractOcr, pyautogui: PyAutoGui):
         super().__init__()
         self.__resolver = resolver
         self.__widget = widget
         self.__tesseract = tesseract
+        self.__pyautogui = pyautogui
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         Logger.debug("Executing ExtractGameContextDataTask")
@@ -42,7 +43,7 @@ class ExtractGameContextDataTask(Task):
         self.__resolver.queue(extract_combat_stance_task)
 
         Logger.debug("Queueing ExtractHealthDataTask")
-        extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__tesseract)
+        extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__pyautogui)
         self.__resolver.queue(extract_health_data_task)
 
         Logger.debug("Queueing ExtractManaDataTask")
