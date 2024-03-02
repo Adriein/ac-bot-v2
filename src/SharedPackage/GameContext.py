@@ -1,4 +1,4 @@
-from . import Constants
+from src.SharedPackage import Constants
 from .Creature import Creature
 from .Waypoint import Waypoint
 from datetime import datetime
