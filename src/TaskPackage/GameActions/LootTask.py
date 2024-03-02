@@ -25,6 +25,7 @@ class LootTask(Task):
         Logger.debug(context, inspect_class=True)
 
         if not context.get_pending_loot() or not context.get_attacking_creature().has_to_loot():
+            context.set_pending_loot(False)
             self.success()
 
             return context
