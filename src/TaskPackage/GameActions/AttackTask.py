@@ -36,6 +36,8 @@ class AttackTask(Task):
 
         self.__player.precision_attack(target)
 
+        context.set_attacking_creature(target)
+
         if target.is_runner() and context.get_combat_stance() is not Constants.CHASE_COMBAT_STANCE:
             self.__player.chase_opponent()
 

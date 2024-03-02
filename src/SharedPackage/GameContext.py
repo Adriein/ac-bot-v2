@@ -31,6 +31,7 @@ class GameContext:
         self.__current_floor = None
         self.__cave_route = None
         self.__combat_stance = None
+        self.__attacking_creature = None
 
     def set_health(self, health: int) -> None:
         self.__health = health
@@ -49,6 +50,12 @@ class GameContext:
 
     def get_is_attacking(self) -> bool:
         return self.__is_attacking
+
+    def set_attacking_creature(self, creature: Creature) -> None:
+        self.__attacking_creature = creature
+
+    def get_attacking_creature(self) -> Creature:
+        return self.__attacking_creature
 
     def set_creatures_in_range(self, creatures: list[Creature]) -> None:
         self.__creatures_in_range = creatures
