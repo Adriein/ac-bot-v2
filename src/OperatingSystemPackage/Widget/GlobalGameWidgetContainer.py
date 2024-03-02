@@ -43,7 +43,7 @@ class GlobalGameWidgetContainer:
         self.__floor_widget_region = self.__locate_floor_widget(initial_floor_lvl)
 
         Logger.info('Locating Combat Stance Widget...')
-        self.__combat_stance_region = self.__locate_floor_widget(initial_floor_lvl)
+        self.__combat_stance_region = self.__locate_combat_stance_widget()
 
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
