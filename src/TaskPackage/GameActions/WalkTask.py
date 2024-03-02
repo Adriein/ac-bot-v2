@@ -46,7 +46,7 @@ class WalkTask(Task):
         real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
 
         if real_current_position != destination:
-            self.fail()
+            self.success()
             return context
 
         if route.peak_next() is None:
