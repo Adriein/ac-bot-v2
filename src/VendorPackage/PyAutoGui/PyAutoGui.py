@@ -153,13 +153,13 @@ class PyAutoGui:
 
             [_, max_coincidence, _, _] = cv2.minMaxLoc(match)
 
-            if self.__ensure_confidence_threshold(confidence, max_coincidence):
-                continue
+            #if self.__ensure_confidence_threshold(confidence, max_coincidence):
+             #   continue
 
-            if self.__is_not_better_match(number_coincidence, max_coincidence):
-                continue
+            #if self.__is_not_better_match(number_coincidence, max_coincidence):
+             #   continue
 
-            number_coincidence.remove(number_coincidence[0])
+            #number_coincidence.remove(number_coincidence[0])
 
             number_coincidence.append((max_coincidence, number))
 
