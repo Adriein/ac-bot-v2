@@ -50,6 +50,7 @@ class TibiaAcBot:
                     self.__task_resolver,
                     self.__global_widget_container,
                     self.__tesseract,
+                    self.__pyautogui,
                     game_map
                 )
 
