@@ -4,7 +4,7 @@ from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
-from src.VendorPackage import TesseractOcr
+from src.VendorPackage import TesseractOcr, PyAutoGui
 
 
 class ExtractHealthDataTask(Task):
@@ -28,9 +28,10 @@ class ExtractHealthDataTask(Task):
 
             hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-            current_health = int(self.__tesseract.number_img_to_string(hp_roi))
+            PyAutoGui.debug_image(hp_roi)
+            # current_health = int(self.__tesseract.number_img_to_string(hp_roi))
 
-            context.set_health(current_health)
+            context.set_health(0)
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)

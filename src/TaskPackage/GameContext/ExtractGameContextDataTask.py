@@ -43,7 +43,7 @@ class ExtractGameContextDataTask(Task):
 
         Logger.debug("Queueing ExtractHealthDataTask")
         extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__tesseract)
-        # self.__resolver.queue(extract_health_data_task)
+        self.__resolver.queue(extract_health_data_task)
 
         Logger.debug("Queueing ExtractManaDataTask")
         extract_mana_data_task = ExtractManaDataTask(self.__widget, self.__tesseract)

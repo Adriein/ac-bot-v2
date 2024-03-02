@@ -35,7 +35,7 @@ class WalkTask(Task):
         real_current_position = context.get_current_waypoint()
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
-        print(walk_instructions)
+
         for instruction in walk_instructions:
             self.__player.move(instruction)
             time.sleep(0.4)
@@ -46,7 +46,6 @@ class WalkTask(Task):
         real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
 
         if real_current_position != destination:
-            print('failed to reach destination')
             self.success()
             return context
 
