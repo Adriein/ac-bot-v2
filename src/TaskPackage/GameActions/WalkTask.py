@@ -33,7 +33,8 @@ class WalkTask(Task):
         real_current_position = context.get_current_waypoint()
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
-
+        print(walk_instructions)
+        print(destination)
         for instruction in walk_instructions:
             self.__player.move(instruction)
             time.sleep(0.4)
