@@ -58,7 +58,7 @@ class CaveBot:
             self.__resolver.queue(location_task)
 
             # 8. Walk
-            walk_task = WalkTask(self.__game_map, player)
+            walk_task = WalkTask(self.__game_map, player, self.__monitor)
             self.__resolver.queue(walk_task)
 
             # 9. Resolve waypoint
