@@ -1,4 +1,3 @@
-from src.SharedPackage import Constants
 from .Creature import Creature
 from .Waypoint import Waypoint
 from datetime import datetime
@@ -31,7 +30,7 @@ class GameContext:
         self.__current_waypoint = None
         self.__current_floor = None
         self.__cave_route = None
-        self.__combat_stance = Constants.IDLE_COMBAT_STANCE
+        self.__combat_stance = None
 
     def set_health(self, health: int) -> None:
         self.__health = health
