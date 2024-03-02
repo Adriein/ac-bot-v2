@@ -137,7 +137,47 @@ class PyAutoGui:
     def __calculate_stat_widget_number_position(self, monitor_dimensions: tuple[int, int]) -> tuple[int, int]:
         [width, _] = monitor_dimensions
 
-        start_number = (width / Constants.REFERENCE_WINDOW_WIDTH) * Constants.REFERENCE_STAT_WIDGET_ANCHOR_TO_START_NUMBER
+        start_number = (
+                                   width / Constants.REFERENCE_WINDOW_WIDTH) * Constants.REFERENCE_STAT_WIDGET_ANCHOR_TO_START_NUMBER
         end_number = (width / Constants.REFERENCE_WINDOW_WIDTH) * Constants.REFERENCE_STAT_WIDGET_ANCHOR_TO_END_NUMBER
 
         return int(start_number), int(end_number)
+
+    def number(self, confidence: float, number_roi: np.array) -> int:
+        number_coincidence = [(0, 0)]
+
+        for number in range(10):
+            number_image = Cv2File.load_image(f'src/Wiki/Ui/Number/{number}.png')
+
+            match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
+
+            [_, max_coincidence, _, _] = cv2.minMaxLoc(match)
+
+            if self.__ensure_confidence_threshold(confidence, max_coincidence):
+                continue
+
+            if self.__is_not_better_match(number_coincidence, max_coincidence):
+                continue
+
+            number_coincidence.remove(number_coincidence[0])
+
+            number_coincidence.append((max_coincidence, number))
+
+        print(number_coincidence)
+        raise Exception
+        if not number_coincidence:
+            raise Exception
+
+        if self.__ensure_some_match(coincidence_found=number_coincidence[0][0]):
+            raise Exception
+
+        return number_coincidence[0][1]
+
+    def __ensure_confidence_threshold(self, client_provided_confidence: float, coincidence_found: float) -> bool:
+        return coincidence_found < client_provided_confidence
+
+    def __ensure_some_match(self, coincidence_found: float) -> bool:
+        return coincidence_found <= 0.5
+
+    def __is_not_better_match(self, number_coincidence: list[tuple[any, int]], coincidence_found: float) -> bool:
+        return number_coincidence[0][0] > coincidence_found
