@@ -4,6 +4,7 @@ from .TaskResolver import TaskResolver
 from .GameContext.ExtractGameContextDataTask import ExtractGameContextDataTask
 from .GameContext.Battle.ExtractBattleListDataTask import ExtractBattleListDataTask
 from .GameContext.Battle.ExtractAttackStatusBattleListTask import ExtractAttackStatusBattleListTask
+from .GameContext.Battle.ExtractCombatStanceTask import ExtractCombatStanceTask
 from .GameContext.ExtractGameContextDataTask import ExtractManaDataTask
 from .GameContext.ExtractGameContextDataTask import ExtractHealthDataTask
 

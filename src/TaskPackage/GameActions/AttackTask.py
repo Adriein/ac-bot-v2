@@ -1,7 +1,7 @@
 import numpy as np
 
 from src.GamePackage import Player
-from src.SharedPackage import GameContext
+from src.SharedPackage import GameContext, Constants
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
 
@@ -35,6 +35,9 @@ class AttackTask(Task):
         target = context.get_creatures_in_range()[0]
 
         self.__player.precision_attack(target)
+
+        if target.is_runner() and context.get_combat_stance() is not Constants.CHASE_COMBAT_STANCE:
+            self.__player.chase_opponent()
 
         context.set_is_attacking(True)
 

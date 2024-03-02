@@ -38,5 +38,8 @@ class Constants:
     MIN_MINUTES_WITHOUT_FOOD = 5
     MAX_MINUTES_WITHOUT_FOOD = 12
 
+    IDLE_COMBAT_STANCE = "IDLE"
+    CHASE_COMBAT_STANCE = "CHASE"
+
     # SPELLS
     LIGHT_HEALING = "exura infir ico"

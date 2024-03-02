@@ -1,3 +1,4 @@
+from . import Constants
 from .Creature import Creature
 from .Waypoint import Waypoint
 from datetime import datetime
@@ -30,6 +31,7 @@ class GameContext:
         self.__current_waypoint = None
         self.__current_floor = None
         self.__cave_route = None
+        self.__combat_stance = Constants.IDLE_COMBAT_STANCE
 
     def set_health(self, health: int) -> None:
         self.__health = health
@@ -104,4 +106,10 @@ class GameContext:
 
     def has_creatures_in_range(self) -> bool:
         return len(self.__creatures_in_range) > 0
+
+    def set_combat_stance(self, combat_stance: str) -> None:
+        self.__combat_stance = combat_stance
+
+    def get_combat_stance(self) -> str:
+        return self.__combat_stance
 

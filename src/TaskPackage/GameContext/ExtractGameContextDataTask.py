@@ -6,6 +6,7 @@ from src.OperatingSystemPackage import GlobalGameWidgetContainer
 
 from src.TaskPackage.GameContext.Battle.ExtractBattleListDataTask import ExtractBattleListDataTask
 from src.TaskPackage.GameContext.Battle.ExtractAttackStatusBattleListTask import ExtractAttackStatusBattleListTask
+from src.TaskPackage.GameContext.Battle.ExtractCombatStanceTask import ExtractCombatStanceTask
 from src.TaskPackage.GameContext.Health.ExtractHealthDataTask import ExtractHealthDataTask
 from src.TaskPackage.GameContext.Mana.ExtractManaDataTask import ExtractManaDataTask
 from src.TaskPackage.Task import Task
@@ -35,6 +36,10 @@ class ExtractGameContextDataTask(Task):
         Logger.debug("Queueing ExtractBattleListDataTask")
         extract_battle_list_data_task = ExtractBattleListDataTask(self.__widget)
         self.__resolver.queue(extract_battle_list_data_task)
+
+        Logger.debug("Queueing ExtractCombatStanceTask")
+        extract_combat_stance_task = ExtractCombatStanceTask(self.__widget)
+        self.__resolver.queue(extract_combat_stance_task)
 
         Logger.debug("Queueing ExtractHealthDataTask")
         extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__tesseract)

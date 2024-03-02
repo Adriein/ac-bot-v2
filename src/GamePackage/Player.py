@@ -58,3 +58,6 @@ class Player:
 
     def use_hand_stair(self, coordinates: Coordinate) -> None:
         self.__mouse.use_right_button(coordinates)
+
+    def chase_opponent(self) -> None:
+        self.__keyboard.press('g')

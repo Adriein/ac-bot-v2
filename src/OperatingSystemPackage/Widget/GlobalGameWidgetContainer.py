@@ -42,6 +42,9 @@ class GlobalGameWidgetContainer:
         Logger.info('Locating Floor Widget...')
         self.__floor_widget_region = self.__locate_floor_widget(initial_floor_lvl)
 
+        Logger.info('Locating Combat Stance Widget...')
+        self.__combat_stance_region = self.__locate_floor_widget(initial_floor_lvl)
+
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
 
@@ -62,6 +65,9 @@ class GlobalGameWidgetContainer:
 
     def looting_area(self) -> list[Coordinate]:
         return self.__looting_area_coordinates
+
+    def combat_stance_widget(self) -> ScreenRegion:
+        return self.__combat_stance_region
 
     def __create_looting_area_coordinates(self,) -> list[Coordinate]:
         [width, _] = self.__monitor_dimensions
@@ -155,6 +161,26 @@ class GlobalGameWidgetContainer:
         (x, y) = max_coordinates
 
         height, width = floor_widget_anchor.shape
+
+        start_y = y
+        end_y = y + height
+        start_x = x
+        end_x = x + width
+
+        return ScreenRegion(start_x, end_x, start_y, end_y)
+
+    def __locate_combat_stance_widget(self) -> ScreenRegion:
+        frame = cv2.cvtColor(self.__initial_setup_screenshot, cv2.COLOR_BGR2GRAY)
+
+        combat_stance_anchor = Cv2File.load_image(f'src/Wiki/Ui/Battle/combat_stance.png')
+
+        match = cv2.matchTemplate(frame, combat_stance_anchor, cv2.TM_CCOEFF_NORMED)
+
+        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+
+        (x, y) = max_coordinates
+
+        height, width = combat_stance_anchor.shape
 
         start_y = y
         end_y = y + height
