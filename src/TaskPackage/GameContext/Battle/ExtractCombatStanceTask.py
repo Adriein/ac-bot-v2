@@ -42,9 +42,9 @@ class ExtractCombatStanceTask(Task):
         return self.__completed
 
     def __is_chasing_opponent_activated(self, frame: np.array) -> bool:
-        (start_x, end_x, start_y, end_y) = self.__container.combat_stance_widget()
+        widget = self.__container.combat_stance_widget()
 
-        frame_roi = frame[start_y:end_y, start_x:end_x]
+        frame_roi = frame[widget.start_y:widget.end_y, widget.start_x:widget.end_x]
 
         hsv_image = cv2.cvtColor(frame_roi, cv2.COLOR_BGR2HSV)
 
