@@ -43,10 +43,7 @@ class WalkTask(Task):
         check_screenshot = self.__monitor.screenshot()
 
         current_floor = self.__game_map.which_floor_am_i(check_screenshot)
-        real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor)
-
-        print(destination)
-        print(real_current_position)
+        real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
 
         if real_current_position != destination:
             self.fail()
