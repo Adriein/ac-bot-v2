@@ -35,7 +35,7 @@ class CaveBot:
 
             # 2. auto healing
             healing_task = HealingTask(player)
-            self.__resolver.queue(healing_task)
+            # self.__resolver.queue(healing_task)
 
             # 3. auto attacking
             attack_task = AttackTask(player)
@@ -47,11 +47,11 @@ class CaveBot:
 
             # 5. waste mana
             spell_healing_task = SmartSpellHealingTask(player)
-            self.__resolver.queue(spell_healing_task)
+            # self.__resolver.queue(spell_healing_task)
 
             # 6. Eat food
             eat_task = EatTask(player)
-            self.__resolver.queue(eat_task)
+            # self.__resolver.queue(eat_task)
 
             self.__resolver.resolve(game_context, screenshot)
 

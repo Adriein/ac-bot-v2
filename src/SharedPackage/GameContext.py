@@ -84,6 +84,9 @@ class GameContext:
     def set_pending_loot(self, creature: Creature) -> None:
         self.__pending_loot.append(creature)
 
+    def reset_pending_loot(self) -> None:
+        self.__pending_loot = list()
+
     def get_pending_loot(self) -> list[Creature]:
         return self.__pending_loot
 
