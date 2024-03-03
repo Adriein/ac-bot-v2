@@ -7,4 +7,4 @@ class NumberCoincidence:
         self.x_coordinate = x_coordinate
 
     def __str__(self):
-        return f'Tile(number={self.number}, matching_coincidence={self.matching_coincidence}, x_coordinate={self.x_coordinate})'
+        return f'NumberCoincidence(number={self.number}, matching_coincidence={self.matching_coincidence}, x_coordinate={self.x_coordinate})'
