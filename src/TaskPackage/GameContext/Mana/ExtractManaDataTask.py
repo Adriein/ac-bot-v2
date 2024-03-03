@@ -32,7 +32,7 @@ class ExtractManaDataTask(Task):
             current_mana = self.__pyautogui.number(mana_roi)
 
             # current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
-
+            print(current_mana)
             context.set_mana(current_mana)
 
             Logger.debug("Updated context")

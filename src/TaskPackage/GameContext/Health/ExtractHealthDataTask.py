@@ -34,7 +34,7 @@ class ExtractHealthDataTask(Task):
             # current_health = int(self.__tesseract.number_img_to_string(hp_roi))
 
             context.set_health(current_health)
-
+            print(current_health)
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
 
