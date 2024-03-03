@@ -37,7 +37,7 @@ class TibiaAcBot:
             game_context = GameContext()
 
             if Constants.TRAIN_MODE not in os.environ:
-                script = Script.load('src/Wiki/Script/Thais/test.json')
+                script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
 
                 game_context.set_script_enemies(script.creatures())
                 game_context.set_cave_route(script.waypoints())
