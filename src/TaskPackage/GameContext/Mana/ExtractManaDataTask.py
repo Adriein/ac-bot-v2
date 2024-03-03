@@ -5,17 +5,17 @@ from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.VendorPackage import TesseractOcr
+from src.VendorPackage import PyAutoGui
 
 
 class ExtractManaDataTask(Task):
     def __str__(self) -> str:
         return f'ExtractManaDataTask'
 
-    def __init__(self, widget: GlobalGameWidgetContainer, tesseract: TesseractOcr):
+    def __init__(self, widget: GlobalGameWidgetContainer, pyautogui: PyAutoGui):
         super().__init__()
         self.__widget = widget
-        self.__tesseract = tesseract
+        self.__pyautogui = pyautogui
         self.__succeed = False
         self.__completed = False
 
@@ -29,7 +29,9 @@ class ExtractManaDataTask(Task):
 
             mana_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-            current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
+            current_mana = self.__pyautogui.number(mana_roi)
+
+            # current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
 
             context.set_mana(current_mana)
 

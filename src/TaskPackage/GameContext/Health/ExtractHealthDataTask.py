@@ -30,11 +30,10 @@ class ExtractHealthDataTask(Task):
 
             hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-            PyAutoGui.debug_image(hp_roi)
-            self.__pyautogui.number(hp_roi)
+            current_health = self.__pyautogui.number(hp_roi)
             # current_health = int(self.__tesseract.number_img_to_string(hp_roi))
 
-            context.set_health(0)
+            context.set_health(current_health)
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
