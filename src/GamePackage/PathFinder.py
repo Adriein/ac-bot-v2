@@ -14,6 +14,11 @@ from src.VendorPackage import Cv2File
 class PathFinder:
     FALSE_NON_WALKABLE_POSITIVES = [
         "32439, 32308, 8",
+        "32435, 32295, 8"
+    ]
+
+    A = [
+        "32439, 32308, 8",
         "32435, 32295, 8",
         "32423, 32303, 8",
         "32429, 32306, 8",
