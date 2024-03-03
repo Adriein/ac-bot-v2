@@ -127,6 +127,7 @@ class PathFinder:
                         open_set.append(neighbor_map_tile)
 
     def __is_not_walkable_waypoint(self, current: MapTile) -> bool:
+        print('------------------------------------------------------------')
         # Define the lower and upper bounds of the yellow color range in BGR format
         lower_yellow = np.array([0, 100, 100], dtype=np.uint8)
         upper_yellow = np.array([100, 255, 255], dtype=np.uint8)
