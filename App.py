@@ -37,13 +37,12 @@ class TibiaAcBot:
             game_context = GameContext()
 
             if Constants.TRAIN_MODE not in os.environ:
-                script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
 
-                game_context.set_script_enemies(script.creatures())
-                game_context.set_cave_route(script.waypoints())
+                game_context.set_script_enemies(self.__script.creatures())
+                game_context.set_cave_route(self.__script.waypoints())
 
-                pathfinder = PathFinder(script)
-                game_map = Map(self.__global_widget_container, script, pathfinder)
+                pathfinder = PathFinder(self.__script)
+                game_map = Map(self.__global_widget_container, self.__script, pathfinder)
 
                 cavebot = CaveBot(
                     self.__monitor,
@@ -95,7 +94,7 @@ class TibiaAcBot:
         self.__mouse = Mouse(self.__kernel)
 
         Logger.info('Loading Script...')
-        self.__script = Script.load('src/Wiki/Script/Thais/test.json')
+        self.__script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
 
         initial_floor_lvl = list(self.__script.floors())[0]
 
