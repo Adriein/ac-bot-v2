@@ -126,7 +126,11 @@ class PathFinder:
         lower_yellow = np.array([0, 100, 100], dtype=np.uint8)
         upper_yellow = np.array([100, 255, 255], dtype=np.uint8)
 
-        for waypoint in self.FALSE_NON_WALKABLE_POSITIVES:
+        for false_positive in self.FALSE_NON_WALKABLE_POSITIVES:
+            x, y, z = false_positive.split(',')
+
+            waypoint = Waypoint(x, y, z, "false")
+
             if waypoint == current.waypoint:
                 return False
 
