@@ -167,5 +167,6 @@ class PyAutoGui:
             str_numbers = ''.join(map(str, numbers))
 
             return int(str_numbers)
-        except Exception:
+        except Exception as e:
+            print(e)
             return 0
