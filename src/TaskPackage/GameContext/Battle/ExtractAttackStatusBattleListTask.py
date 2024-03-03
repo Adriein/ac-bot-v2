@@ -41,7 +41,7 @@ class ExtractAttackStatusBattleListTask(Task):
 
     def __assert_creature_has_been_killed(self, previous_context: GameContext, actual_context: GameContext) -> None:
         if previous_context.get_is_attacking() and not actual_context.get_is_attacking():
-            actual_context.set_pending_loot(True)
+            actual_context.set_pending_loot(previous_context.get_attacking_creature())
 
             Logger.debug("Updated context has a creature pending to loot")
             Logger.debug(actual_context, inspect_class=True)

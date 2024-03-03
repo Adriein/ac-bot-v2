@@ -24,8 +24,17 @@ class LootTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if not context.get_pending_loot() or not context.get_attacking_creature().has_to_loot():
-            context.set_pending_loot(False)
+        if not context.get_pending_loot():
+            self.success()
+
+            return context
+
+        running_creature_killed = False
+
+        for dead_creature in context.get_pending_loot():
+            running_creature_killed = dead_creature.is_runner()
+
+        if not running_creature_killed and context.get_creatures_in_range():
             self.success()
 
             return context
