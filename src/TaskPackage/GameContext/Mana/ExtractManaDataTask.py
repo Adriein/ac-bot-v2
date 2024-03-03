@@ -31,11 +31,11 @@ class ExtractManaDataTask(Task):
             widget = self.__widget.mana_widget()
 
             mana_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
-            PyAutoGui.debug_image(mana_roi)
+
             current_mana = self.__pyautogui.number(mana_roi)
 
             # current_mana = int(self.__tesseract.number_img_to_string(mana_roi))
-            print(current_mana)
+
             context.set_mana(current_mana)
 
             Logger.debug("Updated context")

@@ -6,6 +6,7 @@ import math
 from .NumberCoincidence import NumberCoincidence
 from src.SharedPackage import ScreenRegion, Constants
 from src.VendorPackage.Cv2File import Cv2File
+from src.UtilPackage import MapCollection
 
 
 class PyAutoGui:
@@ -26,7 +27,13 @@ class PyAutoGui:
         cv2.destroyAllWindows()
 
     def __init__(self):
-        pass
+        self.IN_MEMORY_NUMBER_PNG_MAP = MapCollection()
+
+        for number in range(10):
+            self.IN_MEMORY_NUMBER_PNG_MAP.set(
+                number,
+                Cv2File.load_image(f'src/Wiki/Ui/Number/{number}.png')
+            )
 
     def locate_battle_list_widget(self, frame: np.ndarray, monitor_dimensions: tuple[int, int]) -> ScreenRegion:
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -149,7 +156,7 @@ class PyAutoGui:
             number_coincidence: list[NumberCoincidence] = []
 
             for number in range(10):
-                number_image = Cv2File.load_image(f'src/Wiki/Ui/Number/{number}.png')
+                number_image = self.IN_MEMORY_NUMBER_PNG_MAP.get(number)
 
                 match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
 
@@ -167,6 +174,6 @@ class PyAutoGui:
             str_numbers = ''.join(map(str, numbers))
 
             return int(str_numbers)
-        except Exception as e:
-            print(e)
+
+        except Exception:
             return 0

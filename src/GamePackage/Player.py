@@ -44,7 +44,7 @@ class Player:
 
     def potion_heal(self) -> None:
         Logger.info('Potion healing')
-        self.__keyboard.press('x')
+        self.__keyboard.press('y')
 
     def config(self) -> dict:
         return self.__config
