@@ -41,5 +41,7 @@ class Constants:
     IDLE_COMBAT_STANCE = "IDLE"
     CHASE_COMBAT_STANCE = "CHASE"
 
+    POSSIBLE_LOOT_DIRECTIONS = [True, False]
+
     # SPELLS
     LIGHT_HEALING = "exura infir ico"

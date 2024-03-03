@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 from src.GamePackage import Player
-from src.SharedPackage import GameContext, Coordinate
+from src.SharedPackage import GameContext, Coordinate, Constants
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
@@ -55,6 +55,26 @@ class LootTask(Task):
     def __create_looting_area(self) -> list[Coordinate]:
         looting_points = self.__widget.looting_area()
 
-        random.shuffle(looting_points)
+        looting_points_count = len(looting_points)
 
-        return looting_points
+        random_index = random.randint(0, looting_points_count - 1)
+
+        loot_directions = Constants.POSSIBLE_LOOT_DIRECTIONS
+
+        random.shuffle(loot_directions)
+
+        [direction, _] = loot_directions
+
+        # [0,1,2,3,4,5,6,7]
+        # [1,0,7,6,5,4,3,2]
+
+        left_part = looting_points[0:random_index]  # [0,1]
+        right_part = looting_points[random_index:looting_points_count]  # [2,3,4,5,6,7]
+
+        if direction:
+            left_part.reverse()
+            right_part.reverse()
+
+            return left_part + right_part
+
+        return right_part + left_part
