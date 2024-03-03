@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 
 from src.LoggerPackage import Logger
 from src.SharedPackage import GameContext
@@ -24,6 +25,8 @@ class ExtractManaDataTask(Task):
             Logger.debug("Executing ExtractManaDataTask")
             Logger.debug("Received context")
             Logger.debug(context, inspect_class=True)
+
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             widget = self.__widget.mana_widget()
 

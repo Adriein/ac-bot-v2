@@ -21,10 +21,11 @@ class ExtractHealthDataTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         try:
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             Logger.debug("Executing ExtractHealthDataTask")
             Logger.debug("Received context")
             Logger.debug(context, inspect_class=True)
+
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
             widget = self.__widget.health_widget()
 
