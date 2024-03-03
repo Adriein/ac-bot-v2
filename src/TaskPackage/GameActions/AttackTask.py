@@ -21,7 +21,7 @@ class AttackTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if context.get_is_attacking() or context.get_pending_loot():
+        if context.get_is_attacking() or not context.has_creatures_in_range():
             self.success()
 
             return context
