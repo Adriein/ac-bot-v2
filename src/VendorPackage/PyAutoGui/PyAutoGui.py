@@ -139,27 +139,33 @@ class PyAutoGui:
         [width, _] = monitor_dimensions
 
         start_number = (
-                                   width / Constants.REFERENCE_WINDOW_WIDTH) * Constants.REFERENCE_STAT_WIDGET_ANCHOR_TO_START_NUMBER
+                               width / Constants.REFERENCE_WINDOW_WIDTH) * Constants.REFERENCE_STAT_WIDGET_ANCHOR_TO_START_NUMBER
         end_number = (width / Constants.REFERENCE_WINDOW_WIDTH) * Constants.REFERENCE_STAT_WIDGET_ANCHOR_TO_END_NUMBER
 
         return int(start_number), int(end_number)
 
     def number(self, number_roi: np.array) -> int:
-        number_coincidence: list[NumberCoincidence] = []
+        try:
+            number_coincidence: list[NumberCoincidence] = []
 
-        for number in range(10):
-            number_image = Cv2File.load_image(f'src/Wiki/Ui/Number/{number}.png')
+            for number in range(10):
+                number_image = Cv2File.load_image(f'src/Wiki/Ui/Number/{number}.png')
 
-            match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
+                match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
 
-            [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
+                [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
 
-            (x, y) = max_coordinates
+                (x, y) = max_coordinates
 
-            print(NumberCoincidence(number, max_coincidence, x))
-            number_coincidence.append(NumberCoincidence(number, max_coincidence, x))
+                if max_coincidence >= NumberCoincidence.MIN_CONFIDENCE:
+                    number_coincidence.append(NumberCoincidence(number, max_coincidence, x))
 
-        print(number_coincidence)
-        raise Exception
+            number_coincidence.sort(key=lambda n: n.x_coordinate)
 
+            numbers = [item.number for item in number_coincidence]
 
+            str_numbers = ''.join(map(str, numbers))
+
+            return int(str_numbers)
+        except Exception:
+            return 0
