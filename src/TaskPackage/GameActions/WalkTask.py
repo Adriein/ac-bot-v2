@@ -37,8 +37,11 @@ class WalkTask(Task):
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
 
         if not walk_instructions and destination != real_current_position:
+            print("ERROR NO PATH FOUND")
             print(real_current_position)
             print(destination)
+
+            raise Exception
             self.fail()
             return context
 
