@@ -21,7 +21,7 @@ class HealingTask(Task):
         Logger.debug("Executing HealingTask")
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
-
+        print(context.get_health())
         # pending to inject the script and do it with the script config
         if context.get_health() <= 50:
             self.__player.potion_heal()
