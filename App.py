@@ -37,7 +37,6 @@ class TibiaAcBot:
             game_context = GameContext()
 
             if Constants.TRAIN_MODE not in os.environ:
-
                 game_context.set_script_enemies(self.__script.creatures())
                 game_context.set_cave_route(self.__script.waypoints())
 

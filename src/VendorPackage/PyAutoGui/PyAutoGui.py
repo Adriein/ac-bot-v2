@@ -154,8 +154,10 @@ class PyAutoGui:
 
             [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
 
-            print(NumberCoincidence(number, max_coincidence, max_coordinates))
-            number_coincidence.append(NumberCoincidence(number, max_coincidence, max_coordinates))
+            (x, y) = max_coordinates
+
+            print(NumberCoincidence(number, max_coincidence, x))
+            number_coincidence.append(NumberCoincidence(number, max_coincidence, x))
 
         print(number_coincidence)
         raise Exception
