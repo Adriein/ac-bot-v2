@@ -135,9 +135,10 @@ class PathFinder:
             x, y, z = false_positive.split(',')
 
             waypoint = Waypoint(x, y, z, "false")
-            print(waypoint)
-            print(current.waypoint)
+
             if waypoint == current.waypoint:
+                print(waypoint)
+                print(current.waypoint)
                 return False
 
         pixel = current.waypoint.to_coordinate()
