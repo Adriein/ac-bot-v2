@@ -37,20 +37,15 @@ class ResolveWaypointActionTask(Task):
             self.success()
             return context
 
-        if current_waypoint.x == 32418 and current_waypoint.y == 32237 and current_waypoint.z == 7:
-            print(current_waypoint.type)
-            print(current_waypoint.type is Waypoint.STAIR_UP_TYPE)
-            raise Exception
-
         game_window = self.__widget.game_window()
         if current_waypoint.is_floor_change_type():
-            if current_waypoint.type is Waypoint.HOLE_UP_TYPE:
+            if current_waypoint.type == Waypoint.HOLE_UP_TYPE:
                 self.__player.rope(Coordinate.from_screen_region(game_window))
 
                 self.success()
                 return context
 
-            if current_waypoint.type is Waypoint.HAND_STAIR_UP_TYPE:
+            if current_waypoint.type == Waypoint.HAND_STAIR_UP_TYPE:
                 self.__player.use_hand_stair(Coordinate.from_screen_region(game_window))
 
                 self.success()
