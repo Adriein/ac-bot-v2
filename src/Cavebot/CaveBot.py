@@ -51,7 +51,7 @@ class CaveBot:
 
             # 6. Eat food
             eat_task = EatTask(player)
-            # self.__resolver.queue(eat_task)
+            self.__resolver.queue(eat_task)
 
             self.__resolver.resolve(game_context, screenshot)
 

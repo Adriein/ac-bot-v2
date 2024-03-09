@@ -41,7 +41,6 @@ class WalkTask(Task):
             print(real_current_position)
             print(destination)
 
-            raise Exception
             self.fail()
             return context
 
@@ -52,11 +51,22 @@ class WalkTask(Task):
         check_screenshot = self.__monitor.screenshot()
 
         current_floor = self.__game_map.which_floor_am_i(check_screenshot)
-        real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
+        new_real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
 
-        if real_current_position != destination:
-            self.success()
-            return context
+        if new_real_current_position != destination:
+            if not destination.is_floor_change_type():
+                self.success()
+                return context
+
+            delta = real_current_position.z - current_floor
+
+            if destination.is_auto_floor_up() and delta != 1:
+                self.success()
+                return context
+
+            if destination.is_auto_floor_down() and delta != -1:
+                self.success()
+                return context
 
         if route.peak_next() is None:
             route.reset()

@@ -14,11 +14,6 @@ from src.VendorPackage import Cv2File
 class PathFinder:
     FALSE_NON_WALKABLE_POSITIVES = [
         "32439, 32308, 8",
-        "32435, 32295, 8"
-    ]
-
-    A = [
-        "32439, 32308, 8",
         "32435, 32295, 8",
         "32423, 32303, 8",
         "32429, 32306, 8",
@@ -127,7 +122,6 @@ class PathFinder:
                         open_set.append(neighbor_map_tile)
 
     def __is_not_walkable_waypoint(self, current: MapTile) -> bool:
-        print('------------------------------------------------------------')
         # Define the lower and upper bounds of the yellow color range in BGR format
         lower_yellow = np.array([0, 100, 100], dtype=np.uint8)
         upper_yellow = np.array([100, 255, 255], dtype=np.uint8)
@@ -136,11 +130,7 @@ class PathFinder:
             x, y, z = false_positive.replace(" ", "").split(',')
 
             waypoint = Waypoint(int(x), int(y), int(z), "false")
-            if current.waypoint.x == 32435 and current.waypoint.y == 32295:
-                print('EVALUATE EQUALITY')
-                print(waypoint)
-                print(current.waypoint)
-                print(waypoint == current.waypoint)
+
             if waypoint == current.waypoint:
                 return False
 
