@@ -17,3 +17,6 @@ class MapCollection:
 
     def set(self, key: str | int, value: Any) -> None:
         self.dic[key] = value
+
+    def __str__(self):
+        return str(self.dic)
