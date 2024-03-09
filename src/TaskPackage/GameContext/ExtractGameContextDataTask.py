@@ -32,15 +32,15 @@ class ExtractGameContextDataTask(Task):
 
         Logger.debug("Queueing ExtractAttackStatusBattleListTask")
         extract_attack_status_battle_list_task = ExtractAttackStatusBattleListTask(self.__widget)
-        self.__resolver.queue(extract_attack_status_battle_list_task)
+        # self.__resolver.queue(extract_attack_status_battle_list_task)
 
         Logger.debug("Queueing ExtractBattleListDataTask")
         extract_battle_list_data_task = ExtractBattleListDataTask(self.__widget)
-        self.__resolver.queue(extract_battle_list_data_task)
+        # self.__resolver.queue(extract_battle_list_data_task)
 
         Logger.debug("Queueing ExtractCombatStanceTask")
         extract_combat_stance_task = ExtractCombatStanceTask(self.__widget)
-        self.__resolver.queue(extract_combat_stance_task)
+        # self.__resolver.queue(extract_combat_stance_task)
 
         Logger.debug("Queueing ExtractHealthDataTask")
         extract_health_data_task = ExtractHealthDataTask(self.__widget, self.__pyautogui)
