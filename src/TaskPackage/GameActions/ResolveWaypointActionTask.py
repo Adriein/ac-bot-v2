@@ -31,11 +31,12 @@ class ResolveWaypointActionTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if context.has_creatures_in_range():
+        current_waypoint = context.get_current_waypoint()
+
+        if context.has_creatures_in_range() and not current_waypoint.is_floor_change_type():
             self.success()
             return context
 
-        current_waypoint = context.get_current_waypoint()
         game_window = self.__widget.game_window()
 
         if current_waypoint.is_floor_change_type():
