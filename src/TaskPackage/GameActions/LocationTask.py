@@ -32,26 +32,11 @@ class LocationTask(Task):
             self.success()
             return context
 
-        waypoint_type = context.get_current_waypoint().type
-
-        if waypoint_type in self.FLOOR_CHANGE_TYPE:
-            current_floor = self.__game_map.which_floor_am_i(frame)
-
-            map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), current_floor)
-
-            context.set_current_waypoint(map_position.waypoint)
-            context.set_current_floor(current_floor)
-
-            Logger.debug("Updated context")
-            Logger.debug(context, inspect_class=True)
-
-            self.success()
-            return context
-
         current_floor = self.__game_map.which_floor_am_i(frame)
         map_position = self.__game_map.where_am_i(frame, context.get_current_waypoint(), context.get_current_floor())
 
         context.set_current_waypoint(map_position.waypoint)
+        context.set_current_floor(current_floor)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
