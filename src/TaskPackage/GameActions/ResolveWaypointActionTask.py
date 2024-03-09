@@ -37,7 +37,7 @@ class ResolveWaypointActionTask(Task):
             self.success()
             return context
 
-        if current_waypoint.x == 32423 and current_waypoint.y == 32238 and current_waypoint.z == 7:
+        if current_waypoint.x == 32418 and current_waypoint.y == 32237 and current_waypoint.z == 7:
             print(current_waypoint.type)
             print(current_waypoint.type == Waypoint.STAIR_UP_TYPE)
             raise Exception
