@@ -42,7 +42,7 @@ class ResolveWaypointActionTask(Task):
 
         if current_waypoint.x == 32430 and current_waypoint.y == 32302 and current_waypoint.z == 9:
             print(current_waypoint.type)
-            print(current_waypoint.type is Waypoint.HOLE_UP_TYPE)
+            print(current_waypoint.type == Waypoint.HOLE_UP_TYPE)
             raise Exception
 
         game_window = self.__widget.game_window()
