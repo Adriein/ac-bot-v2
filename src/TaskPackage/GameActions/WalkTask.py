@@ -55,16 +55,19 @@ class WalkTask(Task):
 
         if new_real_current_position != destination:
             if not destination.is_floor_change_type():
+                context.set_current_waypoint(new_real_current_position)
                 self.success()
                 return context
 
             delta = real_current_position.z - current_floor
 
             if destination.is_auto_floor_up() and delta != 1:
+                context.set_current_waypoint(new_real_current_position)
                 self.success()
                 return context
 
             if destination.is_auto_floor_down() and delta != -1:
+                context.set_current_waypoint(new_real_current_position)
                 self.success()
                 return context
 
@@ -73,7 +76,7 @@ class WalkTask(Task):
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
-            context.set_current_waypoint(destination)
+            context.set_current_waypoint(new_real_current_position)
 
             self.success()
             return context
@@ -82,7 +85,7 @@ class WalkTask(Task):
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
-        context.set_current_waypoint(destination)
+        context.set_current_waypoint(new_real_current_position)
 
         self.success()
         return context
