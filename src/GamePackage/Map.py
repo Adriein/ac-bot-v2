@@ -38,6 +38,8 @@ class Map:
                 floor
             )
 
+        print('self.IN_MEMORY_FLOOR_LVL_MAP')
+        print(self.IN_MEMORY_FLOOR_LVL_MAP)
     def where_am_i(self, frame: np.ndarray, last_known_waypoint: Waypoint, current_floor: int) -> MapTile:
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -79,7 +81,6 @@ class Map:
         return MapTile.from_pixel(Coordinate(start_x, start_y), current_floor)
 
     def which_floor_am_i(self, frame: np.array) -> int:
-        print(self.IN_MEMORY_FLOOR_LVL_MAP)
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         floor_lvl_widget = self.__widget.floor_level_widget()
