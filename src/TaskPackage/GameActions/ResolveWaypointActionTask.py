@@ -37,12 +37,9 @@ class ResolveWaypointActionTask(Task):
             self.success()
             return context
 
-        print('----------------------------------------')
-        print(current_waypoint)
-
-        if current_waypoint.x == 32430 and current_waypoint.y == 32302 and current_waypoint.z == 9:
+        if current_waypoint.x == 32423 and current_waypoint.y == 32238 and current_waypoint.z == 7:
             print(current_waypoint.type)
-            print(current_waypoint.type == Waypoint.HOLE_UP_TYPE)
+            print(current_waypoint.type == Waypoint.STAIR_UP_TYPE)
             raise Exception
 
         game_window = self.__widget.game_window()
