@@ -22,7 +22,6 @@ class Map:
         self.IN_MEMORY_FLOOR_LVL_MAP = MapCollection()
 
         for floor in script.floors():
-            print(floor)
             self.IN_MEMORY_FLOOR_PNG_MAP.set(
                 floor,
                 Cv2File.load_image(f'src/Wiki/Ui/Map/Floors/floor-{floor}.png')
