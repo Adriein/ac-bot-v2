@@ -47,9 +47,6 @@ class ResolveWaypointActionTask(Task):
                 return context
 
             if current_waypoint.type == Waypoint.HAND_STAIR_UP_TYPE:
-                print(current_waypoint.type)
-                print(current_waypoint.type == Waypoint.STAIR_UP_TYPE)
-                raise Exception
                 self.__player.use_hand_stair(Coordinate.from_screen_region(game_window))
 
                 self.success()
