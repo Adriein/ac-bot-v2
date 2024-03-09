@@ -41,6 +41,7 @@ class ResolveWaypointActionTask(Task):
         game_window = self.__widget.game_window()
         if current_waypoint.is_floor_change_type():
             if current_waypoint.type is Waypoint.HOLE_UP_TYPE:
+                print('rope up')
                 self.__player.rope(Coordinate.from_screen_region(game_window))
 
                 self.success()
