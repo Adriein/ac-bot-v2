@@ -133,7 +133,7 @@ class PathFinder:
         upper_yellow = np.array([100, 255, 255], dtype=np.uint8)
 
         for false_positive in self.FALSE_NON_WALKABLE_POSITIVES:
-            x, y, z = false_positive.split(',')
+            x, y, z = false_positive.replace(" ", "").split(',')
 
             waypoint = Waypoint(x, y, z, "false")
             if current.waypoint.x == 32435 and current.waypoint.y == 32295:
