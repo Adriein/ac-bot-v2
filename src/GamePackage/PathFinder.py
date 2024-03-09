@@ -135,7 +135,7 @@ class PathFinder:
         for false_positive in self.FALSE_NON_WALKABLE_POSITIVES:
             x, y, z = false_positive.replace(" ", "").split(',')
 
-            waypoint = Waypoint(x, y, z, "false")
+            waypoint = Waypoint(int(x), int(y), int(z), "false")
             if current.waypoint.x == 32435 and current.waypoint.y == 32295:
                 print('EVALUATE EQUALITY')
                 print(waypoint)
