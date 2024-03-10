@@ -83,3 +83,6 @@ class Waypoint:
 
     def is_in_same_floor(self, other: 'Waypoint') -> bool:
         return self.z == other.z
+
+    def calculate_distance(self, other: 'Waypoint') -> float:
+        return ((other.x - self.x) ** 2 + (other.y - self.y) ** 2) ** 0.5

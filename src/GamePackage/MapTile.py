@@ -94,10 +94,7 @@ class MapTile:
                 continue
 
     def calculate_cost(self, initial: Waypoint, destination: Waypoint):
-        self.h_score = self.__calculate_distance_between_two_points(destination)
-        self.g_score = self.__calculate_distance_between_two_points(initial)
+        self.h_score = self.waypoint.calculate_distance(destination)
+        self.g_score = self.waypoint.calculate_distance(initial)
 
         self.f_score = self.h_score + self.g_score
-
-    def __calculate_distance_between_two_points(self, destination: Waypoint) -> float:
-        return ((destination.x - self.waypoint.x) ** 2 + (destination.y - self.waypoint.y) ** 2) ** 0.5

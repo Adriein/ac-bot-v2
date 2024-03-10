@@ -27,6 +27,7 @@ class WalkTask(Task):
 
         if context.has_creatures_in_range():
             self.success()
+
             return context
 
         route = context.get_cave_route()
@@ -37,11 +38,13 @@ class WalkTask(Task):
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
 
         if not walk_instructions and destination != real_current_position:
-            print("ERROR NO PATH FOUND")
-            print(real_current_position)
-            print(destination)
+            Logger.info("No path found")
+            Logger.info("Recalculating pointer...")
 
-            self.fail()
+            route.move_pointer_back()
+
+            self.success()
+
             return context
 
         for instruction in walk_instructions:
@@ -56,17 +59,20 @@ class WalkTask(Task):
 
         if new_real_current_position != destination:
             if not destination.is_floor_change_type():
-                self.success()
+                self.fail()
+
                 return context
 
-            delta = real_current_position.z - current_floor
+            delta = new_real_current_position.z - current_floor
 
             if destination.is_auto_floor_up() and delta != 1:
-                self.success()
+                self.fail()
+
                 return context
 
             if destination.is_auto_floor_down() and delta != -1:
-                self.success()
+                self.fail()
+
                 return context
 
         if route.peak_next() is None:
