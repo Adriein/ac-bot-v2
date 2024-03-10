@@ -73,11 +73,6 @@ class ExtractAttackStatusBattleListTask(Task):
         [_, max_val, _, _] = cv2.minMaxLoc(result)
 
         if max_val >= 0.4:
-            context.set_is_attacking(True)
-
-            Logger.debug("Updated context is attacking")
-            Logger.debug(context, inspect_class=True)
-
             return
 
         context.set_is_attacking(False)
