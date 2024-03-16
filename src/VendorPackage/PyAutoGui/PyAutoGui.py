@@ -160,11 +160,9 @@ class PyAutoGui:
 
                 match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
 
-                locations = np.where(match >= NumberCoincidence.MIN_CONFIDENCE)
+                (y, x) = np.where(match >= NumberCoincidence.MIN_CONFIDENCE)
 
-                if len(locations) > 0:
-                    print(locations[0])
-                    print(locations[1])
+                print(x)
 
                 [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
 
