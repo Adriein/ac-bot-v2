@@ -63,16 +63,16 @@ class WalkTask(Task):
 
                 return context
 
-            delta = new_real_current_position.z - current_floor
+            delta = new_real_current_position.z - destination.z
 
             print(delta)
 
-            if destination.is_auto_floor_up() and delta != 1:
+            if destination.is_auto_floor_up() and delta != -1:
                 self.fail()
 
                 return context
 
-            if destination.is_auto_floor_down() and delta != -1:
+            if destination.is_auto_floor_down() and delta != 1:
                 self.fail()
                 raise Exception
                 return context
