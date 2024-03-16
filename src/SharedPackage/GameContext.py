@@ -32,7 +32,7 @@ class GameContext:
         self.__cave_route = None
         self.__combat_stance = None
         self.__attacking_creature = None
-        self.__start_attacking = None
+        self.__start_attacking = Time.now()
 
     def set_health(self, health: int) -> None:
         self.__health = health
