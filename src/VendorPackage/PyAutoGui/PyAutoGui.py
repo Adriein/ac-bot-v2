@@ -174,7 +174,7 @@ class PyAutoGui:
             number_coincidence.sort(key=lambda n: n.x_coordinate)
 
             numbers = [item.number for item in number_coincidence]
-            print(numbers)
+
             str_numbers = ''.join(map(str, numbers))
 
             return int(str_numbers)
