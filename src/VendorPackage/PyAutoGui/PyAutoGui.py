@@ -162,7 +162,9 @@ class PyAutoGui:
 
                 locations = np.where(match >= NumberCoincidence.MIN_CONFIDENCE)
 
-                print(locations)
+                if len(locations) > 0:
+                    print(locations[0])
+                    print(locations[1])
 
                 [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
 
