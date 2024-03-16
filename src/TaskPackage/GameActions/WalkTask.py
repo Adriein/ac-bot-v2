@@ -54,9 +54,9 @@ class WalkTask(Task):
         check_screenshot = self.__monitor.screenshot()
 
         current_floor = self.__game_map.which_floor_am_i(check_screenshot)
-
+        print(current_floor)
         new_real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
-
+        print(current_floor)
         if new_real_current_position != destination:
             if not destination.is_floor_change_type():
                 self.fail()
@@ -74,7 +74,7 @@ class WalkTask(Task):
 
             if destination.is_auto_floor_down() and delta != -1:
                 self.fail()
-
+                raise Exception
                 return context
 
         if route.peak_next() is None:
