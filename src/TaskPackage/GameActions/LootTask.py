@@ -41,8 +41,7 @@ class LootTask(Task):
 
         looting_coordinates = self.__create_looting_area()
 
-        for coordinate in looting_coordinates:
-            self.__player.loot(coordinate)
+        self.__player.loot(looting_coordinates)
 
         context.reset_pending_loot()
 
