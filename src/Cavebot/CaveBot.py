@@ -39,11 +39,11 @@ class CaveBot:
 
             # 3. auto attacking
             attack_task = AttackTask(player)
-            self.__resolver.queue(attack_task)
+            # self.__resolver.queue(attack_task)
 
             # 4. auto looting
             loot_task = LootTask(player, self.__widget)
-            self.__resolver.queue(loot_task)
+            # self.__resolver.queue(loot_task)
 
             # 5. waste mana
             spell_healing_task = SmartSpellHealingTask(player)
@@ -51,20 +51,20 @@ class CaveBot:
 
             # 6. Eat food
             eat_task = EatTask(player)
-            self.__resolver.queue(eat_task)
+            # self.__resolver.queue(eat_task)
 
             self.__resolver.resolve(game_context, screenshot)
 
             # 7. Locate player position
             location_task = LocationTask(self.__game_map)
-            self.__resolver.queue(location_task)
+            # self.__resolver.queue(location_task)
 
             # 8. Walk
             walk_task = WalkTask(self.__game_map, player, self.__monitor)
-            self.__resolver.queue(walk_task)
+            # self.__resolver.queue(walk_task)
 
             # 9. Resolve waypoint
             resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
-            self.__resolver.queue(resolve_waypoint_task)
+            # self.__resolver.queue(resolve_waypoint_task)
 
             self.__resolver.resolve(game_context, screenshot)
