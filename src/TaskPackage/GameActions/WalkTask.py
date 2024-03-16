@@ -37,16 +37,6 @@ class WalkTask(Task):
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
 
-        if not walk_instructions and destination != real_current_position:
-            Logger.info("No path found")
-            Logger.info("Recalculating pointer...")
-
-            route.move_pointer_back()
-
-            self.success()
-
-            return context
-
         for instruction in walk_instructions:
             self.__player.move(instruction)
             time.sleep(0.4)
@@ -54,9 +44,9 @@ class WalkTask(Task):
         check_screenshot = self.__monitor.screenshot()
 
         current_floor = self.__game_map.which_floor_am_i(check_screenshot)
-        print(current_floor)
+
         new_real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
-        print(current_floor)
+
         if new_real_current_position != destination:
             if not destination.is_floor_change_type():
                 self.fail()
@@ -65,8 +55,6 @@ class WalkTask(Task):
 
             delta = new_real_current_position.z - destination.z
 
-            print(delta)
-
             if destination.is_auto_floor_up() and delta != -1:
                 self.fail()
 
@@ -74,7 +62,7 @@ class WalkTask(Task):
 
             if destination.is_auto_floor_down() and delta != 1:
                 self.fail()
-                raise Exception
+
                 return context
 
         if route.peak_next() is None:
