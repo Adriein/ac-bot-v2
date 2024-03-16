@@ -33,7 +33,7 @@ class ExtractHealthDataTask(Task):
 
             current_health = self.__pyautogui.number(hp_roi)
             # current_health = int(self.__tesseract.number_img_to_string(hp_roi))
-            print(current_health)
+
             context.set_health(current_health)
 
             Logger.debug("Updated context")
