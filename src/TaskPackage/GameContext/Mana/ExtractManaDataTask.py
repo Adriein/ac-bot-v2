@@ -34,6 +34,8 @@ class ExtractManaDataTask(Task):
 
             current_mana = self.__pyautogui.number(mana_roi)
 
+            print(current_mana)
+
             raise Exception
 
             # current_mana = int(self.__tesseract.number_img_to_string(mana_roi))

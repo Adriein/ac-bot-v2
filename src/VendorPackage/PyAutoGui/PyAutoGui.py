@@ -160,16 +160,16 @@ class PyAutoGui:
 
                 match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
 
-                (y, x) = np.where(match >= NumberCoincidence.MIN_CONFIDENCE)
+                '''
+                trying to find number 115 the result of np.where is:
+                x = [8, 15] for 1
+                x = [23] for 5
+                '''
+                (_, x_locations) = np.where(match >= NumberCoincidence.MIN_CONFIDENCE)
 
-                print(x)
-
-                [_, max_coincidence, _, max_coordinates] = cv2.minMaxLoc(match)
-
-                (x, y) = max_coordinates
-
-                if max_coincidence >= NumberCoincidence.MIN_CONFIDENCE:
-                    number_coincidence.append(NumberCoincidence(number, max_coincidence, x))
+                if len(x_locations) > 0:
+                    for x in x_locations:
+                        number_coincidence.append(NumberCoincidence(number, NumberCoincidence.MIN_CONFIDENCE, x))
 
             number_coincidence.sort(key=lambda n: n.x_coordinate)
 
