@@ -4,6 +4,7 @@ from src.GamePackage import Player
 from src.SharedPackage import GameContext, Constants
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
+from src.UtilPackage import Time
 
 
 class AttackTask(Task):
@@ -37,6 +38,7 @@ class AttackTask(Task):
         self.__player.precision_attack(target)
 
         context.set_attacking_creature(target)
+        context.set_start_attacking(Time.now())
 
         if target.is_runner() and context.get_combat_stance() is not Constants.CHASE_COMBAT_STANCE:
             self.__player.chase_opponent()

@@ -32,3 +32,19 @@ class Time:
 
         return int(round(delta.total_seconds() / 60, 0))
 
+    @staticmethod
+    def seconds_between(date1: datetime, date2: datetime) -> float:
+        """
+        Get difference between two dates in seconds
+
+        Args:
+            date1 (datetime): nearest date to now which means bigger date
+            date2 (datetime): farthest date to current date which means smaller date
+
+        Returns:
+            int: minutes
+        """
+        delta = date1 - date2
+
+        return delta.total_seconds()
+

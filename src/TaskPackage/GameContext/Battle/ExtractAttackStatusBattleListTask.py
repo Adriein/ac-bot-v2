@@ -2,10 +2,11 @@ import numpy as np
 import cv2
 
 from src.LoggerPackage import Logger
-from src.SharedPackage import GameContext
+from src.SharedPackage import GameContext, Constants
 from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.VendorPackage import Cv2File
+from src.UtilPackage import Time
 
 
 class ExtractAttackStatusBattleListTask(Task):
@@ -28,6 +29,9 @@ class ExtractAttackStatusBattleListTask(Task):
         self.__determine_is_attacking(context, frame)
 
         self.__assert_creature_has_been_killed(previous_context, context)
+
+        if self.__uncommon_attacking_time(previous_context, context):
+            context.set_is_attacking(False)
 
         self.success()
 
@@ -80,3 +84,9 @@ class ExtractAttackStatusBattleListTask(Task):
         Logger.debug("Updated context is not attacking")
         Logger.debug(context, inspect_class=True)
 
+    def __uncommon_attacking_time(self, previous_context: GameContext, actual_context: GameContext) -> bool:
+        seconds_past_from_last_targeting = Time.seconds_between(Time.now(), actual_context.get_start_attacking())
+
+        return (previous_context.get_is_attacking() and
+                actual_context.get_is_attacking() and
+                seconds_past_from_last_targeting > Constants.UNCOMMON_ATTACK_TIME_IN_SECONDS)
