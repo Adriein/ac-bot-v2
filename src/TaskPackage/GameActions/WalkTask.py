@@ -65,6 +65,8 @@ class WalkTask(Task):
 
             delta = new_real_current_position.z - current_floor
 
+            print(delta)
+
             if destination.is_auto_floor_up() and delta != 1:
                 self.fail()
 
