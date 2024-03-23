@@ -22,7 +22,12 @@ class AttackTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if context.get_is_attacking() or not context.has_creatures_in_range() or context.get_dead_creature().requires_immediate_looting():
+        if context.get_is_attacking() or not context.has_creatures_in_range():
+            self.success()
+
+            return context
+
+        if context.get_dead_creature() and context.get_dead_creature().requires_immediate_looting():
             self.success()
 
             return context

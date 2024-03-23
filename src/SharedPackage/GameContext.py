@@ -91,7 +91,7 @@ class GameContext:
     def get_dead_creature(self) -> Creature:
         return self.__dead_creature
 
-    def set_dead_creature(self, creature: Creature) -> None:
+    def set_dead_creature(self, creature: Creature | None) -> None:
         self.__dead_creature = creature
 
     def set_current_waypoint(self, waypoint: Waypoint) -> None:

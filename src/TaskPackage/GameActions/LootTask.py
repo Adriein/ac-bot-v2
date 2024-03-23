@@ -45,6 +45,8 @@ class LootTask(Task):
 
         self.__player.loot(looting_coordinates)
 
+        context.set_dead_creature(None)
+
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
 
