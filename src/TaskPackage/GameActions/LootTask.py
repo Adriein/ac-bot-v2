@@ -46,6 +46,8 @@ class LootTask(Task):
 
         self.__player.loot(looting_coordinates)
 
+        immediate_loot = False
+
         context.reset_pending_loot()
 
         Logger.debug("Updated context")
