@@ -32,7 +32,7 @@ class AttackTask(Task):
 
             return context
 
-        context.get_creatures_in_range().sort(key=lambda enemy: enemy.priority())
+        context.get_creatures_in_range().sort(key=lambda enemy: enemy.priority(), reverse=True)
 
         if not context.get_creatures_in_range():
             self.success()
