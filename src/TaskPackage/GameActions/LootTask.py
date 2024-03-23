@@ -29,12 +29,15 @@ class LootTask(Task):
 
             return context
 
-        running_creature_killed = False
+        immediate_loot = False
 
         for dead_creature in context.get_pending_loot():
-            running_creature_killed = dead_creature.is_runner()
+            if dead_creature.is_runner() and dead_creature.has_to_loot():
+                immediate_loot = True
 
-        if not running_creature_killed and context.get_creatures_in_range():
+                break
+
+        if not immediate_loot and context.get_creatures_in_range():
             self.success()
 
             return context
