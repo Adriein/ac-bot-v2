@@ -24,20 +24,19 @@ class LootTask(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if not context.get_pending_loot():
+        dead_creature = context.get_dead_creature()
+
+        if not dead_creature:
             self.success()
 
             return context
 
-        immediate_loot = False
+        if not dead_creature.requires_immediate_looting() and context.get_creatures_in_range():
+            self.success()
 
-        for dead_creature in context.get_pending_loot():
-            if dead_creature.is_runner() and dead_creature.has_to_loot():
-                immediate_loot = True
+            return context
 
-                break
-
-        if not immediate_loot and context.get_creatures_in_range():
+        if not dead_creature.has_to_loot():
             self.success()
 
             return context
@@ -45,10 +44,6 @@ class LootTask(Task):
         looting_coordinates = self.__create_looting_area()
 
         self.__player.loot(looting_coordinates)
-
-        immediate_loot = False
-
-        context.reset_pending_loot()
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
