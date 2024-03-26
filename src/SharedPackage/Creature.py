@@ -27,3 +27,9 @@ class Creature:
 
     def battle_list_position(self) -> Coordinate:
         return self.__battle_list_position
+
+    def requires_immediate_looting(self) -> bool:
+        if self.has_to_loot() and self.is_runner():
+            return True
+
+        return False

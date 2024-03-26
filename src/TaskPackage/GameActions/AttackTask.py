@@ -27,7 +27,12 @@ class AttackTask(Task):
 
             return context
 
-        context.get_creatures_in_range().sort(key=lambda enemy: enemy.priority())
+        if context.get_dead_creature() and context.get_dead_creature().requires_immediate_looting():
+            self.success()
+
+            return context
+
+        context.get_creatures_in_range().sort(key=lambda enemy: enemy.priority(), reverse=True)
 
         if not context.get_creatures_in_range():
             self.success()

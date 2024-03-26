@@ -2,6 +2,7 @@ from typing import TypeVar
 
 T = TypeVar('T')
 
+
 class Array:
     @staticmethod
     def reverse(arr: list) -> list[str]:

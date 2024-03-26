@@ -25,7 +25,7 @@ class GameContext:
         self.__creatures_in_range = list()
         self.__script_enemies = list()
 
-        self.__pending_loot = list()
+        self.__dead_creature = None
 
         self.__current_waypoint = None
         self.__current_floor = None
@@ -88,14 +88,11 @@ class GameContext:
     def get_next_meal_time(self) -> datetime:
         return self.__next_meal_time
 
-    def set_pending_loot(self, creature: Creature) -> None:
-        self.__pending_loot.append(creature)
+    def get_dead_creature(self) -> Creature:
+        return self.__dead_creature
 
-    def reset_pending_loot(self) -> None:
-        self.__pending_loot = list()
-
-    def get_pending_loot(self) -> list[Creature]:
-        return self.__pending_loot
+    def set_dead_creature(self, creature: Creature | None) -> None:
+        self.__dead_creature = creature
 
     def set_current_waypoint(self, waypoint: Waypoint) -> None:
         self.__current_waypoint = waypoint
@@ -128,4 +125,3 @@ class GameContext:
 
     def get_combat_stance(self) -> str:
         return self.__combat_stance
-
