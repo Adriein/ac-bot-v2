@@ -65,5 +65,5 @@ class Player:
         self.__keyboard.press('g')
 
     def use_stealth_ring(self) -> None:
-        Logger.info('Eqip stealth ring')
+        Logger.info('Equip stealth ring')
         self.__keyboard.press('t')

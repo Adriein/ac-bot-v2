@@ -61,10 +61,12 @@ class ExtractRingStatusTask(Task):
         mask = cv2.inRange(hsv_image, lower_blue, upper_blue)
 
         # Count the number of green pixels
-        green_pixel_count = cv2.countNonZero(mask)
+        blue_pixel_count = cv2.countNonZero(mask)
+
+        print(blue_pixel_count)
 
         # Determine if the image contains blue color
-        if green_pixel_count > 0:
+        if blue_pixel_count > 0:
             return True
 
         return False

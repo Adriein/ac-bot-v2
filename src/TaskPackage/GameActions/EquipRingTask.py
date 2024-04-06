@@ -26,5 +26,8 @@ class EquipRingTask(Task):
         if not context.get_is_ring_equipped() and context.get_has_to_wear_ring():
             self.__player.use_stealth_ring()
 
+            self.succeed()
+            return context
+
         self.succeed()
         return context
