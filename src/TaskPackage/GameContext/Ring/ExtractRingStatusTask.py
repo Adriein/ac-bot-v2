@@ -58,7 +58,7 @@ class ExtractRingStatusTask(Task):
         upper_blue = np.array([220, 67, 72])
 
         # Create a mask based on the color threshold
-        mask = cv2.inRange(hsv_image, lower_blue, upper_blue)
+        mask = cv2.inRange(hsv_image, upper_blue, lower_blue)
 
         # Count the number of green pixels
         blue_pixel_count = cv2.countNonZero(mask)
