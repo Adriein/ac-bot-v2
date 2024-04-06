@@ -31,6 +31,8 @@ class CaveBot:
             extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract, self.__pyautogui)
             self.__resolver.queue(extract_game_context_data_task)
 
+            self.__resolver.resolve(game_context, screenshot)
+
             # 2. auto healing
             healing_task = HealingTask(player)
             self.__resolver.queue(healing_task)
@@ -38,8 +40,6 @@ class CaveBot:
             # 3. auto ring
             equip_ring_task = EquipRingTask(player)
             self.__resolver.queue(equip_ring_task)
-
-            self.__resolver.resolve(game_context, screenshot)
 
             # 4. auto attacking
             attack_task = AttackTask(player)
