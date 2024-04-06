@@ -34,6 +34,9 @@ class GameContext:
         self.__attacking_creature = None
         self.__start_attacking = Time.now()
 
+        self.__has_to_wear_ring = False
+        self.__is_ring_equipped = False
+
     def set_health(self, health: int) -> None:
         self.__health = health
 
@@ -125,3 +128,12 @@ class GameContext:
 
     def get_combat_stance(self) -> str:
         return self.__combat_stance
+
+    def get_has_to_wear_ring(self) -> bool:
+        return self.__has_to_wear_ring
+
+    def get_is_ring_equipped(self) -> bool:
+        return self.__is_ring_equipped
+
+    def set_is_ring_equipped(self, is_equipped: bool) -> None:
+        self.__is_ring_equipped = is_equipped

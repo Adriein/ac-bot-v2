@@ -45,6 +45,9 @@ class GlobalGameWidgetContainer:
         Logger.info('Locating Combat Stance Widget...')
         self.__combat_stance_region = self.__locate_combat_stance_widget()
 
+        Logger.info('Locating Ring Widget...')
+        self.__ring_region = self.__locate_ring_widget()
+
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
 
@@ -68,6 +71,9 @@ class GlobalGameWidgetContainer:
 
     def combat_stance_widget(self) -> ScreenRegion:
         return self.__combat_stance_region
+
+    def ring_widget(self) -> ScreenRegion:
+        return self.__ring_region
 
     def __create_looting_area_coordinates(self,) -> list[Coordinate]:
         [width, _] = self.__monitor_dimensions
@@ -181,6 +187,26 @@ class GlobalGameWidgetContainer:
         (x, y) = max_coordinates
 
         height, width = combat_stance_anchor.shape
+
+        start_y = y
+        end_y = y + height
+        start_x = x
+        end_x = x + width
+
+        return ScreenRegion(start_x, end_x, start_y, end_y)
+
+    def __locate_ring_widget(self) -> ScreenRegion:
+        frame = cv2.cvtColor(self.__initial_setup_screenshot, cv2.COLOR_BGR2GRAY)
+
+        ring_anchor = Cv2File.load_image(f'src/Wiki/Ui/Battle/ring_anchor.png')
+
+        match = cv2.matchTemplate(frame, ring_anchor, cv2.TM_CCOEFF_NORMED)
+
+        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+
+        (x, y) = max_coordinates
+
+        height, width = ring_anchor.shape
 
         start_y = y
         end_y = y + height

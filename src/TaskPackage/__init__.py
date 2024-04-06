@@ -7,7 +7,7 @@ from .GameContext.Battle.ExtractAttackStatusBattleListTask import ExtractAttackS
 from .GameContext.Battle.ExtractCombatStanceTask import ExtractCombatStanceTask
 from .GameContext.ExtractGameContextDataTask import ExtractManaDataTask
 from .GameContext.ExtractGameContextDataTask import ExtractHealthDataTask
-
+from .GameContext.Ring.ExtractRingStatusTask import ExtractRingStatusTask
 from .GameActions.AttackTask import AttackTask
 from .GameActions.HealingTask import HealingTask
 from .GameActions.UseManaSurplusTask import UseManaSurplusTask
@@ -17,3 +17,4 @@ from .GameActions.SmartSpellHealingTask import SmartSpellHealingTask
 from .GameActions.LocationTask import LocationTask
 from .GameActions.WalkTask import WalkTask
 from .GameActions.ResolveWaypointActionTask import ResolveWaypointActionTask
+from .GameActions.EquipRingTask import EquipRingTask

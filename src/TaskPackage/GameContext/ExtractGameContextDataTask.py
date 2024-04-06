@@ -9,6 +9,7 @@ from src.TaskPackage.GameContext.Battle.ExtractAttackStatusBattleListTask import
 from src.TaskPackage.GameContext.Battle.ExtractCombatStanceTask import ExtractCombatStanceTask
 from src.TaskPackage.GameContext.Health.ExtractHealthDataTask import ExtractHealthDataTask
 from src.TaskPackage.GameContext.Mana.ExtractManaDataTask import ExtractManaDataTask
+from src.TaskPackage.GameContext.Ring.ExtractRingStatusTask import ExtractRingStatusTask
 from src.TaskPackage.Task import Task
 from src.TaskPackage.TaskResolver import TaskResolver
 from src.VendorPackage import TesseractOcr, PyAutoGui
@@ -49,6 +50,10 @@ class ExtractGameContextDataTask(Task):
         Logger.debug("Queueing ExtractManaDataTask")
         extract_mana_data_task = ExtractManaDataTask(self.__widget, self.__pyautogui)
         self.__resolver.queue(extract_mana_data_task)
+
+        Logger.debug("Queueing ExtractRingStatusTask")
+        extract_ring_status_task = ExtractRingStatusTask(self.__widget)
+        self.__resolver.queue(extract_ring_status_task)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)

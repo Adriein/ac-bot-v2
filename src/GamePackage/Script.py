@@ -13,9 +13,12 @@ class Script:
     __player_config: dict = None
 
     __floor_levels: set[int] = set()
+    __ring: bool = False
 
     def __init__(self, script_json_data: dict, player_config: dict):
         self.__player_config = player_config
+
+        self.__ring = bool(script_json_data['ring'])
 
         for creature in script_json_data['creatures']:
             self.__creatures.append(
