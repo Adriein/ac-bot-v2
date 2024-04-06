@@ -5,6 +5,7 @@ from src.LoggerPackage import Logger
 from src.SharedPackage import GameContext
 from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
+from src.VendorPackage import PyAutoGui
 
 
 class ExtractRingStatusTask(Task):
@@ -51,6 +52,8 @@ class ExtractRingStatusTask(Task):
 
         frame_roi = frame[widget.start_y:widget.end_y, widget.start_x:widget.end_x]
 
+        PyAutoGui.debug_image(frame_roi)
+
         hsv_image = cv2.cvtColor(frame_roi, cv2.COLOR_BGR2HSV)
 
         # Define the lower and upper bounds for blue color in HSV
@@ -58,12 +61,10 @@ class ExtractRingStatusTask(Task):
         upper_blue = np.array([220, 67, 72])
 
         # Create a mask based on the color threshold
-        mask = cv2.inRange(hsv_image, upper_blue, lower_blue)
+        mask = cv2.inRange(hsv_image, lower_blue, upper_blue)
 
         # Count the number of green pixels
         blue_pixel_count = cv2.countNonZero(mask)
-
-        print(blue_pixel_count)
 
         # Determine if the image contains blue color
         if blue_pixel_count > 0:
