@@ -63,3 +63,6 @@ class Player:
 
     def chase_opponent(self) -> None:
         self.__keyboard.press('g')
+
+    def use_stealth_ring(self) -> None:
+        self.__keyboard.press('t')
