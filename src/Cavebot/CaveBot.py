@@ -27,7 +27,7 @@ class CaveBot:
         count = 1
         while True:
 
-            if count > 4:
+            if count > 10:
                 raise Exception
             screenshot = self.__monitor.screenshot()
 

@@ -52,9 +52,9 @@ class ExtractRingStatusTask(Task):
 
         frame_roi = frame[widget.start_y:widget.end_y, widget.start_x:widget.end_x]
 
-        PyAutoGui.debug_image(frame_roi)
-
         hsv_image = cv2.cvtColor(frame_roi, cv2.COLOR_BGR2HSV)
+
+        PyAutoGui.debug_image(hsv_image)
 
         # Define the lower and upper bounds for blue color in HSV
         lower_blue = np.array([220, 67, 76])
