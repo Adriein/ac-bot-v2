@@ -39,6 +39,7 @@ class TibiaAcBot:
             if Constants.TRAIN_MODE not in os.environ:
                 game_context.set_script_enemies(self.__script.creatures())
                 game_context.set_cave_route(self.__script.waypoints())
+                game_context.set_has_to_wear_ring(self.__script.has_to_wear_ring())
 
                 pathfinder = PathFinder(self.__script)
                 game_map = Map(self.__global_widget_container, self.__script, pathfinder)

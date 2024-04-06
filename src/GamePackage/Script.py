@@ -59,5 +59,8 @@ class Script:
     def floors(self) -> set[int]:
         return self.__floor_levels
 
+    def has_to_wear_ring(self) -> bool:
+        return self.__ring
+
     def player_config(self) -> dict:
         return self.__player_config

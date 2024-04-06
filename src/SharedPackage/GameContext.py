@@ -129,6 +129,9 @@ class GameContext:
     def get_combat_stance(self) -> str:
         return self.__combat_stance
 
+    def set_has_to_wear_ring(self, has_to_wear_ring: bool) -> None:
+        self.__has_to_wear_ring = has_to_wear_ring
+
     def get_has_to_wear_ring(self) -> bool:
         return self.__has_to_wear_ring
 
