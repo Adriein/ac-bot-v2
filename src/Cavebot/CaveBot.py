@@ -24,7 +24,11 @@ class CaveBot:
         self.__game_map = game_map
 
     def start(self, game_context: GameContext, player: Player) -> None:
+        count = 1
         while True:
+
+            if count > 2:
+                raise Exception
             screenshot = self.__monitor.screenshot()
 
             # 1. extract game context
@@ -72,3 +76,5 @@ class CaveBot:
             # self.__resolver.queue(resolve_waypoint_task)
 
             self.__resolver.resolve(game_context, screenshot)
+
+            count = count + 1

@@ -54,8 +54,6 @@ class ExtractRingStatusTask(Task):
 
         PyAutoGui.debug_image(frame_roi)
 
-        raise Exception
-
         hsv_image = cv2.cvtColor(frame_roi, cv2.COLOR_BGR2HSV)
 
         # Define the lower and upper bounds for blue color in HSV
