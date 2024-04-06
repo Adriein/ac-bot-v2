@@ -44,12 +44,6 @@
       "priority": 2
     },
     {
-      "name": "orc_spearman",
-      "runner": true,
-      "loot": false,
-      "priority": 1
-    },
-    {
       "name": "orc_leader",
       "runner": true,
       "loot": false,
