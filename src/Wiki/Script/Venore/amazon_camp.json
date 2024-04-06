@@ -71,5 +71,5 @@
       "priority": 1
     }
   ],
-  "ring": "False"
+  "ring": false
 }
