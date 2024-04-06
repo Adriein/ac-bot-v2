@@ -50,7 +50,7 @@ class ExtractRingStatusTask(Task):
     def __is_ring_equipped(self, frame: np.array) -> bool:
         widget = self.__container.ring_widget()
 
-        frame_roi = frame[widget.start_y - 30 :widget.end_y + 30, widget.start_x - 30:widget.end_x + 30]
+        frame_roi = frame[widget.start_y:widget.end_y, widget.start_x:widget.end_x]
 
         PyAutoGui.debug_image(frame_roi)
 
