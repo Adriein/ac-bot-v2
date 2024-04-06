@@ -32,18 +32,6 @@
   ],
   "creatures": [
     {
-      "name": "orc_warrior",
-      "runner": true,
-      "loot": false,
-      "priority": 1
-    },
-    {
-      "name": "orc",
-      "runner": true,
-      "loot": false,
-      "priority": 1
-    },
-    {
       "name": "orc_shaman",
       "runner": true,
       "loot": true,
