@@ -66,6 +66,8 @@ class ExtractRingStatusTask(Task):
         # Count the number of green pixels
         blue_pixel_count = cv2.countNonZero(mask)
 
+        print(blue_pixel_count)
+
         # Determine if the image contains blue color
         if blue_pixel_count > 0:
             return True
