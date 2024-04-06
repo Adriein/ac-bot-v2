@@ -57,8 +57,8 @@ class ExtractRingStatusTask(Task):
         PyAutoGui.debug_image(hsv_image)
 
         hue, saturation, value = (200, 150, 200)  # Adjust these values based on your findings
-        lower_blue = np.array([hue - 10, saturation - 50, value - 50])
-        upper_blue = np.array([hue + 10, saturation + 50, value + 50])
+        lower_blue = np.array([hue - 50, saturation - 100, value - 100])
+        upper_blue = np.array([hue + 50, saturation + 100, value + 100])
 
         # Create a mask based on the color threshold
         mask = cv2.inRange(hsv_image, lower_blue, upper_blue)
