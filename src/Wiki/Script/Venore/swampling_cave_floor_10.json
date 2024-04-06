@@ -72,5 +72,6 @@
       "loot": true,
       "priority": 2
     }
-  ]
+  ],
+  "ring": "False"
 }
