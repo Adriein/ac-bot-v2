@@ -72,3 +72,5 @@ class CaveBot:
             # self.__resolver.queue(resolve_waypoint_task)
 
             self.__resolver.resolve(game_context, screenshot)
+
+            raise Exception
