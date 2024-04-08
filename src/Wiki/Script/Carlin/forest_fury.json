@@ -75,7 +75,7 @@
     {
       "name": "wilting_leaf_golem",
       "runner": false,
-      "loot": true,
+      "loot": false,
       "priority": 2
     }
   ],
