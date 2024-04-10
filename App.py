@@ -94,9 +94,9 @@ class TibiaAcBot:
         self.__mouse = Mouse(self.__kernel)
 
         Logger.info('Loading Script...')
-        # self.__script = Script.load('src/Wiki/Script/Venore/swampling_cave_floor_10.json')
+        self.__script = Script.load('src/Wiki/Script/Venore/swampling_cave_floor_10.json')
         # self.__script = Script.load('src/Wiki/Script/Venore/orc_fortress_outskirt.json')
-        self.__script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
+        # self.__script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
         # self.__script = Script.load('src/Wiki/Script/Carlin/forest_fury.json')
 
         initial_floor_lvl = list(self.__script.floors())[0]
