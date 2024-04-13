@@ -46,6 +46,7 @@ class WalkTask(Task):
             self.__player.move(instruction)
             time.sleep(0.4)
 
+        time.sleep(1)
         check_screenshot = self.__monitor.screenshot()
 
         current_floor = self.__game_map.which_floor_am_i(check_screenshot)
