@@ -43,7 +43,7 @@ class WalkTask(Task):
 
             context.set_current_waypoint(destination)
 
-            time.sleep(1)
+            time.sleep(4)
             self.success()
             return context
 
