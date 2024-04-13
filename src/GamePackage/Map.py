@@ -88,7 +88,6 @@ class Map:
         end_x = floor_lvl_widget.end_x
 
         actual_floor_lvl = grey_scale_frame[start_y:end_y, start_x:end_x]
-        PyAutoGui.debug_image(actual_floor_lvl)
 
         image_hash = hashlib.sha256(actual_floor_lvl.tobytes()).hexdigest()
 
