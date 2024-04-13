@@ -32,16 +32,11 @@ class WalkTask(Task):
 
         route = context.get_cave_route()
         destination = route.current.data
-        print('destination')
-        print(destination)
 
         if destination.is_auto_floor_up() or destination.type == destination.STAIR_DOWN_TYPE:
-            print('im here as i expected')
             self.__player.move(MoveCommand(1, 'north'))
 
             route.next()
-            print('actualize current way')
-            print(route.current.data)
             context.set_current_waypoint(route.current.data)
 
             time.sleep(0.5)
@@ -51,13 +46,7 @@ class WalkTask(Task):
 
         real_current_position = context.get_current_waypoint()
 
-        print('real_current_position')
-        print(real_current_position)
-
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
-
-        print('walk_instructions')
-        print(walk_instructions)
 
         for instruction in walk_instructions:
             self.__player.move(instruction)
