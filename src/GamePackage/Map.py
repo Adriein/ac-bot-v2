@@ -78,6 +78,7 @@ class Map:
         return MapTile.from_pixel(Coordinate(start_x, start_y), current_floor)
 
     def which_floor_am_i(self, frame: np.array) -> int:
+        PyAutoGui.debug_image(frame)
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         floor_lvl_widget = self.__widget.floor_level_widget()
