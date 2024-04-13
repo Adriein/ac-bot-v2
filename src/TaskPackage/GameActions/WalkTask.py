@@ -36,7 +36,7 @@ class WalkTask(Task):
         real_current_position = context.get_current_waypoint()
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
-
+        print(walk_instructions)
         if destination.is_auto_floor_up() or destination.is_auto_floor_down() and len(walk_instructions) == 0:
             print('im here as i expected')
             self.__player.move(MoveCommand(1, 'north'))
