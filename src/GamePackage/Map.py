@@ -39,7 +39,7 @@ class Map:
 
     def where_am_i(self, frame: np.ndarray, last_known_waypoint: Waypoint, current_floor: int) -> MapTile:
         grey_scale_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+        print(current_floor)
         tibia_map = self.IN_MEMORY_FLOOR_PNG_MAP.get(current_floor)
 
         # find position of minimap in the screen
