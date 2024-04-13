@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-from src.SharedPackage import GameContext
+from src.SharedPackage import GameContext, MoveCommand
 from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
 from src.GamePackage import Map, Player
@@ -36,6 +36,9 @@ class WalkTask(Task):
         real_current_position = context.get_current_waypoint()
 
         walk_instructions = self.__game_map.find_shortest_path(real_current_position, destination)
+
+        if destination.is_auto_floor_up() or destination.is_auto_floor_down() and len(walk_instructions) == 0:
+            walk_instructions.append(MoveCommand(1, 'north'))
 
         for instruction in walk_instructions:
             self.__player.move(instruction)
