@@ -27,6 +27,8 @@ class CaveBot:
         while True:
             screenshot = self.__monitor.screenshot()
 
+            PyAutoGui.debug_image(screenshot)
+
             # 1. extract game context
             extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract, self.__pyautogui)
             self.__resolver.queue(extract_game_context_data_task)
