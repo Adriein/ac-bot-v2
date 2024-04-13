@@ -41,6 +41,7 @@ class WalkTask(Task):
 
             route.next()
 
+            time.sleep(0.4)
             self.success()
             return context
 
