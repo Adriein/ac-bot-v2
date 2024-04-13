@@ -41,9 +41,9 @@ class WalkTask(Task):
 
             route.next()
 
-            context.set_current_waypoint(destination)
+            context.set_current_waypoint(route.peak_next())
 
-            time.sleep(4)
+            time.sleep(0.5)
             self.success()
             return context
 
