@@ -40,7 +40,8 @@ class WalkTask(Task):
             self.__player.move(MoveCommand(1, 'north'))
 
             route.next()
-
+            print('actualize current way')
+            print(route.current.data)
             context.set_current_waypoint(route.current.data)
 
             time.sleep(0.5)
