@@ -47,7 +47,6 @@ class WalkTask(Task):
             self.success()
             return context
 
-
         for instruction in walk_instructions:
             self.__player.move(instruction)
             time.sleep(0.4)
