@@ -65,6 +65,16 @@ class Waypoint:
 
         return self.type in floor_change_type
 
+    def is_auto_floor_change_type(self) -> bool:
+        floor_change_type = [
+            self.HOLE_DOWN_TYPE,
+            self.STAIR_UP_TYPE,
+            self.STAIR_DOWN_TYPE,
+            self.HAND_STAIR_DOWN_TYPE,
+        ]
+
+        return self.type in floor_change_type
+
     def is_auto_floor_down(self) -> bool:
         floor_change_type = [
             self.HOLE_DOWN_TYPE,

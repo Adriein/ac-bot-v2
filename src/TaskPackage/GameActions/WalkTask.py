@@ -59,7 +59,7 @@ class WalkTask(Task):
         new_real_current_position = self.__game_map.where_am_i(check_screenshot, destination, current_floor).waypoint
 
         if new_real_current_position != destination:
-            if not destination.is_floor_change_type():
+            if not destination.is_auto_floor_change_type():
                 self.fail()
 
                 return context
