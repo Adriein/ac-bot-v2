@@ -232,8 +232,8 @@ class GlobalGameWidgetContainer:
         height, width = skill_anchor.shape
 
         start_x = x
-        end_x = start_x + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_MINI_MAP_END_X)
+        end_x = start_x + width
         start_y = y
-        end_y = start_y + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_SKILL_WIDGET_HEIGHT)
+        end_y = start_y + height + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_SKILL_WIDGET_HEIGHT)
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
