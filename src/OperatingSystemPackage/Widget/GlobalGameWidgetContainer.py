@@ -48,6 +48,9 @@ class GlobalGameWidgetContainer:
         Logger.info('Locating Ring Widget...')
         self.__ring_region = self.__locate_ring_widget()
 
+        Logger.info('Locating Skills Widget...')
+        self.__skill_region = self.__locate_skill_widget()
+
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
 
@@ -212,5 +215,25 @@ class GlobalGameWidgetContainer:
         end_y = y + height
         start_x = x
         end_x = x + width
+
+        return ScreenRegion(start_x, end_x, start_y, end_y)
+
+    def __locate_skill_widget(self) -> ScreenRegion:
+        frame = cv2.cvtColor(self.__initial_setup_screenshot, cv2.COLOR_BGR2GRAY)
+
+        skill_anchor = Cv2File.load_image(f'src/Wiki/Ui/Skill/skill_widget.png')
+
+        match = cv2.matchTemplate(frame, skill_anchor, cv2.TM_CCOEFF_NORMED)
+
+        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+
+        (x, y) = max_coordinates
+
+        height, width = skill_anchor.shape
+
+        start_x = x
+        end_x = start_x + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_MINI_MAP_END_X)
+        start_y = y
+        end_y = start_y + self.__monitor.adjust_pixel_to_monitor(Constants.REFERENCE_SKILL_WIDGET_HEIGHT)
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
