@@ -40,5 +40,6 @@
       "loot": false,
       "priority": 1
     }
-  ]
+  ],
+  "ring": false
 }
