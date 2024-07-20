@@ -80,16 +80,32 @@ class ExtractBattleListDataTask(Task):
                     match_result[
                         nearest_creature_battle_list_roi_y:nearest_creature_battle_list_roi_y + creature_template_height,
                         nearest_creature_battle_list_roi_x:nearest_creature_battle_list_roi_x + creature_template_width
-                    ] = 0
+                    ] = 1
 
-            print(match_result)
-            raise Exception
-            potential_entity_locations = np.where((match_result >= 0.5) & (match_result < creature_math_confidence))
-            paired_entity_locations = list(zip(*potential_entity_locations[::-1]))
+            unmasked = cv2.bitwise_not(match_result)
+            contours, _ = cv2.findContours(unmasked.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-            if paired_entity_locations:
-                Logger.info('some player on the screen')
+            unidentified_entities = []
 
+            for contour in contours:
+                x, y, w, h = cv2.boundingRect(contour)
+                if w * h > 100:  # Minimum size threshold to avoid noise
+                    frame_entity_position_start_x = widget.start_x + x
+                    frame_entity_position_start_y = widget.start_y + y
+                    frame_entity_end_x = frame_entity_position_start_x + w
+                    frame_entity_end_y = frame_entity_position_start_y + h
+
+                    unidentified_region = ScreenRegion(
+                        frame_entity_position_start_x,
+                        frame_entity_end_x,
+                        frame_entity_position_start_y,
+                        frame_entity_end_y
+                    )
+                    click_coordinate = Coordinate.from_screen_region(unidentified_region)
+
+                    unidentified_entities.append(click_coordinate)
+
+        print(unidentified_entities)
         context.set_creatures_in_range(results)
 
         Logger.debug("Updated context")
