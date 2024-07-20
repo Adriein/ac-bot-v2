@@ -7,6 +7,7 @@ from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.UtilPackage import String
 from src.VendorPackage import Cv2File
+from src.VendorPackage.PyAutoGui import PyAutoGui
 
 
 class ExtractBattleListDataTask(Task):
@@ -105,7 +106,8 @@ class ExtractBattleListDataTask(Task):
 
                     unidentified_entities.append(click_coordinate)
 
-        print(unidentified_entities)
+        PyAutoGui.debug_image(grey_battle_list_roi)
+        raise Exception
         context.set_creatures_in_range(results)
 
         Logger.debug("Updated context")
