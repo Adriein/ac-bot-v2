@@ -7,7 +7,7 @@ from src.TaskPackage.Task import Task
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.UtilPackage import String
 from src.VendorPackage import Cv2File
-from src.VendorPackage.PyAutoGui import PyAutoGui
+from src.VendorPackage import PyAutoGui
 
 
 class ExtractBattleListDataTask(Task):
