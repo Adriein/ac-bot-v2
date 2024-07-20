@@ -82,7 +82,7 @@ class ExtractBattleListDataTask(Task):
                         nearest_creature_battle_list_roi_x:nearest_creature_battle_list_roi_x + creature_template_width
                     ] = 0
 
-            potential_entity_locations = np.where((match_result >= 0) & (match_result < creature_math_confidence))
+            potential_entity_locations = np.where((match_result > 0) & (match_result < creature_math_confidence))
             paired_entity_locations = list(zip(*potential_entity_locations[::-1]))
 
             if paired_entity_locations:
