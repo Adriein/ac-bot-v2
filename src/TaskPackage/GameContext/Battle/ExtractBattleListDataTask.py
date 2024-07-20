@@ -32,15 +32,17 @@ class ExtractBattleListDataTask(Task):
 
         results = list()
 
+        creature_math_confidence = 0.9
+
         for enemy in context.get_script_enemies():
             enemy_path = f'src/Wiki/Ui/Mobs/{String.snake_to_camel_case(enemy.name())}/{enemy.name()}_label.png'
 
             creature_template = Cv2File.load_image(enemy_path)
 
-            match = cv2.matchTemplate(grey_battle_list_roi, creature_template, cv2.TM_CCOEFF_NORMED)
+            match_result = cv2.matchTemplate(grey_battle_list_roi, creature_template, cv2.TM_CCOEFF_NORMED)
 
             # match_locations = (y_match_coords, x_match_coords) >= similarity more than threshold
-            match_locations = np.where(match >= 0.9)
+            match_locations = np.where(match_result >= creature_math_confidence)
 
             # paired_match_locations = [(x, y), (x, y)]
             paired_match_locations = list(zip(*match_locations[::-1]))
@@ -74,6 +76,17 @@ class ExtractBattleListDataTask(Task):
                     )
 
                     results.append(creature)
+
+                    match_result[
+                        nearest_creature_battle_list_roi_y:nearest_creature_battle_list_roi_y + creature_template_height,
+                        nearest_creature_battle_list_roi_x:nearest_creature_battle_list_roi_x + creature_template_width
+                    ] = 0
+
+            potential_entity_locations = np.where((match_result >= 0) & (match_result < creature_math_confidence))
+            paired_entity_locations = list(zip(*potential_entity_locations[::-1]))
+
+            if paired_entity_locations:
+                Logger.info('some player on the screen')
 
         context.set_creatures_in_range(results)
 
