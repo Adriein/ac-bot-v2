@@ -1,5 +1,5 @@
 CURRENT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-SHELL = /bin/sh
+SHELL = /bin/bash
 
 .PHONY: help
 help: ## Print available targets.
@@ -38,4 +38,10 @@ create-venv: ## Create and activate python venv.
 dependencies: ## Installing dependencies.
 	@echo "Installing dependencies"
 	@poetry install
+
+.PHONY: game
+game: ## Init Tibia Executable.
+	@echo "Executing Tibia"
+	@cd ~/Programs/Tibia; ./start-tibia-launcher.sh
+
 
