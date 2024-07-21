@@ -38,7 +38,7 @@ class Kernel:
 
                         pid_info = Console.execute(f'pwdx {window_pid}')
 
-                        self.__tibia_bin_pid = pid_info[:pid_info.find(":")]
+                        self.__tibia_bin_pid = int(pid_info[:pid_info.find(":")])
 
                         if self.TIBIA_PID_BIN_PATH in pid_info.lower():
                             return int(window_id)
