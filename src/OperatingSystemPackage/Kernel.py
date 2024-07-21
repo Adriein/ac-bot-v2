@@ -38,6 +38,8 @@ class Kernel:
 
                         pid_info = Console.execute(f'pwdx {window_pid}')
 
+                        print(pid_info)
+
                         if self.TIBIA_PID_BIN_PATH in pid_info.lower():
                             return int(window_id)
 
