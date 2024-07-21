@@ -1,3 +1,6 @@
+import os
+import signal
+
 from .Console import Console
 from .Exception.CommandExecutionException import CommandExecutionException
 
@@ -19,6 +22,9 @@ class Kernel:
 
     def obs_tibia_preview_window_id(self) -> int:
         return self.__obs_tibia_preview_window_id
+
+    def force_game_logout(self) -> None:
+        os.kill(self.__tibia_window_id, signal.SIGTERM)
 
     def __get_tibia_window_id(self) -> int:
         try:
