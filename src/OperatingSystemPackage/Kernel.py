@@ -1,3 +1,6 @@
+import os
+import signal
+
 from .Console import Console
 from .Exception.CommandExecutionException import CommandExecutionException
 
@@ -20,6 +23,9 @@ class Kernel:
     def obs_tibia_preview_window_id(self) -> int:
         return self.__obs_tibia_preview_window_id
 
+    def force_game_logout(self) -> None:
+        os.kill(self.__tibia_bin_pid, signal.SIGTERM)
+
     def __get_tibia_window_id(self) -> int:
         try:
             window_ids = Console.execute(fr'xdotool search --name "\b"{self.TIBIA_WINDOW_NAME}"\b"')
@@ -31,6 +37,8 @@ class Kernel:
                         window_pid = Console.execute(f'xdotool getwindowpid {window_id}')
 
                         pid_info = Console.execute(f'pwdx {window_pid}')
+
+                        self.__tibia_bin_pid = int(pid_info[:pid_info.find(":")])
 
                         if self.TIBIA_PID_BIN_PATH in pid_info.lower():
                             return int(window_id)

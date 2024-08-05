@@ -1,3 +1,5 @@
+import time
+
 from src.GamePackage import Player, Script, Map, PathFinder
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard, Mouse
@@ -14,16 +16,6 @@ import os
 
 class TibiaAcBot:
     def __init__(self):
-        self.__kernel = None
-        self.__monitor = None
-        self.__keyboard = None
-        self.__mouse = None
-        self.__global_widget_container = None
-        self.__task_resolver = None
-        self.__pyautogui = None
-        self.__tesseract = None
-        self.__script = None
-
         self.__collect_program_arguments()
         self.__setup_global()
 
@@ -71,6 +63,10 @@ class TibiaAcBot:
             raise SystemExit
         except Exception as error:
             Logger.error(str(error), error)
+
+            Logger.info('Force character logout')
+            self.__kernel.force_game_logout()
+
             raise SystemExit from error
 
     def __setup_global(self) -> None:
@@ -96,9 +92,9 @@ class TibiaAcBot:
         Logger.info('Loading Script...')
         # self.__script = Script.load('src/Wiki/Script/Venore/swampling_cave_floor_10.json')
         # self.__script = Script.load('src/Wiki/Script/Venore/orc_fortress_outskirt.json')
-        # self.__script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
+        self.__script = Script.load('src/Wiki/Script/Thais/thais_wasp.json')
         # self.__script = Script.load('src/Wiki/Script/AbDendriel/ab_dendriel_wasp.json')
-        self.__script = Script.load('src/Wiki/Script/AbDendriel/ab_dendriel_1_wasp.json')
+        # self.__script = Script.load('src/Wiki/Script/AbDendriel/ab_dendriel_1_wasp.json')
         # self.__script = Script.load('src/Wiki/Script/Carlin/forest_fury.json')
 
         initial_floor_lvl = list(self.__script.floors())[0]
