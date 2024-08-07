@@ -29,16 +29,10 @@
   ],
   "creatures": [
     {
-      "name": "bat",
-      "runner": true,
-      "loot": false,
-      "priority": 1
-    },
-    {
       "name": "swamp_troll",
       "runner": true,
       "loot": true,
-      "priority": 2
+      "priority": 1
     }
   ],
   "ring": false
