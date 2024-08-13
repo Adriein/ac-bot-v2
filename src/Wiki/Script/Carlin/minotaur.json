@@ -1,0 +1,42 @@
+{
+  "walk": [
+    ["32107,31578,10", "walk"],
+    ["32117,31578,10", "walk"],
+    ["32117,31585,10", "walk"],
+    ["32115,31597,10", "walk"],
+    ["32126,31599,10", "walk"],
+    ["32134,31599,10", "walk"],
+    ["32118,31579,10", "walk"],
+    ["32118,31562,10", "walk"],
+    ["32100,31563,10", "walk"],
+    ["32094,31573,10", "walk"],
+    ["32098,31580,10", "walk"]
+  ],
+  "creatures": [
+    {
+      "name": "minotaur",
+      "runner": true,
+      "loot": false,
+      "priority": 1
+    },
+    {
+      "name": "minotaur_archer",
+      "runner": true,
+      "loot": false,
+      "priority": 2
+    },
+    {
+      "name": "minotaur_mage",
+      "runner": true,
+      "loot": false,
+      "priority": 3
+    },
+    {
+      "name": "minotaur_guard",
+      "runner": true,
+      "loot": false,
+      "priority": 4
+    }
+  ],
+  "ring": false
+}
