@@ -47,8 +47,8 @@ class PyAutoGui:
 
         start_x = region.left
         end_x = region.left + region.width
-        start_y = region.top
-        end_y = region.top + region.height + widget_height
+        start_y = region.top + region.height 
+        end_y = start_y + widget_height
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
 
