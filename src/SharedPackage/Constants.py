@@ -43,7 +43,7 @@ class Constants:
 
     POSSIBLE_LOOT_DIRECTIONS = [True, False]
 
-    UNCOMMON_ATTACK_TIME_IN_SECONDS = 5
+    UNCOMMON_ATTACK_TIME_IN_SECONDS = 10
 
     # SPELLS
     LIGHT_HEALING = "exura infir ico"
