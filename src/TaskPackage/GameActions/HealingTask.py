@@ -23,7 +23,7 @@ class HealingTask(Task):
         Logger.debug(context, inspect_class=True)
 
         # pending to inject the script and do it with the script config
-        if context.get_health() <= 300:
+        if context.get_health() <= 100:
             self.__player.potion_heal()
 
         self.succeed()
