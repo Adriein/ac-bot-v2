@@ -32,6 +32,7 @@ class OpenMarketTask(Task):
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
 
+
             self.success()
             return context
         except ValueError:
