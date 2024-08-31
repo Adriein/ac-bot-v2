@@ -236,7 +236,7 @@ class GlobalGameWidgetContainer:
             depot_locations.append(pt)
 
         screen_player_position = Coordinate.from_screen_region(self.__game_window)
-
+        print(depot_locations)
         distances = []
         for depot_loc in depot_locations:
             distance = np.linalg.norm(np.array(screen_player_position) - np.array(depot_loc))
