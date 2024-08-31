@@ -32,7 +32,9 @@ class OpenMarketTask(Task):
 
             market_anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/market_icon.png')
 
-            match = cv2.matchTemplate(frame, market_anchor, cv2.TM_CCOEFF_NORMED)
+            grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            match = cv2.matchTemplate(grey_frame, market_anchor, cv2.TM_CCOEFF_NORMED)
 
             [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
 
