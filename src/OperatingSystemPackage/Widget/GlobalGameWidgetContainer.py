@@ -228,21 +228,33 @@ class GlobalGameWidgetContainer:
 
         match = cv2.matchTemplate(depot_anchor, frame, cv2.TM_CCOEFF_NORMED)
 
-        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+        multiple_loc = np.where(match >= 0.9)
 
-        (x, y) = max_coordinates
+        depot_locations = []
 
-        height, width = depot_anchor.shape
+        for pt in zip(*multiple_loc[::-1]):
+            depot_locations.append(pt)
 
         screen_player_position = Coordinate.from_screen_region(self.__game_window)
 
-        print(x)
-        print(y)
-        print(screen_player_position)
+        distances = []
+        for depot_loc in depot_locations:
+            distance = np.linalg.norm(np.array(screen_player_position) - np.array(depot_loc))
+            distances.append(distance)
+
+        # Find the index of the nearest depot
+        nearest_depot_index = np.argmin(distances)
+
+        # Get the coordinates of the nearest depot
+        nearest_depot_loc = depot_locations[nearest_depot_index]
+
+        height, width = depot_anchor.shape
+
+        print(nearest_depot_loc)
 
         return ScreenRegion(
-            start_x=x,
-            end_x=x + width,
-            start_y=y,
-            end_y=y + height
+            start_x=0,
+            end_x=0 + width,
+            start_y=0,
+            end_y=0 + height
         )
