@@ -1,3 +1,5 @@
+from time import sleep
+
 import numpy as np
 import cv2
 
@@ -48,6 +50,8 @@ class OpenMarketTask(Task):
                 start_y=y,
                 end_y=y + height
             )
+
+            sleep(2)
 
             self.__player.open(Coordinate.from_screen_region(market_region))
 
