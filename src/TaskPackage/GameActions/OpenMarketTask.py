@@ -3,9 +3,10 @@ import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.SharedPackage import GameContext, Coordinate
+from src.SharedPackage import GameContext, Coordinate, ScreenRegion
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
+from src.VendorPackage import Cv2File
 
 
 class OpenMarketTask(Task):
@@ -28,6 +29,25 @@ class OpenMarketTask(Task):
             nearest_depot_position = self.__widget.nearest_depot()
 
             self.__player.open(Coordinate.from_screen_region(nearest_depot_position))
+
+            market_anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/market_icon.png')
+
+            match = cv2.matchTemplate(frame, market_anchor, cv2.TM_CCOEFF_NORMED)
+
+            [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+
+            (x, y) = max_coordinates
+
+            height, width = market_anchor.shape
+
+            market_region = ScreenRegion(
+                start_x=x,
+                end_x=x + width,
+                start_y=y,
+                end_y=y + height
+            )
+
+            self.__player.open(Coordinate.from_screen_region(market_region))
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
