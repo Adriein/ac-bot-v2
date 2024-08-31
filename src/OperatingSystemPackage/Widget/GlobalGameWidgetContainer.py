@@ -239,7 +239,7 @@ class GlobalGameWidgetContainer:
         print(depot_locations)
         distances = []
         for depot_loc in depot_locations:
-            distance = np.linalg.norm(np.array(screen_player_position) - np.array(depot_loc))
+            distance = np.linalg.norm(np.array((screen_player_position.x, screen_player_position.y)) - np.array(depot_loc))
             distances.append(distance)
 
         # Find the index of the nearest depot
