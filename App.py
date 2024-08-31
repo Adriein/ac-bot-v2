@@ -6,6 +6,7 @@ from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContaine
 from src.VendorPackage import PyAutoGui, TesseractOcr
 from src.Cavebot import CaveBot
 from src.Train import AutoTrainer
+from src.Trader import AutoTrader
 from src.TaskPackage import TaskResolver
 from src.SharedPackage import Constants, GameContext
 
@@ -28,7 +29,7 @@ class TibiaAcBot:
 
             game_context = GameContext()
 
-            if Constants.TRAIN_MODE not in os.environ:
+            if Constants.TRAIN_MODE not in os.environ and Constants.TRADE_MODE not in os.environ:
                 game_context.set_script_enemies(self.__script.creatures())
                 game_context.set_cave_route(self.__script.waypoints())
                 game_context.set_has_to_wear_ring(self.__script.has_to_wear_ring())
@@ -49,14 +50,26 @@ class TibiaAcBot:
 
                 return
 
-            auto_trainer = AutoTrainer(
+            if Constants.TRAIN_MODE in os.environ:
+                auto_trainer = AutoTrainer(
+                    self.__monitor,
+                    self.__task_resolver,
+                    self.__global_widget_container,
+                    self.__tesseract
+                )
+
+                auto_trainer.start(game_context, player)
+
+                return
+
+            auto_trader = AutoTrader(
                 self.__monitor,
                 self.__task_resolver,
-                self.__global_widget_container,
-                self.__tesseract
+                self.__global_widget_container
             )
 
-            auto_trainer.start(game_context, player)
+            auto_trader.start(game_context, player)
+
 
         except KeyboardInterrupt:
             Logger.info('Graceful shutdown')
@@ -148,6 +161,12 @@ class TibiaAcBot:
             help='Indicate that program should start in training mode'
         )
 
+        parser.add_argument(
+            '--trade',
+            action="store_true",
+            help='Indicate that program should start in trade mode'
+        )
+
         if parser.parse_args():
             table = Table()
             table.add_column("Argument", justify="left", style="magenta", no_wrap=True)
@@ -157,6 +176,10 @@ class TibiaAcBot:
                 os.environ[Constants.TRAIN_MODE] = Constants.TRAIN_MODE
                 table.add_row("--train", Constants.TRAIN_MODE)
 
+            if parser.parse_args().trade:
+                os.environ[Constants.TRADE_MODE] = Constants.TRADE_MODE
+                table.add_row("--trade", Constants.TRADE_MODE)
+
             if parser.parse_args().debug:
                 os.environ[Constants.DEBUG_MODE] = Constants.DEBUG_MODE
                 table.add_row("--debug", Constants.DEBUG_MODE)
@@ -165,7 +188,7 @@ class TibiaAcBot:
                 os.environ[Constants.DEV_MODE] = Constants.DEV_MODE
                 table.add_row("--dev", Constants.DEV_MODE)
 
-            if not parser.parse_args().dev and not parser.parse_args().train and not parser.parse_args().debug:
+            if not parser.parse_args().dev and not parser.parse_args().train and not parser.parse_args().debug and not parser.parse_args().trade:
                 os.environ[Constants.PRODUCTION_MODE] = Constants.PRODUCTION_MODE
                 table.add_row("production", Constants.PRODUCTION_MODE)
 

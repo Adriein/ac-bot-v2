@@ -228,11 +228,17 @@ class GlobalGameWidgetContainer:
 
         match = cv2.matchTemplate(depot_anchor, frame, cv2.TM_CCOEFF_NORMED)
 
-        (y_locations, x_locations) = np.where(match >= 0.9)
+        [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
+
+        (x, y) = max_coordinates
 
         height, width = depot_anchor.shape
 
         screen_player_position = Coordinate.from_screen_region(self.__game_window)
+
+        print(x)
+        print(y)
+        print(screen_player_position)
 
         return ScreenRegion(
             start_x=0,
