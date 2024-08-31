@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 from src.SharedPackage import ScreenRegion, Constants, Coordinate
 from src.VendorPackage import PyAutoGui, Cv2File
@@ -48,6 +49,9 @@ class GlobalGameWidgetContainer:
         Logger.info('Locating Ring Widget...')
         self.__ring_region = self.__locate_ring_widget()
 
+        Logger.info('Locating Nearest Depot...')
+        self.__nearest_depot_region = self.__locate_depot()
+
     def battle_list_widget(self) -> ScreenRegion:
         return self.__battle_list_widget_region
 
@@ -74,6 +78,9 @@ class GlobalGameWidgetContainer:
 
     def ring_widget(self) -> ScreenRegion:
         return self.__ring_region
+
+    def nearest_depot(self) -> ScreenRegion:
+        return self.__nearest_depot_region
 
     def __create_looting_area_coordinates(self,) -> list[Coordinate]:
         [width, _] = self.__monitor_dimensions
@@ -214,3 +221,22 @@ class GlobalGameWidgetContainer:
         end_x = x + width
 
         return ScreenRegion(start_x, end_x, start_y, end_y)
+    def __locate_depot(self) -> ScreenRegion:
+        frame = cv2.cvtColor(self.__initial_setup_screenshot, cv2.COLOR_BGR2GRAY)
+
+        depot_anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/depot.png')
+
+        match = cv2.matchTemplate(depot_anchor, frame, cv2.TM_CCOEFF_NORMED)
+
+        (y_locations, x_locations) = np.where(match >= 0.9)
+
+        height, width = depot_anchor.shape
+
+        screen_player_position = Coordinate.from_screen_region(self.__game_window)
+
+        return ScreenRegion(
+            start_x=0,
+            end_x=0,
+            start_y=0,
+            end_y=0
+        )

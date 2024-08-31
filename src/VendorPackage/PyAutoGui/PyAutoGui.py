@@ -134,6 +134,20 @@ class PyAutoGui:
             end_y=frame_end_y
         )
 
+    def locate_image(self, frame: np.ndarray, needle: np.ndarray) -> ScreenRegion:
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        match = cv2.matchTemplate(needle, frame, cv2.TM_CCOEFF_NORMED)
+
+        (y_locations, x_locations) = np.where(match >= NumberCoincidence.MIN_CONFIDENCE)
+
+        return ScreenRegion(
+            start_x=0,
+            end_x=0,
+            start_y=0,
+            end_y=0
+        )
+
     def screen_size(self) -> (int, int):
         return pyautogui.size()
 
