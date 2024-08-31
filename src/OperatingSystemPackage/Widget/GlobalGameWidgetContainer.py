@@ -246,15 +246,13 @@ class GlobalGameWidgetContainer:
         nearest_depot_index = np.argmin(distances)
 
         # Get the coordinates of the nearest depot
-        nearest_depot_loc = depot_locations[nearest_depot_index]
+        (x, y) = depot_locations[nearest_depot_index]
 
         height, width = depot_anchor.shape
 
-        print(nearest_depot_loc)
-
         return ScreenRegion(
-            start_x=0,
-            end_x=0 + width,
-            start_y=0,
-            end_y=0 + height
+            start_x=x,
+            end_x=x + width,
+            start_y=y,
+            end_y=y + height
         )
