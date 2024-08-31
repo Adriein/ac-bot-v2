@@ -241,8 +241,8 @@ class GlobalGameWidgetContainer:
         print(screen_player_position)
 
         return ScreenRegion(
-            start_x=0,
-            end_x=0,
-            start_y=0,
-            end_y=0
+            start_x=x,
+            end_x=x + width,
+            start_y=y,
+            end_y=y + height
         )

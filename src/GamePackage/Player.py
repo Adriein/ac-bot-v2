@@ -67,3 +67,6 @@ class Player:
     def use_stealth_ring(self) -> None:
         Logger.info('Equip stealth ring')
         self.__keyboard.press('t')
+
+    def open(self, coordinates: Coordinate) -> None:
+        self.__mouse.use_right_button(coordinates)

@@ -2,7 +2,8 @@ from src.GamePackage import Player
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, UseManaSurplusTask, EatTask
+from src.TaskPackage import TaskResolver, OpenMarketTask, EatTask
+
 
 class AutoTrader:
     def __init__(
@@ -21,13 +22,11 @@ class AutoTrader:
         while True:
             frame = self.__monitor.screenshot()
 
-            Logger.debug('Queuing UseManaSurplusTask')
-            use_mana_surplus_task = UseManaSurplusTask(player)
-            self.__task_resolver.queue(use_mana_surplus_task)
-
-            Logger.debug('Queuing EatTask')
-            eat_task = EatTask(player)
-            self.__task_resolver.queue(eat_task)
+            Logger.debug('Queuing OpenMarketTask')
+            open_depot = OpenMarketTask(self.__widget, player)
+            self.__task_resolver.queue(open_depot)
 
             self.__task_resolver.resolve(game_context, frame)
+
+            raise KeyboardInterrupt
 

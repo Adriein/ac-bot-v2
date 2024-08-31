@@ -3,18 +3,19 @@ import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.SharedPackage import GameContext
+from src.SharedPackage import GameContext, Coordinate
 from src.TaskPackage.Task import Task
-from src.VendorPackage import PyAutoGui
+from src.GamePackage import Player
 
 
 class OpenMarketTask(Task):
     def __str__(self) -> str:
         return f'OpenMarketTask'
 
-    def __init__(self, widget: GlobalGameWidgetContainer):
+    def __init__(self, widget: GlobalGameWidgetContainer, player: Player):
         super().__init__()
         self.__widget = widget
+        self.__player = player
         self.__succeed = False
         self.__completed = False
 
@@ -24,7 +25,9 @@ class OpenMarketTask(Task):
             Logger.debug("Received context")
             Logger.debug(context, inspect_class=True)
 
-            nearest_depot_position
+            nearest_depot_position = self.__widget.nearest_depot()
+
+            self.__player.open(Coordinate.from_screen_region(nearest_depot_position))
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
