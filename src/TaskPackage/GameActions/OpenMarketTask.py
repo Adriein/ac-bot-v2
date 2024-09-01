@@ -3,11 +3,10 @@ import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.SharedPackage import GameContext, Coordinate, ScreenRegion
+from src.SharedPackage import GameContext, Coordinate, ScreenRegion, ManualIterationInterrupt
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
 from src.VendorPackage import Cv2File
-from src.Trader.Exception.ManualIterationInterrupt import ManualIterationInterrupt
 
 
 class OpenMarketTask(Task):

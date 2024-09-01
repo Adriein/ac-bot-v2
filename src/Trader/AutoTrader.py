@@ -3,7 +3,7 @@ from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, OpenMarketTask, SearchItemInMarket
-from src.Trader.Exception.ManualIterationInterrupt import ManualIterationInterrupt
+from src.SharedPackage.Exception.ManualIterationInterrupt import ManualIterationInterrupt
 
 
 class AutoTrader:

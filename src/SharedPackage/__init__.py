@@ -5,3 +5,4 @@ from .GameContext import GameContext
 from .Constants import Constants
 from .Waypoint import Waypoint
 from .MoveCommand import MoveCommand
+from .Exception.ManualIterationInterrupt import ManualIterationInterrupt
