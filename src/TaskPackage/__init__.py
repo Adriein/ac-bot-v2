@@ -18,4 +18,5 @@ from .GameActions.LocationTask import LocationTask
 from .GameActions.WalkTask import WalkTask
 from .GameActions.ResolveWaypointActionTask import ResolveWaypointActionTask
 from .GameActions.EquipRingTask import EquipRingTask
+from .GameActions.OpenDepotTask import OpenDepotTask
 from .GameActions.OpenMarketTask import OpenMarketTask

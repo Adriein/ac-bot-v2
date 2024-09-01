@@ -228,7 +228,7 @@ class GlobalGameWidgetContainer:
 
         match = cv2.matchTemplate(depot_anchor, frame, cv2.TM_CCOEFF_NORMED)
 
-        multiple_loc = np.where(match >= 0.9)
+        multiple_loc = np.where(match >= 0.7)
 
         depot_locations = []
 

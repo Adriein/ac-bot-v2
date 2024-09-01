@@ -6,12 +6,11 @@ from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.SharedPackage import GameContext, Coordinate, ScreenRegion
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
-from src.VendorPackage import Cv2File
 
 
-class OpenMarketTask(Task):
+class OpenDepotTask(Task):
     def __str__(self) -> str:
-        return f'OpenMarketTask'
+        return f'OpenDepotTask'
 
     def __init__(self, widget: GlobalGameWidgetContainer, player: Player):
         super().__init__()
@@ -22,34 +21,16 @@ class OpenMarketTask(Task):
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
         try:
-            Logger.debug("Executing OpenMarketTask")
+            Logger.debug("Executing OpenDepotTask")
             Logger.debug("Received context")
             Logger.debug(context, inspect_class=True)
 
-            market_anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/market_icon.png')
+            nearest_depot_position = self.__widget.nearest_depot()
 
-            grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-            match = cv2.matchTemplate(grey_frame, market_anchor, cv2.TM_CCOEFF_NORMED)
-
-            [_, _, _, max_coordinates] = cv2.minMaxLoc(match)
-
-            (x, y) = max_coordinates
-
-            height, width = market_anchor.shape
-
-            market_region = ScreenRegion(
-                start_x=x,
-                end_x=x + width,
-                start_y=y,
-                end_y=y + height
-            )
-
-            self.__player.open(Coordinate.from_screen_region(market_region))
+            self.__player.open(Coordinate.from_screen_region(nearest_depot_position))
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
-
 
             self.success()
             return context

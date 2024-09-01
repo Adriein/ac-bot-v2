@@ -2,7 +2,7 @@ from src.GamePackage import Player
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, OpenMarketTask, EatTask
+from src.TaskPackage import TaskResolver, OpenMarketTask, OpenDepotTask
 
 
 class AutoTrader:
@@ -21,6 +21,10 @@ class AutoTrader:
 
         while True:
             frame = self.__monitor.screenshot()
+
+            Logger.debug('Queuing OpenDepotTask')
+            open_depot = OpenDepotTask(self.__widget, player)
+            self.__task_resolver.queue(open_depot)
 
             Logger.debug('Queuing OpenMarketTask')
             open_depot = OpenMarketTask(self.__widget, player)
