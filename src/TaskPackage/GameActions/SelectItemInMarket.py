@@ -1,5 +1,3 @@
-from time import sleep
-
 import numpy as np
 import cv2
 
@@ -8,7 +6,7 @@ from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.SharedPackage import GameContext, Coordinate, ScreenRegion, ManualIterationInterrupt
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
-from src.VendorPackage import Cv2File, PyAutoGui
+from src.VendorPackage import Cv2File
 
 class SelectItemInMarket(Task):
     def __str__(self) -> str:
@@ -42,9 +40,7 @@ class SelectItemInMarket(Task):
             end_y=item_list_anchor_screen_region.end_y + 40
         )
 
-        test = grey_frame[item_list_screen_region.start_y:item_list_screen_region.end_y, item_list_screen_region.start_x:item_list_screen_region.end_x]
-
-        PyAutoGui.debug_image(test)
+        self.__player.left_click(Coordinate.from_screen_region(item_list_screen_region))
         raise KeyboardInterrupt
 
         Logger.debug("Updated context")
