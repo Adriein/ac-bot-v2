@@ -21,3 +21,4 @@ from .GameActions.EquipRingTask import EquipRingTask
 from .GameActions.OpenDepotTask import OpenDepotTask
 from .GameActions.OpenMarketTask import OpenMarketTask
 from .GameActions.SearchItemInMarket import SearchItemInMarket
+from .GameActions.SelectItemInMarket import SelectItemInMarket

@@ -8,11 +8,11 @@ from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.SharedPackage import GameContext, Coordinate, ScreenRegion, ManualIterationInterrupt
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
-from src.VendorPackage import Cv2File
+from src.VendorPackage import Cv2File, PyAutoGui
 
-class SearchItemInMarket(Task):
+class SelectItemInMarket(Task):
     def __str__(self) -> str:
-        return f'SearchItemInMarket'
+        return f'SelectItemInMarket'
 
     def __init__(self, widget: GlobalGameWidgetContainer, player: Player):
         super().__init__()
@@ -22,28 +22,30 @@ class SearchItemInMarket(Task):
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        Logger.debug("Executing SearchItemInMarket")
+        Logger.debug("Executing SelectItemInMarket")
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if not context.get_is_market_open():
+        if not context.get_is_market_open() and not context.get_is_scrapping_item_info():
             self.success()
 
             return context
 
         grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        close_button_region = self.__get_screen_region(grey_frame, 'market_cancel_search')
+        item_list_anchor_screen_region = self.__get_screen_region(grey_frame, 'item_list')
 
-        close_button_coordinate = Coordinate.from_screen_region(close_button_region)
+        item_list_screen_region = ScreenRegion(
+            start_x= item_list_anchor_screen_region.start_x,
+            end_x= item_list_anchor_screen_region.end_x,
+            start_y= item_list_anchor_screen_region.start_y,
+            end_y=item_list_anchor_screen_region.end_y + 20
+        )
 
-        self.__player.left_click(Coordinate(close_button_coordinate.x - 20, close_button_coordinate.y))
+        test = grey_frame[item_list_screen_region.start_y:item_list_screen_region.end_y, item_list_screen_region.start_x:item_list_screen_region.end_x]
 
-        sleep(0.5)
-
-        self.__player.write('honeycomb')
-
-        context.set_is_scrapping_item_info(True)
+        PyAutoGui.debug_image(test)
+        raise KeyboardInterrupt
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
