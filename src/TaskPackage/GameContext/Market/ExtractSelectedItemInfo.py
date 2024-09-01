@@ -42,13 +42,21 @@ class ExtractSelectedItemInfo(Task):
                 end_y = region.end_y + height
 
                 amount_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
-                # amount_roi = grey_frame[region.start_y:region.end_y, region.start_x:region.end_x]
-
-                PyAutoGui.debug_image(amount_roi)
-
-                raise KeyboardInterrupt
 
             price_screen_regions = self.__get_screen_regions(grey_frame, 'piece_price_column_anchor')
+
+            for region in price_screen_regions:
+                # The bottom of the column header
+                start_y = region.end_y
+
+                # The height of the row
+                height = region.end_y - region.start_y
+                end_y = region.end_y + height
+
+                price_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
+                print(self.__pyautogui.number(price_roi))
+                raise KeyboardInterrupt
+
             end_at_screen_region = self.__get_screen_regions(grey_frame, 'ends_at_column_anchor')
             raise KeyboardInterrupt
             # current_health = self.__pyautogui.number(hp_roi)
@@ -62,7 +70,7 @@ class ExtractSelectedItemInfo(Task):
             return context
         except ValueError:
             self.fail()
-
+            raise KeyboardInterrupt
             return context
 
     def __get_screen_regions(self, grey_frame: np.ndarray, anchor_name: str) -> list[ScreenRegion]:
