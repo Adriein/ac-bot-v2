@@ -1,3 +1,5 @@
+from time import sleep
+
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Keyboard, Mouse
 from src.SharedPackage import Creature, Coordinate, MoveCommand
@@ -70,3 +72,13 @@ class Player:
 
     def open(self, coordinates: Coordinate) -> None:
         self.__mouse.use_right_button(coordinates)
+
+    def left_click(self, coordinates: Coordinate) -> None:
+        self.__mouse.use_left_button(coordinates)
+
+    def write(self, word: str) -> None:
+        letters = list(word)
+
+        for letter in letters:
+            self.__keyboard.press(letter)
+            sleep(0.5)

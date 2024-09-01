@@ -37,6 +37,9 @@ class GameContext:
         self.__has_to_wear_ring = False
         self.__is_ring_equipped = False
 
+        self.__is_market_open = False
+        self.__is_scrapping_item_info = False
+
     def set_health(self, health: int) -> None:
         self.__health = health
 
@@ -140,3 +143,15 @@ class GameContext:
 
     def set_is_ring_equipped(self, is_equipped: bool) -> None:
         self.__is_ring_equipped = is_equipped
+
+    def get_is_market_open(self) -> bool:
+        return self.__is_market_open
+
+    def set_is_market_open(self, is_market_open: bool) -> None:
+        self.__is_market_open = is_market_open
+
+    def get_is_scrapping_item_info(self) -> bool:
+        return self.__is_scrapping_item_info
+
+    def set_is_scrapping_item_info(self, is_scrapping_item_info: bool) -> None:
+        self.__is_scrapping_item_info = is_scrapping_item_info

@@ -2,7 +2,8 @@ from src.GamePackage import Player
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, OpenMarketTask, OpenDepotTask
+from src.TaskPackage import TaskResolver, OpenMarketTask, SearchItemInMarket
+from src.Trader.Exception.ManualIterationInterrupt import ManualIterationInterrupt
 
 
 class AutoTrader:
@@ -20,17 +21,25 @@ class AutoTrader:
         Logger.info("Starting AutoTrader")
 
         while True:
-            frame = self.__monitor.screenshot()
+            try:
+                frame = self.__monitor.screenshot()
 
-            Logger.debug('Queuing OpenDepotTask')
-            open_depot = OpenDepotTask(self.__widget, player)
-            # self.__task_resolver.queue(open_depot)
+                # Logger.debug('Queuing OpenDepotTask')
+                # open_depot = OpenDepotTask(self.__widget, player)
+                # self.__task_resolver.queue(open_depot)
 
-            Logger.debug('Queuing OpenMarketTask')
-            open_depot = OpenMarketTask(self.__widget, player)
-            self.__task_resolver.queue(open_depot)
+                Logger.debug('Queuing OpenMarketTask')
+                open_market = OpenMarketTask(self.__widget, player)
+                self.__task_resolver.queue(open_market)
 
-            self.__task_resolver.resolve(game_context, frame)
+                Logger.debug('Queuing SearchItemInMarketTask')
+                search_item = SearchItemInMarket(self.__widget, player)
+                self.__task_resolver.queue(search_item)
 
-            raise KeyboardInterrupt
+                self.__task_resolver.resolve(game_context, frame)
+
+                raise KeyboardInterrupt
+
+            except ManualIterationInterrupt:
+                continue
 
