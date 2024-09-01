@@ -46,6 +46,8 @@ class SearchItemInMarket(Task):
         context.set_is_item_searched(True)
         context.set_scrapped_item(MarketItem('honeycomb'))
 
+        sleep(1)
+
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
 

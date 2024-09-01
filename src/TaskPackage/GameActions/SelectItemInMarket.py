@@ -46,7 +46,7 @@ class SelectItemInMarket(Task):
 
         context.set_is_item_selected(True)
 
-        sleep(2)
+        sleep(1)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
