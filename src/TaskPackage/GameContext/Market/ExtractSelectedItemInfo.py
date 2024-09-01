@@ -52,9 +52,8 @@ class ExtractSelectedItemInfo(Task):
 
         screen_regions = []
 
-        for pt in zip(*multiple_loc[::-1]):
-            print(pt)
-            screen_regions.append(pt)
+        for x, y in zip(*multiple_loc[::-1]):
+            screen_regions.append((x, y))
 
 
         print(screen_regions)
