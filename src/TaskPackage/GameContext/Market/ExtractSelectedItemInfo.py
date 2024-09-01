@@ -39,7 +39,7 @@ class ExtractSelectedItemInfo(Task):
 
                 # The height of the row
                 height = region.end_y - region.start_y
-                end_y = region.end_y - height
+                end_y = region.end_y + 80
 
 
 
