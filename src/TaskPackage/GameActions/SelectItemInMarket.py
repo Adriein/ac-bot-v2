@@ -39,7 +39,7 @@ class SelectItemInMarket(Task):
             start_x= item_list_anchor_screen_region.start_x,
             end_x= item_list_anchor_screen_region.end_x,
             start_y= item_list_anchor_screen_region.start_y,
-            end_y=item_list_anchor_screen_region.end_y + 20
+            end_y=item_list_anchor_screen_region.end_y + 40
         )
 
         test = grey_frame[item_list_screen_region.start_y:item_list_screen_region.end_y, item_list_screen_region.start_x:item_list_screen_region.end_x]
