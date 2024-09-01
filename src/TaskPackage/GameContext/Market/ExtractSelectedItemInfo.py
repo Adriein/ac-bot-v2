@@ -36,12 +36,15 @@ class ExtractSelectedItemInfo(Task):
             for region in amount_screen_regions:
                 # The bottom of the column header
                 start_y = region.end_y
+
                 # The height of the row
                 height = region.end_y - region.start_y
-                end_y = region.end_y + height
+                end_y = region.end_y - height
 
-                #amount_roi = grey_frame[start_y: end_y, region.start_x: region.end_x]
-                amount_roi = grey_frame[region.start_y:region.end_y, region.start_x:region.end_x]
+
+
+                amount_roi = grey_frame[start_y: end_y, region.start_x: region.end_x]
+                # amount_roi = grey_frame[region.start_y:region.end_y, region.start_x:region.end_x]
 
                 PyAutoGui.debug_image(amount_roi)
 
