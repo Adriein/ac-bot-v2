@@ -39,10 +39,10 @@ class ExtractSelectedItemInfo(Task):
 
                 # The height of the row
                 height = region.end_y - region.start_y
-                end_y = region.end_y + 100
+                end_y = region.end_y + height
 
-                amount_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
-                # amount_roi = grey_frame[region.start_y:region.end_y, region.start_x:region.end_x]
+                # amount_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
+                amount_roi = grey_frame[region.start_y:region.end_y, region.start_x:region.end_x]
 
                 PyAutoGui.debug_image(amount_roi)
 
