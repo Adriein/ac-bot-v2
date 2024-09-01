@@ -24,7 +24,7 @@ class SelectItemInMarket(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if not context.get_is_market_open() and not context.get_is_scrapping_item_info():
+        if context.get_is_item_selected():
             self.success()
 
             return context
@@ -41,6 +41,8 @@ class SelectItemInMarket(Task):
         )
 
         self.__player.left_click(Coordinate.from_screen_region(item_list_screen_region))
+
+        context.set_is_item_selected(True)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)

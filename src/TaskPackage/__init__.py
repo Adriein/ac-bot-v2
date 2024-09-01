@@ -8,6 +8,8 @@ from .GameContext.Battle.ExtractCombatStanceTask import ExtractCombatStanceTask
 from .GameContext.ExtractGameContextDataTask import ExtractManaDataTask
 from .GameContext.ExtractGameContextDataTask import ExtractHealthDataTask
 from .GameContext.Ring.ExtractRingStatusTask import ExtractRingStatusTask
+from .GameContext.Market.ExtractSelectedItemInfo import ExtractSelectedItemInfo
+
 from .GameActions.AttackTask import AttackTask
 from .GameActions.HealingTask import HealingTask
 from .GameActions.UseManaSurplusTask import UseManaSurplusTask

@@ -2,7 +2,8 @@ from src.GamePackage import Player
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext, ManualIterationInterrupt
-from src.TaskPackage import TaskResolver, OpenMarketTask, SearchItemInMarket, SelectItemInMarket
+from src.TaskPackage import TaskResolver, OpenMarketTask, SearchItemInMarket, SelectItemInMarket, ExtractSelectedItemInfo
+from src.VendorPackage import PyAutoGui
 
 
 class AutoTrader:
@@ -10,11 +11,13 @@ class AutoTrader:
             self,
             monitor: Monitor,
             task_resolver: TaskResolver,
-            widget: GlobalGameWidgetContainer
+            widget: GlobalGameWidgetContainer,
+            pyautogui: PyAutoGui,
     ):
         self.__monitor = monitor
         self.__task_resolver = task_resolver
         self.__widget = widget
+        self.__pyautogui = pyautogui
 
     def start(self, game_context: GameContext, player: Player) -> None:
         Logger.info("Starting AutoTrader")
@@ -38,6 +41,10 @@ class AutoTrader:
                 Logger.debug('Queuing SelectItemInMarket')
                 select_item = SelectItemInMarket(self.__widget, player)
                 self.__task_resolver.queue(select_item)
+
+                Logger.debug('Queuing ExtractSelectedItemInfo')
+                extract_selected_item_info = ExtractSelectedItemInfo(self.__widget, self.__pyautogui)
+                self.__task_resolver.queue(extract_selected_item_info)
 
                 self.__task_resolver.resolve(game_context, frame)
 

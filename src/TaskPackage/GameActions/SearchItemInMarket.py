@@ -26,7 +26,7 @@ class SearchItemInMarket(Task):
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if not context.get_is_market_open():
+        if context.get_is_item_searched():
             self.success()
 
             return context
@@ -43,7 +43,7 @@ class SearchItemInMarket(Task):
 
         self.__player.write('honeycomb')
 
-        context.set_is_scrapping_item_info(True)
+        context.set_is_item_searched(True)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)

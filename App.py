@@ -65,7 +65,8 @@ class TibiaAcBot:
             auto_trader = AutoTrader(
                 self.__monitor,
                 self.__task_resolver,
-                self.__global_widget_container
+                self.__global_widget_container,
+                self.__pyautogui
             )
 
             auto_trader.start(game_context, player)
