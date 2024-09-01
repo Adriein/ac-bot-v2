@@ -1,5 +1,6 @@
 from .Creature import Creature
 from .Waypoint import Waypoint
+from .MarketItem import MarketItem
 from datetime import datetime
 from copy import deepcopy
 from src.UtilPackage import Time, LinkedList
@@ -41,6 +42,7 @@ class GameContext:
         self.__is_item_searched = False
         self.__is_item_selected = False
         self.__is_scrapping_item_info = False
+        self.__scrapped_item = None
 
     def set_health(self, health: int) -> None:
         self.__health = health
@@ -169,3 +171,9 @@ class GameContext:
 
     def set_is_scrapping_item_info(self, is_scrapping_item_info: bool) -> None:
         self.__is_scrapping_item_info = is_scrapping_item_info
+
+    def get_scrapped_item(self) -> MarketItem:
+        return self.__scrapped_item
+
+    def set_scrapped_item(self, scrapped_item: MarketItem) -> None:
+        self.__scrapped_item = scrapped_item

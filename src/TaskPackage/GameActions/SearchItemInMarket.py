@@ -5,7 +5,7 @@ import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.SharedPackage import GameContext, Coordinate, ScreenRegion, ManualIterationInterrupt
+from src.SharedPackage import GameContext, Coordinate, ScreenRegion, ManualIterationInterrupt, MarketItem
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
 from src.VendorPackage import Cv2File
@@ -44,6 +44,7 @@ class SearchItemInMarket(Task):
         self.__player.write('honeycomb')
 
         context.set_is_item_searched(True)
+        context.set_scrapped_item(MarketItem('honeycomb'))
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)

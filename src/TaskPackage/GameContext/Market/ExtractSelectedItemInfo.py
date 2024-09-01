@@ -5,6 +5,7 @@ from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
 from src.SharedPackage import GameContext, ScreenRegion
 from src.TaskPackage.Task import Task
+from src.UtilPackage import MapCollection
 from src.VendorPackage import Cv2File, PyAutoGui
 
 
@@ -27,7 +28,22 @@ class ExtractSelectedItemInfo(Task):
 
             grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
+            item = context.get_scrapped_item()
+            extraction_result = MapCollection()
+
             amount_screen_regions = self.__get_screen_regions(grey_frame, 'amount_column_anchor')
+
+            for region in amount_screen_regions:
+                # The bottom of the column header
+                start_y = region.end_y
+                # The height of the row
+                end_y = region.end_y - region.start_y
+                amount_roi = grey_frame[start_y: end_y, region.start_x: region.end_x]
+
+                PyAutoGui.debug_image(amount_roi)
+
+                raise KeyboardInterrupt
+
             price_screen_regions = self.__get_screen_regions(grey_frame, 'piece_price_column_anchor')
             end_at_screen_region = self.__get_screen_regions(grey_frame, 'ends_at_column_anchor')
             raise KeyboardInterrupt
