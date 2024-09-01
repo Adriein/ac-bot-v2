@@ -1,3 +1,5 @@
+from time import sleep
+
 import numpy as np
 import cv2
 
@@ -31,6 +33,8 @@ class OpenDepotTask(Task):
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
+
+            sleep(5)
 
             self.success()
             return context
