@@ -24,7 +24,7 @@ class AutoTrader:
 
             Logger.debug('Queuing OpenDepotTask')
             open_depot = OpenDepotTask(self.__widget, player)
-            self.__task_resolver.queue(open_depot)
+            # self.__task_resolver.queue(open_depot)
 
             Logger.debug('Queuing OpenMarketTask')
             open_depot = OpenMarketTask(self.__widget, player)

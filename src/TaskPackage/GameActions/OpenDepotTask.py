@@ -1,7 +1,4 @@
-from time import sleep
-
 import numpy as np
-import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
@@ -33,8 +30,6 @@ class OpenDepotTask(Task):
 
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
-
-            sleep(5)
 
             self.success()
             return context
