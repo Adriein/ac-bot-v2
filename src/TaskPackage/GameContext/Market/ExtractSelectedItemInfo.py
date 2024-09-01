@@ -27,7 +27,9 @@ class ExtractSelectedItemInfo(Task):
 
             grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-            self.__get_screen_region(grey_frame, 'piece_price_column_anchor')
+            amount_screen_regions = self.__get_screen_regions(grey_frame, 'amount_column_anchor')
+            price_screen_regions = self.__get_screen_regions(grey_frame, 'piece_price_column_anchor')
+            end_at_screen_region = self.__get_screen_regions(grey_frame, 'ends_at_column_anchor')
             raise KeyboardInterrupt
             # current_health = self.__pyautogui.number(hp_roi)
             # current_health = int(self.__tesseract.number_img_to_string(hp_roi))
@@ -43,8 +45,10 @@ class ExtractSelectedItemInfo(Task):
 
             return context
 
-    def __get_screen_region(self, grey_frame: np.ndarray, anchor_name: str) -> None:
+    def __get_screen_regions(self, grey_frame: np.ndarray, anchor_name: str) -> list[ScreenRegion]:
         anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/{anchor_name}.png')
+
+        height, width = anchor.shape
 
         match = cv2.matchTemplate(grey_frame, anchor, cv2.TM_CCOEFF_NORMED)
 
@@ -53,10 +57,14 @@ class ExtractSelectedItemInfo(Task):
         screen_regions = []
 
         for x, y in zip(*multiple_loc[::-1]):
-            screen_regions.append((x, y))
+            screen_region = ScreenRegion(
+                start_x=x,
+                end_x=x + width,
+                start_y=y,
+                end_y=y + height
+            )
 
+            screen_regions.append(screen_region)
 
-        print(screen_regions)
-        height, width = anchor.shape
-
+        return screen_regions
 
