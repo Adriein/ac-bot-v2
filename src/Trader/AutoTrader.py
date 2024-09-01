@@ -2,7 +2,7 @@ from src.GamePackage import Player
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext, ManualIterationInterrupt
-from src.TaskPackage import TaskResolver, OpenMarketTask, SearchItemInMarket
+from src.TaskPackage import TaskResolver, OpenMarketTask, SearchItemInMarket, SelectItemInMarket
 
 
 class AutoTrader:
@@ -34,6 +34,10 @@ class AutoTrader:
                 Logger.debug('Queuing SearchItemInMarketTask')
                 search_item = SearchItemInMarket(self.__widget, player)
                 self.__task_resolver.queue(search_item)
+
+                Logger.debug('Queuing SelectItemInMarket')
+                select_item = SelectItemInMarket(self.__widget, player)
+                self.__task_resolver.queue(select_item)
 
                 self.__task_resolver.resolve(game_context, frame)
 
