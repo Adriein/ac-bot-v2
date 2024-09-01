@@ -37,7 +37,9 @@ class ExtractSelectedItemInfo(Task):
                 # The bottom of the column header
                 start_y = region.end_y
                 # The height of the row
-                end_y = region.end_y - region.start_y
+                height = region.end_y - region.start_y
+                end_y = region.end_y + height
+
                 amount_roi = grey_frame[start_y: end_y, region.start_x: region.end_x]
 
                 PyAutoGui.debug_image(amount_roi)
