@@ -45,7 +45,7 @@ class ExtractSelectedItemInfo(Task):
                 amount_roi = grey_frame[region.start_y:end_y, region.start_x:region.end_x]
                 # amount_roi = grey_frame[region.start_y:region.end_y, region.start_x:region.end_x]
 
-                PyAutoGui.debug_image(amount_roi)
+                PyAutoGui.debug_image(grey_frame)
 
                 raise KeyboardInterrupt
 
