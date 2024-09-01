@@ -1,3 +1,5 @@
+from time import sleep
+
 import numpy as np
 import cv2
 
@@ -43,6 +45,8 @@ class SelectItemInMarket(Task):
         self.__player.left_click(Coordinate.from_screen_region(item_list_screen_region))
 
         context.set_is_item_selected(True)
+
+        sleep(2)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
