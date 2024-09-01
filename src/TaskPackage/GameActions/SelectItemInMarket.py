@@ -41,7 +41,6 @@ class SelectItemInMarket(Task):
         )
 
         self.__player.left_click(Coordinate.from_screen_region(item_list_screen_region))
-        raise KeyboardInterrupt
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
