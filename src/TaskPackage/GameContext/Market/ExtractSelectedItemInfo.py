@@ -36,15 +36,15 @@ class ExtractSelectedItemInfo(Task):
 
             amount_screen_regions = self.__get_screen_regions(grey_frame, 'amount_column_anchor')
 
-            self.__extract_row_offer(frame, amount_screen_regions, extraction_result, "amount")
+            self.__extract_row_offer(grey_frame, amount_screen_regions, extraction_result, "amount")
 
             price_screen_regions = self.__get_screen_regions(grey_frame, 'piece_price_column_anchor')
 
-            self.__extract_row_offer(frame, price_screen_regions, extraction_result, "unit_price")
+            self.__extract_row_offer(grey_frame, price_screen_regions, extraction_result, "unit_price")
 
             end_at_screen_region = self.__get_screen_regions(grey_frame, 'ends_at_column_anchor')
 
-            self.__extract_row_offer(frame, end_at_screen_region, extraction_result, "end_date")
+            self.__extract_row_offer(grey_frame, end_at_screen_region, extraction_result, "end_date")
 
             print(extraction_result.get(Constants.SELL_OFFER))
             print(extraction_result.get(Constants.BUY_OFFER))
