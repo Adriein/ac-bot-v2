@@ -110,8 +110,6 @@ class ExtractSelectedItemInfo(Task):
 
                 result_set.set(Constants.SELL_OFFER, offer)
 
-                continue
-
             start_y = next_region.end_y
 
             height = next_region.end_y - next_region.start_y
