@@ -135,9 +135,7 @@ class ExtractSelectedItemInfo(Task):
 
         mask = cv2.inRange(hsv, lower_red, upper_red)
 
-        red_pixels = np.where(mask == 255)
-
-        return len(red_pixels) > 0
+        return cv2.countNonZero(mask) > 0
 
     def __preprocess_frame(self, frame: np.ndarray) -> np.ndarray:
         grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
