@@ -36,15 +36,15 @@ class ExtractSelectedItemInfo(Task):
 
             amount_screen_regions = self.__get_screen_regions(grey_frame, 'amount_column_anchor')
 
-            self.__extract_row_offer(grey_frame, amount_screen_regions, extraction_result, "amount")
+            self.__extract_row_offer(frame, amount_screen_regions, extraction_result, "amount")
 
             price_screen_regions = self.__get_screen_regions(grey_frame, 'piece_price_column_anchor')
 
-            self.__extract_row_offer(grey_frame, price_screen_regions, extraction_result, "unit_price")
+            self.__extract_row_offer(frame, price_screen_regions, extraction_result, "unit_price")
 
             end_at_screen_region = self.__get_screen_regions(grey_frame, 'ends_at_column_anchor')
 
-            self.__extract_row_offer(grey_frame, end_at_screen_region, extraction_result, "end_date")
+            self.__extract_row_offer(frame, end_at_screen_region, extraction_result, "end_date")
 
             print(extraction_result.get(Constants.SELL_OFFER))
             print(extraction_result.get(Constants.BUY_OFFER))
@@ -104,11 +104,11 @@ class ExtractSelectedItemInfo(Task):
 
                 roi = frame[start_y:end_y, region.start_x:region.end_x]
 
-                _, thresh = cv2.threshold(roi, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+                number_image = self.__preprocess_frame(roi)
 
                 offer = result_set.get(Constants.SELL_OFFER)
 
-                setattr(offer, column, self.__pyautogui.number(thresh))
+                setattr(offer, column, self.__pyautogui.number(number_image))
 
                 result_set.set(Constants.SELL_OFFER, offer)
 
@@ -119,11 +119,32 @@ class ExtractSelectedItemInfo(Task):
 
             roi = frame[start_y:end_y, next_region.start_x:next_region.end_x]
 
-            _, thresh = cv2.threshold(roi, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+            number_image = self.__preprocess_frame(roi)
 
             offer = result_set.get(Constants.BUY_OFFER)
 
-            setattr(offer, column, self.__pyautogui.number(thresh))
+            setattr(offer, column, self.__pyautogui.number(number_image))
 
             result_set.set(Constants.BUY_OFFER, offer)
 
+    def __has_red_pixels(self, frame: np.ndarray) -> bool:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+        lower_red = np.array([0, 100, 50])
+        upper_red = np.array([10, 255, 255])
+
+        mask = cv2.inRange(hsv, lower_red, upper_red)
+
+        red_pixels = np.where(mask == 255)
+
+        return len(red_pixels) > 0
+
+    def __preprocess_frame(self, frame: np.ndarray) -> np.ndarray:
+        grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        if self.__has_red_pixels(frame):
+            _, thresh = cv2.threshold(grey_frame, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+
+            return thresh
+
+        return grey_frame
