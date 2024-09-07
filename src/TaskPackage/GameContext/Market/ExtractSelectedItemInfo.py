@@ -104,9 +104,11 @@ class ExtractSelectedItemInfo(Task):
 
                 roi = frame[start_y:end_y, region.start_x:region.end_x]
 
+                _, thresh = cv2.threshold(roi, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+
                 offer = result_set.get(Constants.SELL_OFFER)
 
-                setattr(offer, column, self.__pyautogui.number(roi))
+                setattr(offer, column, self.__pyautogui.number(thresh))
 
                 result_set.set(Constants.SELL_OFFER, offer)
 
@@ -116,13 +118,12 @@ class ExtractSelectedItemInfo(Task):
             end_y = next_region.end_y + height
 
             roi = frame[start_y:end_y, next_region.start_x:next_region.end_x]
-            equalized_gray = cv2.equalizeHist(roi)
-            # Apply thresholding (adjust the threshold value as needed)
-            ret, thresh1 = cv2.threshold(roi, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
-            PyAutoGui.debug_image(thresh1)
+
+            _, thresh = cv2.threshold(roi, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+
             offer = result_set.get(Constants.BUY_OFFER)
-            print(self.__pyautogui.number(thresh1))
-            setattr(offer, column, self.__pyautogui.number(thresh1))
+
+            setattr(offer, column, self.__pyautogui.number(thresh))
 
             result_set.set(Constants.BUY_OFFER, offer)
 
