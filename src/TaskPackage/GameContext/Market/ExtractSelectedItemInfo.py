@@ -51,8 +51,6 @@ class ExtractSelectedItemInfo(Task):
 
             item.offers = [extraction_result.get(Constants.SELL_OFFER), extraction_result.get(Constants.BUY_OFFER)]
 
-            raise KeyboardInterrupt
-
             Logger.debug("Updated context")
             Logger.debug(context, inspect_class=True)
 
@@ -60,7 +58,6 @@ class ExtractSelectedItemInfo(Task):
             return context
         except ValueError:
             self.fail()
-            raise KeyboardInterrupt
             return context
 
     def __get_screen_regions(self, grey_frame: np.ndarray, anchor_name: str) -> list[ScreenRegion]:
