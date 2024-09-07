@@ -53,7 +53,7 @@ class AutoTrader:
                     self.__task_resolver.queue(notify_item_info)
 
                     Logger.debug('Queuing CancelItemSearch')
-                    cancel_item_search = CancelItemSearch(self.__widget)
+                    cancel_item_search = CancelItemSearch(self.__widget, player)
                     self.__task_resolver.queue(cancel_item_search)
 
                     self.__task_resolver.resolve(game_context, frame)
