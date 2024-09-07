@@ -48,3 +48,7 @@ class Constants:
 
     # SPELLS
     LIGHT_HEALING = "exura infir ico"
+
+    # TRADE
+    SELL_OFFER = "SELL_OFFER"
+    BUY_OFFER = "BUY_OFFER"

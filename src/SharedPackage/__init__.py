@@ -6,4 +6,5 @@ from .Constants import Constants
 from .Waypoint import Waypoint
 from .MoveCommand import MoveCommand
 from .MarketItem import MarketItem
+from .Offer import Offer
 from .Exception.ManualIterationInterrupt import ManualIterationInterrupt
