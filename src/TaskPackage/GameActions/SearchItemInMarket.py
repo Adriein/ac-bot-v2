@@ -40,14 +40,14 @@ class SearchItemInMarket(Task):
 
         self.__player.left_click(Coordinate(close_button_coordinate.x - 20, close_button_coordinate.y))
 
-        sleep(0.5)
+        sleep(0.2)
 
         self.__player.write(item)
 
         context.set_is_item_searched(True)
         context.set_scrapped_item(MarketItem(item))
 
-        sleep(1)
+        sleep(0.2)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
