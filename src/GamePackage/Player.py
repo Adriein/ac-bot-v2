@@ -80,5 +80,9 @@ class Player:
         letters = list(word)
 
         for letter in letters:
+            if letter == "":
+                self.__keyboard.press("space")
+                continue
+
             self.__keyboard.press(letter)
-            sleep(0.5)
+            sleep(0.2)
