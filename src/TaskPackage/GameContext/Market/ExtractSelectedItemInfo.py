@@ -118,12 +118,11 @@ class ExtractSelectedItemInfo(Task):
             roi = frame[start_y:end_y, next_region.start_x:next_region.end_x]
             equalized_gray = cv2.equalizeHist(roi)
             # Apply thresholding (adjust the threshold value as needed)
-            threshold_value = 128
-            _, thresh = cv2.threshold(equalized_gray, threshold_value, 255, cv2.THRESH_BINARY)
-            PyAutoGui.debug_image(thresh)
+            ret, thresh1 = cv2.threshold(roi, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+            PyAutoGui.debug_image(thresh1)
             offer = result_set.get(Constants.BUY_OFFER)
-            print(self.__pyautogui.number(thresh))
-            setattr(offer, column, self.__pyautogui.number(thresh))
+            print(self.__pyautogui.number(thresh1))
+            setattr(offer, column, self.__pyautogui.number(thresh1))
 
             result_set.set(Constants.BUY_OFFER, offer)
 
