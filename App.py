@@ -79,7 +79,7 @@ class TibiaAcBot:
             Logger.error(str(error), error)
 
             Logger.info('Force character logout')
-            self.__kernel.force_game_logout()
+            # self.__kernel.force_game_logout()
 
             raise SystemExit from error
 
