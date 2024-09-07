@@ -117,10 +117,8 @@ class ExtractSelectedItemInfo(Task):
 
             roi = frame[start_y:end_y, next_region.start_x:next_region.end_x]
 
-            PyAutoGui.debug_image(roi)
-
             offer = result_set.get(Constants.BUY_OFFER)
-
+            print(self.__pyautogui.number(roi))
             setattr(offer, column, self.__pyautogui.number(roi))
 
             result_set.set(Constants.BUY_OFFER, offer)
