@@ -50,8 +50,8 @@ class SelectItemInMarket(Task):
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
-        self.success()
-        return context
+
+        raise ManualIterationInterrupt
 
     def __get_screen_region(self, grey_frame: np.ndarray, anchor_name: str) -> ScreenRegion:
         anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/{anchor_name}.png')

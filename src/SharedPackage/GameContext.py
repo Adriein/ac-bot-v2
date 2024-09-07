@@ -38,7 +38,7 @@ class GameContext:
         self.__has_to_wear_ring = False
         self.__is_ring_equipped = False
 
-        self.__trade_items = list()
+        self.__trade_items = LinkedList[str]
         self.__is_market_open = False
         self.__is_item_searched = False
         self.__is_item_selected = False
@@ -179,8 +179,8 @@ class GameContext:
     def set_scrapped_item(self, scrapped_item: MarketItem | None) -> None:
         self.__scrapped_item = scrapped_item
 
-    def get_trade_items(self) -> list[str]:
+    def get_trade_items(self) -> LinkedList[str]:
         return self.__trade_items
 
-    def set_trade_items(self, items: list[str]) -> None:
+    def set_trade_items(self, items: LinkedList[str]) -> None:
         self.__trade_items = items

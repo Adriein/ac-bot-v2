@@ -35,31 +35,27 @@ class AutoTrader:
                 self.__task_resolver.queue(open_market)
                 self.__task_resolver.resolve(game_context, frame)
 
-                for item in game_context.get_trade_items():
-                    Logger.debug('Queuing SearchItemInMarketTask')
-                    search_item = SearchItemInMarket(self.__widget, player, item)
-                    self.__task_resolver.queue(search_item)
+                Logger.debug('Queuing SearchItemInMarketTask')
+                search_item = SearchItemInMarket(self.__widget, player)
+                self.__task_resolver.queue(search_item)
 
-                    Logger.debug('Queuing SelectItemInMarket')
-                    select_item = SelectItemInMarket(self.__widget, player)
-                    self.__task_resolver.queue(select_item)
+                Logger.debug('Queuing SelectItemInMarket')
+                select_item = SelectItemInMarket(self.__widget, player)
+                self.__task_resolver.queue(select_item)
 
-                    Logger.debug('Queuing ExtractSelectedItemInfo')
-                    extract_selected_item_info = ExtractSelectedItemInfo(self.__widget, self.__pyautogui)
-                    self.__task_resolver.queue(extract_selected_item_info)
+                Logger.debug('Queuing ExtractSelectedItemInfo')
+                extract_selected_item_info = ExtractSelectedItemInfo(self.__widget, self.__pyautogui)
+                self.__task_resolver.queue(extract_selected_item_info)
 
-                    Logger.debug('Queuing NotifyItemInfo')
-                    notify_item_info = NotifyItemInfo(self.__widget)
-                    self.__task_resolver.queue(notify_item_info)
+                Logger.debug('Queuing NotifyItemInfo')
+                notify_item_info = NotifyItemInfo(self.__widget)
+                self.__task_resolver.queue(notify_item_info)
 
-                    Logger.debug('Queuing CancelItemSearch')
-                    cancel_item_search = CancelItemSearch(self.__widget, player)
-                    self.__task_resolver.queue(cancel_item_search)
+                Logger.debug('Queuing CancelItemSearch')
+                cancel_item_search = CancelItemSearch(self.__widget, player)
+                self.__task_resolver.queue(cancel_item_search)
 
-                    self.__task_resolver.resolve(game_context, frame)
-
-                    raise KeyboardInterrupt
+                self.__task_resolver.resolve(game_context, frame)
 
             except ManualIterationInterrupt:
                 continue
-

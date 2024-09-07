@@ -1,9 +1,10 @@
 import json
+from src.UtilPackage import LinkedList
 
 class TradeScript:
     __FILE_READ_MODE = 'r'
 
-    __items: list[str] = list()
+    __items: LinkedList = LinkedList[str]()
 
 
     def __init__(self, script_json_data: dict):
@@ -18,5 +19,5 @@ class TradeScript:
 
         return TradeScript(script_data)
 
-    def items(self) -> list[str]:
+    def items(self) -> LinkedList[str]:
         return self.__items

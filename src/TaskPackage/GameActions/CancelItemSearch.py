@@ -41,6 +41,13 @@ class CancelItemSearch(Task):
         context.set_is_item_selected(False)
         context.set_scrapped_item(None)
 
+        item_list = context.get_trade_items()
+
+        if not item_list.peak_next():
+            raise KeyboardInterrupt
+
+        item_list.next()
+
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
 

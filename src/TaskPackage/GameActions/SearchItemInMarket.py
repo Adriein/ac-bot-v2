@@ -5,7 +5,7 @@ import cv2
 
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer
-from src.SharedPackage import GameContext, Coordinate, ScreenRegion, MarketItem
+from src.SharedPackage import GameContext, Coordinate, ScreenRegion, MarketItem, ManualIterationInterrupt
 from src.TaskPackage.Task import Task
 from src.GamePackage import Player
 from src.VendorPackage import Cv2File
@@ -14,11 +14,10 @@ class SearchItemInMarket(Task):
     def __str__(self) -> str:
         return f'SearchItemInMarket'
 
-    def __init__(self, widget: GlobalGameWidgetContainer, player: Player, item: str):
+    def __init__(self, widget: GlobalGameWidgetContainer, player: Player):
         super().__init__()
         self.__widget = widget
         self.__player = player
-        self.__item = item
         self.__succeed = False
         self.__completed = False
 
@@ -32,6 +31,7 @@ class SearchItemInMarket(Task):
 
             return context
 
+        item = context.get_trade_items().current.data
         grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         close_button_region = self.__get_screen_region(grey_frame, 'market_cancel_search')
@@ -42,18 +42,17 @@ class SearchItemInMarket(Task):
 
         sleep(0.5)
 
-        self.__player.write(self.__item)
+        self.__player.write(item)
 
         context.set_is_item_searched(True)
-        context.set_scrapped_item(MarketItem(self.__item))
+        context.set_scrapped_item(MarketItem(item))
 
         sleep(1)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)
 
-        self.success()
-        return context
+        raise ManualIterationInterrupt
 
     def __get_screen_region(self, grey_frame: np.ndarray, anchor_name: str) -> ScreenRegion:
         anchor = Cv2File.load_image(f'src/Wiki/Ui/Market/{anchor_name}.png')
