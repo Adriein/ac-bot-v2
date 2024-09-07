@@ -30,6 +30,7 @@ class ExtractSelectedItemInfo(Task):
             PyAutoGui.debug_image(grey_frame)
             equalized_gray = cv2.equalizeHist(grey_frame)
             PyAutoGui.debug_image(equalized_gray)
+            grey_frame = equalized_gray
             item = context.get_scrapped_item()
             extraction_result = GenericMapCollection[Offer]()
 
