@@ -36,82 +36,15 @@ class ExtractSelectedItemInfo(Task):
 
             amount_screen_regions = self.__get_screen_regions(grey_frame, 'amount_column_anchor')
 
-            for region, next_region in zip(amount_screen_regions, amount_screen_regions[1:]):
-                # The bottom of the column header
-                start_y = region.end_y
-
-                # The height of the row
-                height = region.end_y - region.start_y
-                end_y = region.end_y + height
-
-                amount_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
-
-                print(region.start_y)
-                print(next_region.start_y)
-                if region.start_y > next_region.start_y:
-                    offer = extraction_result.get(Constants.SELL_OFFER)
-                    offer.amount = self.__pyautogui.number(amount_roi)
-
-                    extraction_result.set(Constants.SELL_OFFER, offer)
-
-                    continue
-
-                offer = extraction_result.get(Constants.BUY_OFFER)
-                offer.amount = self.__pyautogui.number(amount_roi)
-
-                extraction_result.set(Constants.BUY_OFFER, offer)
-
+            self.__extract_row_offer(grey_frame, amount_screen_regions, extraction_result, "amount")
 
             price_screen_regions = self.__get_screen_regions(grey_frame, 'piece_price_column_anchor')
 
-            for region, next_region in zip(price_screen_regions, price_screen_regions[1:]):
-                # The bottom of the column header
-                start_y = region.end_y
-
-                # The height of the row
-                height = region.end_y - region.start_y
-                end_y = region.end_y + height
-
-                price_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
-
-                if region.start_y > next_region.start_y:
-                    offer = extraction_result.get(Constants.SELL_OFFER)
-                    offer.unit_price = self.__pyautogui.number(price_roi)
-
-                    extraction_result.set(Constants.SELL_OFFER, offer)
-
-                    continue
-
-                offer = extraction_result.get(Constants.BUY_OFFER)
-                offer.unit_price = self.__pyautogui.number(price_roi)
-
-                extraction_result.set(Constants.BUY_OFFER, offer)
-
+            self.__extract_row_offer(grey_frame, price_screen_regions, extraction_result, "unit_price")
 
             end_at_screen_region = self.__get_screen_regions(grey_frame, 'ends_at_column_anchor')
 
-            for region, next_region in zip(end_at_screen_region, end_at_screen_region[1:]):
-                # The bottom of the column header
-                start_y = region.end_y
-
-                # The height of the row
-                height = region.end_y - region.start_y
-                end_y = region.end_y + height
-
-                end_at_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
-
-                if region.start_y > next_region.start_y:
-                    offer = extraction_result.get(Constants.SELL_OFFER)
-                    offer.end_date = self.__pyautogui.number(end_at_roi)
-
-                    extraction_result.set(Constants.SELL_OFFER, offer)
-
-                    continue
-
-                offer = extraction_result.get(Constants.BUY_OFFER)
-                offer.end_date = self.__pyautogui.number(end_at_roi)
-
-                extraction_result.set(Constants.BUY_OFFER, offer)
+            self.__extract_row_offer(grey_frame, end_at_screen_region, extraction_result, "end_date")
 
             print(extraction_result.get(Constants.SELL_OFFER))
             print(extraction_result.get(Constants.BUY_OFFER))
@@ -152,4 +85,43 @@ class ExtractSelectedItemInfo(Task):
             screen_regions.append(screen_region)
 
         return screen_regions
+
+    def __extract_row_offer(
+            self,
+            frame: np.ndarray,
+            screen_regions: list[ScreenRegion],
+            result_set: GenericMapCollection[Offer],
+            column: str,
+    ) -> None:
+        for region, next_region in zip(screen_regions, screen_regions[1:]):
+            if region.start_y < next_region.start_y:
+                # The bottom of the column header
+                start_y = region.end_y
+
+                # The height of the row
+                height = region.end_y - region.start_y
+                end_y = region.end_y + height
+
+                roi = frame[start_y:end_y, region.start_x:region.end_x]
+
+                offer = result_set.get(Constants.SELL_OFFER)
+
+                setattr(offer, column, self.__pyautogui.number(roi))
+
+                result_set.set(Constants.SELL_OFFER, offer)
+
+                continue
+
+            start_y = next_region.end_y
+
+            height = next_region.end_y - next_region.start_y
+            end_y = next_region.end_y + height
+
+            roi = frame[start_y:end_y, next_region.start_x:next_region.end_x]
+
+            offer = result_set.get(Constants.BUY_OFFER)
+
+            setattr(offer, column, self.__pyautogui.number(roi))
+
+            result_set.set(Constants.BUY_OFFER, offer)
 
