@@ -26,25 +26,10 @@ class ExtractSelectedItemInfo(Task):
             Logger.debug("Received context")
             Logger.debug(context, inspect_class=True)
 
-            # Convert to HSV color space
-            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            PyAutoGui.debug_image(hsv)
-            # Define a wider range for colors
-            lower_range = np.array([0, 0, 0])  # Adjust these values as needed
-            upper_range = np.array([255, 255, 255])
-
-            # Create a mask for the color range
-            mask = cv2.inRange(hsv, lower_range, upper_range)
-
-            # Apply the mask to the image
-            masked_img = cv2.bitwise_and(frame, frame, mask=mask)
-
-            # Convert the masked image to grayscale
-            gray = cv2.cvtColor(masked_img, cv2.COLOR_BGR2GRAY)
-            PyAutoGui.debug_image(gray)
-
             grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+            PyAutoGui.debug_image(grey_frame)
+            equalized_gray = cv2.equalizeHist(grey_frame)
+            PyAutoGui.debug_image(equalized_gray)
             item = context.get_scrapped_item()
             extraction_result = GenericMapCollection[Offer]()
 
