@@ -120,6 +120,7 @@ class ExtractSelectedItemInfo(Task):
             # Apply thresholding (adjust the threshold value as needed)
             threshold_value = 128
             _, thresh = cv2.threshold(equalized_gray, threshold_value, 255, cv2.THRESH_BINARY)
+            PyAutoGui.debug_image(thresh)
             offer = result_set.get(Constants.BUY_OFFER)
             print(self.__pyautogui.number(thresh))
             setattr(offer, column, self.__pyautogui.number(thresh))
