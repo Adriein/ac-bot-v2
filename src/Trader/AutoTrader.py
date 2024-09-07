@@ -58,7 +58,7 @@ class AutoTrader:
 
                     self.__task_resolver.resolve(game_context, frame)
 
-                raise KeyboardInterrupt
+                    raise KeyboardInterrupt
 
             except ManualIterationInterrupt:
                 continue
