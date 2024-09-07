@@ -24,3 +24,5 @@ from .GameActions.OpenDepotTask import OpenDepotTask
 from .GameActions.OpenMarketTask import OpenMarketTask
 from .GameActions.SearchItemInMarket import SearchItemInMarket
 from .GameActions.SelectItemInMarket import SelectItemInMarket
+from .GameActions.NotifyItemInfo import NotifyItemInfo
+from .GameActions.CancelItemSearch import CancelItemSearch

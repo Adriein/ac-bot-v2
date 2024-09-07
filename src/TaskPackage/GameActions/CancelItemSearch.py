@@ -10,27 +10,22 @@ from src.TaskPackage.Task import Task
 from src.GamePackage import Player
 from src.VendorPackage import Cv2File
 
-class SearchItemInMarket(Task):
+class CancelItemSearch(Task):
     def __str__(self) -> str:
-        return f'SearchItemInMarket'
+        return f'CancelItemSearch'
 
-    def __init__(self, widget: GlobalGameWidgetContainer, player: Player, item: str):
+    def __init__(self, widget: GlobalGameWidgetContainer, player: Player):
         super().__init__()
         self.__widget = widget
         self.__player = player
-        self.__item = item
         self.__succeed = False
         self.__completed = False
 
     def execute(self, context: GameContext, frame: np.ndarray) -> GameContext:
-        Logger.debug("Executing SearchItemInMarket")
+        Logger.debug("Executing CancelItemSearch")
         Logger.debug("Received context")
         Logger.debug(context, inspect_class=True)
 
-        if context.get_is_item_searched():
-            self.success()
-
-            return context
 
         grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -38,16 +33,13 @@ class SearchItemInMarket(Task):
 
         close_button_coordinate = Coordinate.from_screen_region(close_button_region)
 
-        self.__player.left_click(Coordinate(close_button_coordinate.x - 20, close_button_coordinate.y))
+        self.__player.left_click(Coordinate(close_button_coordinate.x, close_button_coordinate.y))
 
         sleep(0.5)
 
-        self.__player.write(self.__item)
-
-        context.set_is_item_searched(True)
-        context.set_scrapped_item(MarketItem(self.__item))
-
-        sleep(1)
+        context.set_is_item_searched(False)
+        context.set_is_item_selected(False)
+        context.set_scrapped_item(None)
 
         Logger.debug("Updated context")
         Logger.debug(context, inspect_class=True)

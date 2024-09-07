@@ -1,6 +1,6 @@
 import time
 
-from src.GamePackage import Player, Script, Map, PathFinder
+from src.GamePackage import Player, Script, Map, PathFinder, TradeScript
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import Kernel, Monitor, GlobalGameWidgetContainer, Keyboard, Mouse
 from src.VendorPackage import PyAutoGui, TesseractOcr
@@ -61,6 +61,10 @@ class TibiaAcBot:
                 auto_trainer.start(game_context, player)
 
                 return
+
+            script = TradeScript.load('src/Wiki/Script/Trade/trade.json')
+
+            game_context.set_trade_items(script.items())
 
             auto_trader = AutoTrader(
                 self.__monitor,
