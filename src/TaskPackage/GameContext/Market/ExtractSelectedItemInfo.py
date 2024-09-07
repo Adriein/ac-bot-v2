@@ -29,8 +29,11 @@ class ExtractSelectedItemInfo(Task):
             grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             PyAutoGui.debug_image(grey_frame)
             equalized_gray = cv2.equalizeHist(grey_frame)
-            PyAutoGui.debug_image(equalized_gray)
-            grey_frame = equalized_gray
+            # Apply thresholding (adjust the threshold value as needed)
+            threshold_value = 128
+            _, thresh = cv2.threshold(equalized_gray, threshold_value, 255, cv2.THRESH_BINARY)
+            PyAutoGui.debug_image(thresh)
+
             item = context.get_scrapped_item()
             extraction_result = GenericMapCollection[Offer]()
 
