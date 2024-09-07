@@ -42,6 +42,8 @@ class SelectItemInMarket(Task):
             end_y=item_list_anchor_screen_region.end_y + 40
         )
 
+        print(Coordinate.from_screen_region(item_list_screen_region))
+
         self.__player.left_click(Coordinate.from_screen_region(item_list_screen_region))
 
         context.set_is_item_selected(True)
