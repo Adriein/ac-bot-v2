@@ -46,9 +46,6 @@ class ExtractSelectedItemInfo(Task):
 
             self.__extract_row_offer(frame, end_at_screen_region, extraction_result, "end_date")
 
-            print(extraction_result.get(Constants.SELL_OFFER))
-            print(extraction_result.get(Constants.BUY_OFFER))
-
             item.offers = [extraction_result.get(Constants.SELL_OFFER), extraction_result.get(Constants.BUY_OFFER)]
 
             self.success()
