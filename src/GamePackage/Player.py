@@ -78,10 +78,9 @@ class Player:
 
     def write(self, word: str) -> None:
         letters = list(word)
-        print(letters)
+
         for letter in letters:
-            print(letter)
-            if letter == "":
+            if letter == " ":
                 self.__keyboard.press("space")
                 continue
 
