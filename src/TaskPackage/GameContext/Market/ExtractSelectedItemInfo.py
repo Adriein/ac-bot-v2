@@ -46,6 +46,8 @@ class ExtractSelectedItemInfo(Task):
 
                 amount_roi = grey_frame[start_y:end_y, region.start_x:region.end_x]
 
+                print(region.start_y)
+                print(next_region.start_y)
                 if region.start_y > next_region.start_y:
                     offer = extraction_result.get(Constants.SELL_OFFER)
                     offer.amount = self.__pyautogui.number(amount_roi)
