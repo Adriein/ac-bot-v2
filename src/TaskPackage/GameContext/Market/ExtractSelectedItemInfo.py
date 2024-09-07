@@ -51,9 +51,6 @@ class ExtractSelectedItemInfo(Task):
 
             item.offers = [extraction_result.get(Constants.SELL_OFFER), extraction_result.get(Constants.BUY_OFFER)]
 
-            Logger.debug("Updated context")
-            Logger.debug(context, inspect_class=True)
-
             self.success()
             return context
         except ValueError:
