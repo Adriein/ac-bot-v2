@@ -141,7 +141,7 @@ class ExtractSelectedItemInfo(Task):
 
     def __preprocess_frame(self, frame: np.ndarray) -> np.ndarray:
         grey_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
+        print(self.__has_red_pixels(frame))
         if self.__has_red_pixels(frame):
             _, thresh = cv2.threshold(grey_frame, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
 
