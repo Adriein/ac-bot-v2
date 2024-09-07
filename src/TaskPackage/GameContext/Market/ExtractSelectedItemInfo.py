@@ -30,8 +30,8 @@ class ExtractSelectedItemInfo(Task):
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
             # Define a wider range for colors
-            lower_range = np.array([0, 50, 50])  # Adjust these values as needed
-            upper_range = np.array([180, 255, 255])
+            lower_range = np.array([0, 0, 0])  # Adjust these values as needed
+            upper_range = np.array([255, 255, 255])
 
             # Create a mask for the color range
             mask = cv2.inRange(hsv, lower_range, upper_range)
