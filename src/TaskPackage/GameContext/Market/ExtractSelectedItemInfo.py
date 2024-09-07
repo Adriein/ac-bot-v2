@@ -28,7 +28,7 @@ class ExtractSelectedItemInfo(Task):
 
             # Convert to HSV color space
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
+            PyAutoGui.debug_image(hsv)
             # Define a wider range for colors
             lower_range = np.array([0, 0, 0])  # Adjust these values as needed
             upper_range = np.array([255, 255, 255])
