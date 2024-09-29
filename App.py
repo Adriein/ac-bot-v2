@@ -97,7 +97,8 @@ class TibiaAcBot:
         # self.__script = Script.load('src/Wiki/Script/AbDendriel/ab_dendriel_wasp.json')
         # self.__script = Script.load('src/Wiki/Script/AbDendriel/ab_dendriel_1_wasp.json')
         # self.__script = Script.load('src/Wiki/Script/Carlin/forest_fury.json')
-        self.__script = Script.load('src/Wiki/Script/Carlin/minotaur.json')
+        # self.__script = Script.load('src/Wiki/Script/Carlin/minotaur.json')
+        self.__script = Script.load('src/Wiki/Script/Rookgard/troll_salamander.json')
 
         initial_floor_lvl = list(self.__script.floors())[0]
 
