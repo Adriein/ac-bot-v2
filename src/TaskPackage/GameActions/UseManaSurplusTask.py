@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 
 from src.GamePackage import Player
@@ -37,8 +39,11 @@ class UseManaSurplusTask(Task):
         if minutes_to_next_meal >= 8 and random_spell_heal_times <= 4:
             random_spell_heal_times = random_spell_heal_times + 10
 
+        Logger.debug(f'Healing {random_spell_heal_times} times')
+
         for _ in range(random_spell_heal_times):
             self.__player.spell_heal(Constants.LIGHT_HEALING)
+            time.sleep(2)
 
         self.succeed()
         return context
