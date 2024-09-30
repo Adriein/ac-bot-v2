@@ -41,7 +41,7 @@ class UseManaSurplusTask(Task):
 
         Logger.debug(f'Healing {random_spell_heal_times} times')
 
-        for _ in range(random_spell_heal_times):
+        for _ in range(3):
             self.__player.spell_heal(Constants.LIGHT_HEALING)
             time.sleep(2)
 
