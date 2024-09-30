@@ -28,20 +28,13 @@ class UseManaSurplusTask(Task):
         random_spell_heal_times = Number.random(Constants.MIN_SPELL_HEAL_TIMES, Constants.MAX_SPELL_HEAL_TIMES)
 
         minutes_from_last_meal = Time.minutes_between(Time.now(), context.get_last_meal_time())
-        Logger.debug(f'Minutes {minutes_from_last_meal}')
-        if minutes_from_last_meal > 1:
+
+        if minutes_from_last_meal < 3:
             self.succeed()
 
             return context
 
-        minutes_to_next_meal = Time.minutes_between(context.get_next_meal_time(), context.get_last_meal_time())
-
-        if minutes_to_next_meal >= 8 and random_spell_heal_times <= 4:
-            random_spell_heal_times = random_spell_heal_times + 10
-
-        Logger.debug(f'Healing {random_spell_heal_times} times')
-
-        for _ in range(3):
+        for _ in range(random_spell_heal_times):
             self.__player.spell_heal(Constants.LIGHT_HEALING)
             time.sleep(2)
 
