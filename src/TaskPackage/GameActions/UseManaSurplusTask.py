@@ -28,7 +28,7 @@ class UseManaSurplusTask(Task):
         random_spell_heal_times = Number.random(Constants.MIN_SPELL_HEAL_TIMES, Constants.MAX_SPELL_HEAL_TIMES)
 
         minutes_from_last_meal = Time.minutes_between(Time.now(), context.get_last_meal_time())
-
+        Logger.debug(f'Minutes {minutes_from_last_meal}')
         if minutes_from_last_meal > 1:
             self.succeed()
 
