@@ -49,11 +49,15 @@ class TibiaAcBot:
 
                 return
 
+            pathfinder = PathFinder(self.__script)
+            game_map = Map(self.__global_widget_container, self.__script, pathfinder)
+
             auto_trainer = AutoTrainer(
                 self.__monitor,
                 self.__task_resolver,
                 self.__global_widget_container,
-                self.__tesseract
+                self.__tesseract,
+                game_map
             )
 
             auto_trainer.start(game_context, player)

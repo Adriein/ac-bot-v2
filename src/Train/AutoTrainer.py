@@ -1,9 +1,8 @@
-from src.GamePackage import Player, Script
+from src.GamePackage import Player, Map
 from src.LoggerPackage import Logger
 from src.OperatingSystemPackage import GlobalGameWidgetContainer, Monitor
 from src.SharedPackage import GameContext
-from src.TaskPackage import TaskResolver, ExtractHealthDataTask, ExtractManaDataTask, HealingTask, UseManaSurplusTask, \
-    EatTask
+from src.TaskPackage import TaskResolver, UseManaSurplusTask, EatTask, SecurityTrainingFloorCheckTask
 from src.VendorPackage import TesseractOcr
 
 
@@ -13,18 +12,24 @@ class AutoTrainer:
             monitor: Monitor,
             task_resolver: TaskResolver,
             widget: GlobalGameWidgetContainer,
-            tesseract: TesseractOcr
+            tesseract: TesseractOcr,
+            game_map: Map
     ):
         self.__monitor = monitor
         self.__task_resolver = task_resolver
         self.__widget = widget
         self.__tesseract = tesseract
+        self.__game_map = game_map
 
     def start(self, game_context: GameContext, player: Player) -> None:
         Logger.info("Starting AutoTrainer")
 
         while True:
             frame = self.__monitor.screenshot()
+
+            Logger.debug('Queuing SecurityTrainingFloorCheckTask')
+            security_lvl_check = SecurityTrainingFloorCheckTask(self.__game_map)
+            self.__task_resolver.queue(security_lvl_check)
 
             Logger.debug('Queuing UseManaSurplusTask')
             use_mana_surplus_task = UseManaSurplusTask(player)
