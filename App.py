@@ -36,8 +36,6 @@ class TibiaAcBot:
             game_map = Map(self.__global_widget_container, self.__script, pathfinder)
 
             if Constants.TRAIN_MODE not in os.environ:
-
-
                 cavebot = CaveBot(
                     self.__monitor,
                     self.__task_resolver,
