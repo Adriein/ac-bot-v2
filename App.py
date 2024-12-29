@@ -28,13 +28,15 @@ class TibiaAcBot:
 
             game_context = GameContext()
 
-            if Constants.TRAIN_MODE not in os.environ:
-                game_context.set_script_enemies(self.__script.creatures())
-                game_context.set_cave_route(self.__script.waypoints())
-                game_context.set_has_to_wear_ring(self.__script.has_to_wear_ring())
+            game_context.set_script_enemies(self.__script.creatures())
+            game_context.set_cave_route(self.__script.waypoints())
+            game_context.set_has_to_wear_ring(self.__script.has_to_wear_ring())
 
-                pathfinder = PathFinder(self.__script)
-                game_map = Map(self.__global_widget_container, self.__script, pathfinder)
+            pathfinder = PathFinder(self.__script)
+            game_map = Map(self.__global_widget_container, self.__script, pathfinder)
+
+            if Constants.TRAIN_MODE not in os.environ:
+
 
                 cavebot = CaveBot(
                     self.__monitor,
@@ -48,9 +50,6 @@ class TibiaAcBot:
                 cavebot.start(game_context, player)
 
                 return
-
-            pathfinder = PathFinder(self.__script)
-            game_map = Map(self.__global_widget_container, self.__script, pathfinder)
 
             auto_trainer = AutoTrainer(
                 self.__monitor,
