@@ -23,8 +23,7 @@ class SecurityTrainingFloorCheckTask(Task):
 
         current_floor = self.__game_map.which_floor_am_i(frame)
 
-        if current_floor is not 9:
-            raise Exception
+        print(current_floor)
 
         context.set_current_floor(current_floor)
 
