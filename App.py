@@ -100,7 +100,8 @@ class TibiaAcBot:
         # self.__script = Script.load('src/Wiki/Script/Carlin/forest_fury.json')
         # self.__script = Script.load('src/Wiki/Script/Carlin/minotaur.json')
         # self.__script = Script.load('src/Wiki/Script/Rookgard/troll_salamander.json')
-        self.__script = Script.load('src/Wiki/Script/Thais/thais_training.json')
+        # self.__script = Script.load('src/Wiki/Script/Thais/thais_training.json')
+        self.__script = Script.load('src/Wiki/Script/Carlin/forest_fury_1_room.json')
 
         initial_floor_lvl = list(self.__script.floors())[0]
 

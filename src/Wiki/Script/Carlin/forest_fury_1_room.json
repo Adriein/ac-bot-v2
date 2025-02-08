@@ -1,0 +1,28 @@
+{
+  "walk": [
+    ["32446,31731,8", "walk"],
+    ["32451,31738,8", "walk"],
+    ["32461,31746,8", "walk"]
+  ],
+  "creatures": [
+    {
+      "name": "forest_fury",
+      "runner": true,
+      "loot": true,
+      "priority": 3
+    },
+    {
+      "name": "leaf_golem",
+      "runner": false,
+      "loot": false,
+      "priority": 1
+    },
+    {
+      "name": "wilting_leaf_golem",
+      "runner": false,
+      "loot": false,
+      "priority": 2
+    }
+  ],
+    "ring": false
+}
