@@ -5,6 +5,7 @@ from src.TaskPackage.Task import Task
 from src.LoggerPackage import Logger
 from src.GamePackage import Map
 from src.OperatingSystemPackage import Monitor
+from src.VendorPackage.PyAutoGui.PyAutoGui import PyAutoGui
 
 
 class SecurityTrainingFloorCheckTask(Task):
@@ -24,6 +25,8 @@ class SecurityTrainingFloorCheckTask(Task):
         Logger.debug(context, inspect_class=True)
 
         check_screenshot = self.__monitor.screenshot()
+
+        PyAutoGui.debug_image(check_screenshot)
 
         current_floor = self.__game_map.which_floor_am_i(check_screenshot)
 
