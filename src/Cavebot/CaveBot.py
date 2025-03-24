@@ -34,41 +34,41 @@ class CaveBot:
             self.__resolver.resolve(game_context, screenshot)
 
             # 2. auto healing
-            healing_task = HealingTask(player)
-            self.__resolver.queue(healing_task)
+            # healing_task = HealingTask(player)
+            # self.__resolver.queue(healing_task)
 
             # 3. auto ring
-            equip_ring_task = EquipRingTask(player)
-            self.__resolver.queue(equip_ring_task)
+            # equip_ring_task = EquipRingTask(player)
+            # self.__resolver.queue(equip_ring_task)
 
             # 4. auto attacking
-            attack_task = AttackTask(player)
-            self.__resolver.queue(attack_task)
+            # attack_task = AttackTask(player)
+            #self.__resolver.queue(attack_task)
 
             # 5. auto looting
-            loot_task = LootTask(player, self.__widget)
-            self.__resolver.queue(loot_task)
+            #loot_task = LootTask(player, self.__widget)
+            #self.__resolver.queue(loot_task)
 
             # 6. waste mana
-            spell_healing_task = SmartSpellHealingTask(player)
-            self.__resolver.queue(spell_healing_task)
+            #spell_healing_task = SmartSpellHealingTask(player)
+            #self.__resolver.queue(spell_healing_task)
 
             # 7. Eat food
-            eat_task = EatTask(player)
-            self.__resolver.queue(eat_task)
+            #eat_task = EatTask(player)
+            #self.__resolver.queue(eat_task)
 
-            self.__resolver.resolve(game_context, screenshot)
+            #self.__resolver.resolve(game_context, screenshot)
 
             # 8. Locate player position
-            location_task = LocationTask(self.__game_map)
-            self.__resolver.queue(location_task)
+            #location_task = LocationTask(self.__game_map)
+            #self.__resolver.queue(location_task)
 
             # 9. Walk
-            walk_task = WalkTask(self.__game_map, player, self.__monitor)
-            self.__resolver.queue(walk_task)
+            #walk_task = WalkTask(self.__game_map, player, self.__monitor)
+            #self.__resolver.queue(walk_task)
 
             # 10. Resolve waypoint
-            resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
-            self.__resolver.queue(resolve_waypoint_task)
+            #resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
+            #self.__resolver.queue(resolve_waypoint_task)
 
-            self.__resolver.resolve(game_context, screenshot)
+            #self.__resolver.resolve(game_context, screenshot)
