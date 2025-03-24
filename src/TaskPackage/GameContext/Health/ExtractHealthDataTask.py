@@ -31,8 +31,6 @@ class ExtractHealthDataTask(Task):
 
             hp_roi = frame[widget.start_y: widget.end_y, widget.start_x: widget.end_x]
 
-            PyAutoGui.debug_image(hp_roi)
-
             current_health = self.__pyautogui.number(hp_roi)
             # current_health = int(self.__tesseract.number_img_to_string(hp_roi))
 

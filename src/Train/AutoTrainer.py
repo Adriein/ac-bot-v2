@@ -28,8 +28,8 @@ class AutoTrainer:
             frame = self.__monitor.screenshot()
 
             Logger.debug('Queuing SecurityTrainingFloorCheckTask')
-            security_lvl_check = SecurityTrainingFloorCheckTask(self.__game_map, self.__monitor)
-            self.__task_resolver.queue(security_lvl_check)
+            #security_lvl_check = SecurityTrainingFloorCheckTask(self.__game_map, self.__monitor)
+            #self.__task_resolver.queue(security_lvl_check)
 
             Logger.debug('Queuing UseManaSurplusTask')
             use_mana_surplus_task = UseManaSurplusTask(player)

@@ -156,12 +156,8 @@ class PyAutoGui:
             number_coincidence: list[NumberCoincidence] = []
 
             for number in range(10):
-                print(number)
                 number_image = self.IN_MEMORY_NUMBER_PNG_MAP.get(number)
-
                 match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
-
-                print(match)
 
                 '''
                 trying to find number 115 the result of np.where is:
