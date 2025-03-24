@@ -3,6 +3,9 @@ from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask, WalkTask, ResolveWaypointActionTask, EquipRingTask
 from src.VendorPackage import TesseractOcr, PyAutoGui
+import time
+
+import cv2
 
 
 class CaveBot:
@@ -25,13 +28,25 @@ class CaveBot:
 
     def start(self, game_context: GameContext, player: Player) -> None:
         while True:
+            last_time = time.time()
             screenshot = self.__monitor.screenshot()
 
-            # 1. extract game context
-            extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract, self.__pyautogui)
-            self.__resolver.queue(extract_game_context_data_task)
+            # Display the picture
+            cv2.imshow("OpenCV/Numpy normal", screenshot)
 
-            self.__resolver.resolve(game_context, screenshot)
+
+            print(f"fps: {1 / (time.time() - last_time)}")
+
+            # Press "q" to quit
+            if cv2.waitKey(25) & 0xFF == ord("q"):
+                cv2.destroyAllWindows()
+                break
+
+            # 1. extract game context
+            #extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract, self.__pyautogui)
+            #self.__resolver.queue(extract_game_context_data_task)
+
+            #self.__resolver.resolve(game_context, screenshot)
 
             # 2. auto healing
             # healing_task = HealingTask(player)

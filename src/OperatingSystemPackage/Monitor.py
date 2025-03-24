@@ -2,6 +2,7 @@ import cv2
 import numpy
 from PIL import Image
 from Xlib import display, X
+from mss.linux import MSS as mss
 
 from .Kernel import Kernel
 
@@ -20,34 +21,40 @@ class Monitor:
         self.__height = height
         self.__kernel = kernel
 
-    def screenshot(self) -> numpy.ndarray:
-        obs_tibia_preview_window_id = self.__kernel.obs_tibia_preview_window_id()
+    #def screenshot(self) -> numpy.ndarray:
+        #    obs_tibia_preview_window_id = self.__kernel.obs_tibia_preview_window_id()
 
         # Create a connection to the X server
-        disp = display.Display()
+        #    disp = display.Display()
 
         # Get the specified window
-        window = disp.create_resource_object('window', obs_tibia_preview_window_id)
+        #    window = disp.create_resource_object('window', obs_tibia_preview_window_id)
 
         # Get the dimensions of the window
-        width = window.get_geometry().width
-        height = window.get_geometry().height
+        #   width = window.get_geometry().width
+        #   height = window.get_geometry().height
 
         # Get the raw image data from the window
-        raw = window.get_image(0, 0, width, height, X.ZPixmap, 0xffffffff)
+        #    raw = window.get_image(0, 0, width, height, X.ZPixmap, 0xffffffff)
 
         # Convert the raw image data to a PIL Image object
-        image = Image.frombytes(
-            self.IMAGE_MODE,
-            (width, height),
-            raw.data,
-            self.DECODER,
-            self.ORDER
-        )
+        #    image = Image.frombytes(
+        #       self.IMAGE_MODE,
+        #       (width, height),
+        #       raw.data,
+        #       self.DECODER,
+        #      self.ORDER
+        #   )
 
-        disp.close()
+        #   disp.close()
 
-        return cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
+    #   return cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
+
+    def screenshot(self) -> numpy.ndarray:
+        monitor = {"top": 0, "left": 0, "width": self.__width, "height": self.__height}
+        with mss.mss() as sct:
+            return numpy.array(sct.grab(monitor))
+
 
     def specifications(self) -> tuple[int, int]:
         return self.__width, self.__height
