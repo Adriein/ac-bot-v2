@@ -15,7 +15,7 @@ class Kernel:
 
     def __init__(self):
         self.__tibia_window_id = self.__get_tibia_window_id()
-        self.__obs_tibia_preview_window_id = self.__get_obs_tibia_preview_window_id()
+        # self.__obs_tibia_preview_window_id = self.__get_obs_tibia_preview_window_id()
 
     def tibia_window_id(self) -> int:
         return self.__tibia_window_id
