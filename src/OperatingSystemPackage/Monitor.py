@@ -2,7 +2,7 @@ import cv2
 import numpy
 from PIL import Image
 from Xlib import display, X
-from mss.linux import MSS as mss
+import mss
 
 from .Kernel import Kernel
 
