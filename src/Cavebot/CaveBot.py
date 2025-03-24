@@ -3,10 +3,6 @@ from src.OperatingSystemPackage import Monitor, GlobalGameWidgetContainer
 from src.SharedPackage import GameContext
 from src.TaskPackage import TaskResolver, ExtractGameContextDataTask, AttackTask, HealingTask, LootTask, EatTask, SmartSpellHealingTask, LocationTask, WalkTask, ResolveWaypointActionTask, EquipRingTask
 from src.VendorPackage import TesseractOcr, PyAutoGui
-import time
-
-import cv2
-
 
 class CaveBot:
 
@@ -28,62 +24,50 @@ class CaveBot:
 
     def start(self, game_context: GameContext, player: Player) -> None:
         while True:
-            last_time = time.time()
             screenshot = self.__monitor.screenshot()
 
-            # Display the picture
-            cv2.imshow("OpenCV/Numpy normal", screenshot)
-
-
-            print(f"fps: {1 / (time.time() - last_time)}")
-
-            # Press "q" to quit
-            if cv2.waitKey(25) & 0xFF == ord("q"):
-                cv2.destroyAllWindows()
-                break
-
             # 1. extract game context
-            #extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract, self.__pyautogui)
-            #self.__resolver.queue(extract_game_context_data_task)
+            extract_game_context_data_task = ExtractGameContextDataTask(self.__resolver, self.__widget, self.__tesseract, self.__pyautogui)
+            self.__resolver.queue(extract_game_context_data_task)
 
-            #self.__resolver.resolve(game_context, screenshot)
+            self.__resolver.resolve(game_context, screenshot)
 
             # 2. auto healing
-            # healing_task = HealingTask(player)
-            # self.__resolver.queue(healing_task)
+            healing_task = HealingTask(player)
+            self.__resolver.queue(healing_task)
 
             # 3. auto ring
-            # equip_ring_task = EquipRingTask(player)
-            # self.__resolver.queue(equip_ring_task)
+            equip_ring_task = EquipRingTask(player)
+            self.__resolver.queue(equip_ring_task)
 
             # 4. auto attacking
-            # attack_task = AttackTask(player)
-            #self.__resolver.queue(attack_task)
+            attack_task = AttackTask(player)
+            self.__resolver.queue(attack_task)
 
             # 5. auto looting
-            #loot_task = LootTask(player, self.__widget)
-            #self.__resolver.queue(loot_task)
+            loot_task = LootTask(player, self.__widget)
+            self.__resolver.queue(loot_task)
 
             # 6. waste mana
-            #spell_healing_task = SmartSpellHealingTask(player)
-            #self.__resolver.queue(spell_healing_task)
+            spell_healing_task = SmartSpellHealingTask(player)
+            self.__resolver.queue(spell_healing_task)
 
             # 7. Eat food
-            #eat_task = EatTask(player)
-            #self.__resolver.queue(eat_task)
+            eat_task = EatTask(player)
+            self.__resolver.queue(eat_task)
 
-            #self.__resolver.resolve(game_context, screenshot)
+            self.__resolver.resolve(game_context, screenshot)
 
             # 8. Locate player position
-            #location_task = LocationTask(self.__game_map)
-            #self.__resolver.queue(location_task)
+            location_task = LocationTask(self.__game_map)
+            self.__resolver.queue(location_task)
 
             # 9. Walk
-            #walk_task = WalkTask(self.__game_map, player, self.__monitor)
-            #self.__resolver.queue(walk_task)
+            walk_task = WalkTask(self.__game_map, player, self.__monitor)
+            self.__resolver.queue(walk_task)
 
             # 10. Resolve waypoint
-            #resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
-            #self.__resolver.queue(resolve_waypoint_task)
+            resolve_waypoint_task = ResolveWaypointActionTask(self.__game_map, player, self.__widget)
+            self.__resolver.queue(resolve_waypoint_task)
 
-            #self.__resolver.resolve(game_context, screenshot)
+            self.__resolver.resolve(game_context, screenshot)
