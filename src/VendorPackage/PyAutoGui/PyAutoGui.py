@@ -161,6 +161,8 @@ class PyAutoGui:
 
                 match = cv2.matchTemplate(number_image, number_roi, cv2.TM_CCOEFF_NORMED)
 
+                print(match)
+
                 '''
                 trying to find number 115 the result of np.where is:
                 x = [8, 15] for 1
